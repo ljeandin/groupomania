@@ -365,6 +365,7 @@ input:focus {
 }
 
 .adminDelete {
+  display: none !important;
   width: 50px;
   margin-bottom: 10px;
   padding: 0;
@@ -627,9 +628,9 @@ input:focus {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -679,6 +680,16 @@ input:focus {
   color: #091f43;
 }
 
+.filActualite .comments .writeLine {
+  margin-bottom: 40px;
+}
+
+@media only screen and (max-width: 767px) {
+  .filActualite .comments .writeLine {
+    margin-bottom: 20px;
+  }
+}
+
 .filActualite .idLine {
   margin-bottom: 10px;
   display: -webkit-box;
@@ -723,16 +734,6 @@ input:focus {
 
 .filActualite .reactionLine--comments {
   margin-left: 20px;
-}
-
-.filActualite .comments .writeLine {
-  margin-bottom: 40px;
-}
-
-@media only screen and (max-width: 767px) {
-  .filActualite .comments .writeLine {
-    margin-bottom: 20px;
-  }
 }
 
 .filActualite .post__line--media {

@@ -9,7 +9,7 @@
     }
     .writeLine {
         display: flex;
-        justify-content: space-evenly;
+        justify-content: space-between;
         align-items: center;
 
         input {
@@ -39,6 +39,15 @@
 
             i {
                 color: $accent-color;
+            }
+        }
+    }
+
+    .comments {
+        .writeLine {
+            margin-bottom: 40px;
+            @include respond(mobileLandscape) {
+                margin-bottom: 20px;
             }
         }
     }
@@ -79,15 +88,6 @@
 
         &--comments {
             margin-left: 20px;
-        }
-    }
-
-    .comments {
-        .writeLine {
-            margin-bottom: 40px;
-            @include respond(mobileLandscape) {
-                margin-bottom: 20px;
-            }
         }
     }
 
