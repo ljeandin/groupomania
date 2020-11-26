@@ -1,0 +1,16 @@
+.adminDelete {
+    width: 50px;
+    margin-bottom: 10px;
+    padding: 0;
+    border-radius: 50%;
+    //centering the icon
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    margin-left: auto;
+    i {
+        color: $admin-delete;
+    }
+}

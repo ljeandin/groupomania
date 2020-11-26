@@ -138,18 +138,5 @@
                 color: $accent-color;
             }
         }
-
-        //styling the gif button
-        button {
-            width: 50px;
-            margin: 10px;
-            padding: 0;
-            border-radius: 50%;
-            //centering the icon
-            display: inline-flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
     }
 }

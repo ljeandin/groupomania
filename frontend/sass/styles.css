@@ -364,6 +364,31 @@ input:focus {
   transition: 0.1s;
 }
 
+.adminDelete {
+  width: 50px;
+  margin-bottom: 10px;
+  padding: 0;
+  border-radius: 50%;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-left: auto;
+}
+
+.adminDelete i {
+  color: #eb1135;
+}
+
 .connexion {
   height: 100vh;
   display: -ms-grid;
@@ -767,25 +792,5 @@ input:focus {
       -ms-flex-pack: center;
           justify-content: center;
   color: #091f43;
-}
-
-.filActualite .post__line--media button {
-  width: 50px;
-  margin: 10px;
-  padding: 0;
-  border-radius: 50%;
-  display: -webkit-inline-box;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
 }
 /*# sourceMappingURL=styles.css.map */
