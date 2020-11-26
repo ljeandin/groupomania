@@ -1,0 +1,23 @@
+//This file contains all the styles used to animate elements
+
+//Animation of the logos on the login page
+@keyframes line-anim {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes fill {
+    80% {
+        fill: transparent;
+        //transform: scale(1);
+    }
+
+    90% {
+        // transform: scale(1.005);
+    }
+
+    100% {
+        fill: #d1515a;
+    }
+}

@@ -1,0 +1,16 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: $background-color;
+
+    :focus {
+        //border on focus
+        outline: none;
+        background-color: $focus-color !important;
+    }
+}
+
+i {
+    background-color: transparent;
+}

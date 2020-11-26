@@ -1,0 +1,11 @@
+//this is the profile picture styling, used to make it round even if the picture sent by the user is not a square
+.avatar {
+    border-radius: 50%;
+    object-fit: cover;
+    height: 60px;
+    width: 60px;
+    @include respond(mobileLandscape) {
+        height: 50px;
+        width: 50px;
+    }
+}

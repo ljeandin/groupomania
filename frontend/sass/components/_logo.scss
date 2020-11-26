@@ -1,0 +1,20 @@
+.logo {
+    &--icon {
+        //hidden on smaller resolutions
+        @include respond(desktop) {
+            display: block;
+        }
+
+        @include respond(mobileLandscape) {
+            display: none;
+        }
+    }
+
+    &--typography {
+        //hidden on bigger resolutions
+        display: none;
+        @include respond(mobileLandscape) {
+            display: block;
+        }
+    }
+}

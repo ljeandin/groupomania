@@ -1,0 +1,146 @@
+// This is the file where all the specific styles for the feed are defined (everything that's not defined at pages/general)
+
+.filActualite {
+    i {
+        font-size: 40px;
+        @include respond(mobile) {
+            font-size: 35px;
+        }
+    }
+    .writeLine {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+
+        input {
+            width: 100%;
+            max-width: 50ch; //makes sure it stays readable
+            margin-left: 10px;
+            margin-right: 10px;
+            @include respond(mobile) {
+                padding: 8px;
+            }
+        }
+
+        button {
+            //modifying default stuff (as defined in components/buttons)
+            height: min-content;
+            width: min-content;
+            margin: 0;
+            padding: 0;
+            border-radius: 50%;
+            box-shadow: none;
+
+            //centering the icon
+            display: inline-flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            i {
+                color: $accent-color;
+            }
+        }
+    }
+
+    .idLine {
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        .firstName {
+            margin-left: 10px;
+            margin-right: 5px;
+        }
+        span {
+            font-weight: 700;
+            color: $accent-color;
+        }
+    }
+
+    .publication {
+        margin-bottom: 20px;
+    }
+
+    .publicationContent {
+        img {
+            max-width: 100%;
+        }
+
+        p {
+            margin: 10px 0;
+        }
+    }
+
+    .reactionLine {
+        display: flex;
+        i {
+            color: $primary-color;
+        }
+
+        &--comments {
+            margin-left: 20px;
+        }
+    }
+
+    .post__line--media {
+        display: flex;
+        justify-content: center;
+        @include respond(mobile) {
+            justify-content: flex-start;
+        }
+
+        //styling the buttons to insert gifs or images
+        .custom-file-upload {
+            display: inline-block;
+            position: relative;
+            //defining size of the button
+            height: 50px;
+            width: 50px;
+            margin-top: 10px;
+            border-radius: 50%;
+            @include shadow;
+
+            &:nth-of-type(2) {
+                //margin-left to the second button
+                margin-left: 10px;
+            }
+
+            input[type="file"] {
+                //making the actual input invisible
+                position: absolute;
+                left: 0;
+                opacity: 0;
+                top: 0;
+                bottom: 0;
+                width: 100%;
+            }
+
+            i {
+                //centering icon
+                position: absolute;
+                left: 0;
+                top: 0;
+                bottom: 0;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                //color of the icon
+                color: $accent-color;
+            }
+        }
+
+        //styling the gif button
+        button {
+            width: 50px;
+            margin: 10px;
+            padding: 0;
+            border-radius: 50%;
+            //centering the icon
+            display: inline-flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+}
