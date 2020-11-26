@@ -5,14 +5,14 @@
     place-items: center;
 
     &__wrapper {
-        @media screen and (min-width: 768px) {
+        /* @media screen and (min-width: 768px) {
             min-width: 600px;
             max-width: 40vw;
         }
 
         @include respond(mobileLandscape) {
             width: 80vw;
-        }
+        }*/
 
         .logo {
             //logos take 100% of the space they are allowed to
@@ -20,12 +20,6 @@
         }
 
         form {
-            //card is for making the form a card and shadow adds neumorphic shadows (see abstacts/mixins)
-            @include card;
-            @include shadow;
-
-            padding: 1vw 5vw;
-
             button {
                 margin: 1vw; //most of the button is styled at components/button/.formSubmit
             }
