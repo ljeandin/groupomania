@@ -64,7 +64,7 @@ header {
                 flex-direction: column;
                 justify-content: space-evenly;
 
-                & p {
+                p {
                     //styling the dropdown content title
                     @include raleway($font-bigger, 700, $accent-color);
                     @include respond(mobileLandscape) {
@@ -102,7 +102,7 @@ header {
                     }
                 }
 
-                & a {
+                a {
                     display: inline-block;
                     height: 45px; //height sufficient to be clicable
                     line-height: 45px; //same as height so that the text is vertically centered
