@@ -8,4 +8,7 @@
         height: 50px;
         width: 50px;
     }
+    &:focus {
+        border: 5px solid $focus-color;
+    }
 }

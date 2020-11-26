@@ -357,6 +357,10 @@ input:focus {
   }
 }
 
+.avatar:focus {
+  border: 5px solid #d1d9e6;
+}
+
 .connexion {
   height: 100vh;
   display: -ms-grid;
