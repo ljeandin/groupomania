@@ -21,6 +21,11 @@ i {
   background-color: transparent;
 }
 
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 * {
   font-family: Raleway, sans-serif;
   font-size: 18px;
@@ -660,6 +665,16 @@ input:focus {
 
 .filActualite .reactionLine--comments {
   margin-left: 20px;
+}
+
+.filActualite .comments .writeLine {
+  margin-bottom: 40px;
+}
+
+@media only screen and (max-width: 767px) {
+  .filActualite .comments .writeLine {
+    margin-bottom: 20px;
+  }
 }
 
 .filActualite .post__line--media {

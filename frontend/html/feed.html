@@ -62,7 +62,7 @@
         <main>
             <div class="bloc post">
                 <form>
-                    <div class="post__line post__line--text writeLine">
+                    <div class="writeLine">
                         <img class="avatar" src="../images/avatar_vertical.jpg" />
                         <input type="text" placeholder="Que voulez-vous dire ?" name="post" required />
                         <button type="submit">
@@ -77,7 +77,7 @@
                         
                         <label for="uploadImage" class="custom-file-upload" tabindex="0" >
                             <i class="material-icons" tabindex="-1">gif</i>
-                            <input type="file" id="uploadImg" name="image" accept="image/*" tabindex="-1" />
+                            <input type="file" id="uploadGif" name="image" accept="image/*" tabindex="-1" />
                         </label>
                     </div>
                 </form>
@@ -112,10 +112,23 @@
                 </div>
                 
                 <div class="comments">
-                    <div class="idLine">
+                    <div class="writeLine">
                         <img class="avatar" src="../images/avatar_vertical.jpg" />
-                        <span class="firstName">Cécile</span>
-                        <span class="lastName">Michel</span>
+                        <input type="text" placeholder="Que voulez-vous dire ?" name="post" required />
+                        <button type="submit">
+                            <i class="material-icons">send</i>
+                        </button>
+                    </div>
+
+                    <div class="comments__comment">
+                        <div class="idLine">
+                            <img class="avatar" src="../images/avatar-rectangle.jpg" />
+                            <span class="firstName">Mickaël</span>
+                            <span class="lastName">Georges</span>
+                        </div>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        </p>
                     </div>
                 </div>
             </div>

@@ -82,6 +82,15 @@
         }
     }
 
+    .comments {
+        .writeLine {
+            margin-bottom: 40px;
+            @include respond(mobileLandscape) {
+                margin-bottom: 20px;
+            }
+        }
+    }
+
     .post__line--media {
         display: flex;
         justify-content: center;
