@@ -109,7 +109,7 @@ header .dropdown__content {
 
 @media only screen and (max-width: 420px) {
   header .dropdown__content {
-    width: 80vw;
+    width: 85vw;
   }
 }
 
@@ -138,6 +138,32 @@ header .dropdown__content__text p {
   header .dropdown__content__text p {
     font-size: 18px;
   }
+}
+
+header .dropdown__content__text .custom-file-upload {
+  display: inline-block;
+  position: relative;
+  height: 45px;
+  line-height: 45px;
+  padding: 0 5px;
+  margin-top: 10px;
+}
+
+header .dropdown__content__text .custom-file-upload:hover {
+  background-color: #d1d9e6;
+}
+
+header .dropdown__content__text .custom-file-upload input[type="file"] {
+  position: absolute;
+  left: 0;
+  opacity: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+header .dropdown__content__text .custom-file-upload span {
+  background-color: transparent;
 }
 
 header .dropdown__content__text a {

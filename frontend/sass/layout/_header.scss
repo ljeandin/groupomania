@@ -56,7 +56,7 @@ header {
             }
 
             @include respond(mobile) {
-                width: 80vw;
+                width: 85vw;
             }
 
             &__text {
@@ -71,6 +71,35 @@ header {
                         font-size: $font-default;
                     }
                     margin-bottom: 20px;
+                }
+
+                //styling the buttons to change the avatar
+                .custom-file-upload {
+                    display: inline-block;
+                    position: relative;
+                    //defining size of the button
+                    height: 45px; //height sufficient to be clicable
+                    line-height: 45px; //same as height so that the text is vertically centered
+                    padding: 0 5px;
+                    margin-top: 10px;
+
+                    &:hover {
+                        background-color: $focus-color; //see the variable at abstracts/varaibles
+                    }
+
+                    input[type="file"] {
+                        //making the actual input invisible
+                        position: absolute;
+                        left: 0;
+                        opacity: 0;
+                        top: 0;
+                        bottom: 0;
+                        width: 100%;
+                    }
+
+                    span {
+                        background-color: transparent;
+                    }
                 }
 
                 & a {
