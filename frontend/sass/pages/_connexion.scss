@@ -4,6 +4,7 @@
     display: grid;
     place-items: center;
 
+    //items are placed in a wrapper to be easily centered
     &__wrapper {
         .logo {
             //logos take 100% of the space they are allowed to

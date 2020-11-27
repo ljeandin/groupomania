@@ -1,5 +1,7 @@
-//this is the profile picture styling, used to make it round even if the picture sent by the user is not a square
+//this is the profile picture styling
+
 .avatar {
+    //making the picture perfectly round even if the picture sent by the user is not a square
     border-radius: 50%;
     object-fit: cover;
     height: 60px;

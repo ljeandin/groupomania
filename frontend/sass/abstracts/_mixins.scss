@@ -1,10 +1,5 @@
 //ce fichiers contient les mixins utilisées sur le site
 
-//test mixin /**************Remove **************/
-@mixin outline {
-    outline: 2px solid aquamarine;
-}
-
 //Ombre neumorphique (composée d'une ombre claire et une foncée)
 @mixin shadow {
     box-shadow: -5px -5px 15px $shadow-highlight, 5px 5px 15px $shadow-dark;
@@ -12,8 +7,7 @@
 
 //Ombre neumorphique qui "rentre" dans la page (composée d'une ombre claire et une foncée)
 @mixin inner-shadow {
-    box-shadow: inset -2px -2px 8px $shadow-highlight,
-        inset 2px 2px 8px $shadow-dark;
+    box-shadow: inset -2px -2px 8px $shadow-highlight, inset 2px 2px 8px $shadow-dark;
 }
 
 //format "carte"

@@ -23,6 +23,9 @@ button {
     @include respond(mobileLandscape) {
         font-size: $font-default;
     }
+    & :focus {
+        background-color: $focus-color;
+    }
 }
 
 .formExit {

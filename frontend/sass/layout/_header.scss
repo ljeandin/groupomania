@@ -102,6 +102,7 @@ header {
                     }
                 }
 
+                //this is the links styling
                 a {
                     display: inline-block;
                     height: 45px; //height sufficient to be clicable
@@ -115,6 +116,8 @@ header {
             }
         }
     }
+
+    //that's the toggleable class to show the content
     .show {
         display: block;
     }

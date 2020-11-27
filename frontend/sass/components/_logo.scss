@@ -1,4 +1,7 @@
+//this stylesheet is where the logos are styled
+
 .logo {
+    //logo with icon
     &--icon {
         //hidden on smaller resolutions
         @include respond(desktop) {
@@ -10,6 +13,7 @@
         }
     }
 
+    //logo without icon
     &--typography {
         //hidden on bigger resolutions
         display: none;

@@ -30,6 +30,7 @@
             font-weight: 500;
         }
 
+        //containers represent both parts of the form (one with the actual form, the other with the exit button)
         .container {
             display: flex; //flexing items
             div {
@@ -103,6 +104,7 @@
             display: list-item;
         }
 
+        //this is the button to add an avatar
         .imgUpload {
             b {
                 color: $accent-color;
@@ -117,7 +119,6 @@
                 top: 0;
                 bottom: 0;
                 width: 100%;
-                @include outline;
             }
             .custom-file-upload {
                 display: inline-block;
