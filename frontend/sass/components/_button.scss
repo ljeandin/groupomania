@@ -9,18 +9,19 @@ button {
     //using neumorphic shadow and corners rounding
     @include shadow;
     @include card;
+
+    &:disabled {
+        background-color: $disabled-color !important;
+    }
 }
 
 .formSubmit {
+    background-color: $primary-color;
+
     @include raleway($font-bigger, 700, white);
     //responsive for buttons font-size
     @include respond(mobileLandscape) {
         font-size: $font-default;
-    }
-    background-color: $primary-color;
-
-    &:disabled {
-        background-color: $disabled-color;
     }
 }
 

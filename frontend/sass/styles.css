@@ -275,22 +275,22 @@ button {
   border-radius: 20px;
 }
 
+button:disabled {
+  background-color: #575757 !important;
+}
+
 .formSubmit {
+  background-color: #d1515a;
   font-family: Raleway, sans-serif;
   font-size: 22px;
   font-weight: 700;
   color: white;
-  background-color: #d1515a;
 }
 
 @media only screen and (max-width: 767px) {
   .formSubmit {
     font-size: 18px;
   }
-}
-
-.formSubmit:disabled {
-  background-color: #575757;
 }
 
 .formExit {
@@ -717,7 +717,12 @@ input:focus {
 }
 
 .filActualite .reactionLine i {
+  cursor: pointer;
   color: #d1515a;
+}
+
+.filActualite .reactionLine i :focus {
+  color: #091f43;
 }
 
 .filActualite .reactionLine--comments {

@@ -83,7 +83,11 @@
     .reactionLine {
         display: flex;
         i {
+            cursor: pointer;
             color: $primary-color;
+            :focus {
+                color: $accent-color;
+            }
         }
 
         &--comments {
