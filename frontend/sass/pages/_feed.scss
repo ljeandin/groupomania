@@ -144,6 +144,11 @@
         i {
             cursor: pointer;
             color: $primary-color;
+            &:focus {
+                background-color: transparent;
+                transform: scale(1.1, 1.1);
+                transition: 0.1s;
+            }
         }
 
         &--comments {

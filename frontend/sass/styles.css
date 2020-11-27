@@ -18,7 +18,7 @@
 }
 
 * :disabled {
-  background-color: #575757 !important;
+  background-color: #575757;
 }
 
 i {
@@ -87,6 +87,10 @@ header {
 header .logo {
   height: 65px;
   max-width: 60%;
+}
+
+header .logo a:focus {
+  background-color: turquoise;
 }
 
 header .dropdown__btn {
@@ -787,6 +791,14 @@ input:focus {
 .filActualite .reactionLine i {
   cursor: pointer;
   color: #d1515a;
+}
+
+.filActualite .reactionLine i:focus {
+  background-color: transparent;
+  -webkit-transform: scale(1.1, 1.1);
+          transform: scale(1.1, 1.1);
+  -webkit-transition: 0.1s;
+  transition: 0.1s;
 }
 
 .filActualite .reactionLine--comments {

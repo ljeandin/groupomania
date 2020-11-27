@@ -26,6 +26,10 @@ header {
         //logo sizing
         height: 65px;
         max-width: 60%;
+
+        a:focus {
+            background-color: turquoise;
+        }
     }
 
     //dropdown styling
