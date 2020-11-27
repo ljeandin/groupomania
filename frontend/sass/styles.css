@@ -696,6 +696,12 @@ input:focus {
           align-items: center;
 }
 
+.filActualite .writeLine label {
+  font-size: 1px;
+  line-height: 1px;
+  opacity: 0;
+}
+
 .filActualite .writeLine input {
   width: 100%;
   max-width: 50ch;

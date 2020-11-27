@@ -65,6 +65,13 @@
         justify-content: space-between;
         align-items: center;
 
+        label {
+            //hiding labels in a way that screenreaders can still use them
+            font-size: 1px;
+            line-height: 1px;
+            opacity: 0;
+        }
+
         input {
             width: 100%;
             max-width: 50ch; //makes sure it stays readable
