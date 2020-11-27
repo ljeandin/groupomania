@@ -72,7 +72,10 @@
             opacity: 0;
         }
 
-        input {
+        textarea {
+            resize: none; //removing the default resize thingy
+            overflow: auto; //removes default scrollbars on IE, but still makes sure they appear when needed
+            //sizing
             width: 100%;
             max-width: 50ch; //makes sure it stays readable
             margin-left: 10px;
