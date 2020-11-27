@@ -72,14 +72,14 @@
                         </button>
                     </div>
                     <div class="post__line post__line--media">
-                        <label for="uploadImage" class="custom-file-upload" tabindex="0" >
+                        <label for="télécharger_image" class="custom-file-upload" tabindex="-1" >
                             <i class="material-icons" tabindex="-1">insert_photo</i>
-                            <input type="file" id="uploadImg" name="image" accept="image/*" tabindex="-1" />
+                            <input type="file" id="télécharger_image" name="image" accept="image/*" onfocus="focusBtn()" onblur="blurBtn()" tabindex="0" />
                         </label>
                         
-                        <label for="uploadImage" class="custom-file-upload" tabindex="0" >
+                        <label for="télécharger_gif" class="custom-file-upload" tabindex="-1" >
                             <i class="material-icons" tabindex="-1">gif</i>
-                            <input type="file" id="uploadGif" name="image" accept="image/*" tabindex="-1" />
+                            <input type="file" id="télécharger_gif" name="image" accept="image/*" onfocus="focusBtn()" onblur="blurBtn()" tabindex="0" />       
                         </label>
                     </div>
                 </form>

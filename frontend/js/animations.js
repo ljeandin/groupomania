@@ -168,7 +168,7 @@ function seePassword() {
     }
 }
 
-let input = document.getElementById("uploadAvatar");
+/*let input = document.getElementById("uploadAvatar");
 let label = document.getElementById("labelUpload");
 
 input.onfocus = function () {
@@ -177,4 +177,18 @@ input.onfocus = function () {
 
 input.onblur = function () {
     label.style.backgroundColor = "#ecf0f3"; //color correspond to $background-color in sass/abstracts/variables
-};
+};*/
+
+function focusBtn() {
+    let label = document.getElementsByClassName("custom-file-upload");
+    for (var i = 0; i < label.length; i++) {
+        label[i].style.backgroundColor = "#d1d9e6"; //color correspond to $focus-color in sass/abstracts/variables
+    }
+}
+
+function blurBtn() {
+    let label = document.getElementsByClassName("custom-file-upload");
+    for (var i = 0; i < label.length; i++) {
+        label[i].style.backgroundColor = "#ecf0f3"; //color correspond to $background-color in sass/abstracts/variables
+    }
+}
