@@ -142,6 +142,7 @@ myInput.onkeyup = function () {
         length.classList.add("invalid");
     }
 
+    //changing password message
     if (
         letter.classList.contains("valid") &&
         capital.classList.contains("valid") &&
