@@ -17,6 +17,10 @@
   background-color: #d1d9e6;
 }
 
+* :disabled {
+  background-color: #575757 !important;
+}
+
 i {
   background-color: transparent;
   -webkit-user-select: none;
@@ -279,10 +283,6 @@ button {
   border-radius: 20px;
 }
 
-button:disabled {
-  background-color: #575757 !important;
-}
-
 .formSubmit {
   background-color: #d1515a;
   font-family: Raleway, sans-serif;
@@ -297,7 +297,7 @@ button:disabled {
   }
 }
 
-.formSubmit :focus {
+.formSubmit:focus {
   background-color: #d1d9e6;
 }
 

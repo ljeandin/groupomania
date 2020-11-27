@@ -6,10 +6,14 @@
     box-sizing: border-box;
     background-color: $background-color;
 
-    & :focus {
+    :focus {
         //border on focus
         outline: none; //removing default outline
         background-color: $focus-color;
+    }
+
+    :disabled {
+        background-color: $disabled-color !important;
     }
 }
 
