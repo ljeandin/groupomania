@@ -296,8 +296,8 @@ button {
 .formExit {
   font-family: Raleway, sans-serif;
   font-size: 18px;
-  font-weight: 700;
-  color: #d1515a;
+  font-weight: 300;
+  color: #091f43;
 }
 
 @media only screen and (max-width: 767px) {

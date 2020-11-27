@@ -25,7 +25,7 @@ button {
 }
 
 .formExit {
-    @include raleway($font-default, 700, $primary-color);
+    @include raleway($font-default, 300, $accent-color);
     @include respond(mobileLandscape) {
         font-size: $font-smaller;
     }
