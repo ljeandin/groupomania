@@ -418,10 +418,6 @@ input:focus {
   }
 }
 
-.connexion__wrapper form button {
-  margin: 1vw;
-}
-
 .connexion__wrapper form .container {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -448,7 +444,17 @@ input:focus {
   padding: 10px 20px;
 }
 
+.connexion__wrapper form label {
+  font-size: 1px;
+  line-height: 1px;
+  opacity: 0;
+}
+
 .connexion__wrapper form input {
+  margin: 1vw;
+}
+
+.connexion__wrapper form button {
   margin: 1vw;
 }
 

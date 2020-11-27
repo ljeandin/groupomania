@@ -45,7 +45,7 @@
             <!--clicking on the avatar reveals a dropdown menu-->
             <div class="dropdown">
                 <!--this is the dropdown button but also the profile picture-->
-                <img onclick="dropdown()" onkeydown="dropdown()" class="avatar dropdown__btn" id="headerAvatar" src="../images/avatar_vertical.jpg" tabindex="0"/>  
+                <img onclick="dropdown()" onkeypress="dropdown()" class="avatar dropdown__btn" id="headerAvatar" src="../images/avatar_vertical.jpg" tabindex="0"/>  
             </div>
             <div id="myDropdown" class="dropdown__content">
                 <div class="dropdown__content__text">
@@ -119,8 +119,8 @@
                     <div class="writeLine">
                         <img class="avatar" src="../images/avatar_vertical.jpg" />
                         <input type="text" placeholder="Que voulez-vous dire ?" name="post" required />
-                        <button type="submit" tabindex="0">
-                            <i class="material-icons" tabindex="-1">send</i>
+                        <button type="submit">
+                            <i class="material-icons">send</i>
                         </button>
                     </div>
 

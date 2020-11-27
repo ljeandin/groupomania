@@ -46,8 +46,13 @@
             <form class="bloc">
                 <div class="container">
                     <!--here are the inputs and submit btn-->
-                    <input type="text" placeholder="Adresse e-mail" name="email" required />
-                    <input type="password" placeholder="Mot de passe" name="mot de passe" required />
+                    <!--labels are made invisible via the css, but screenreaders can still read them-->
+                    <label for="emailLogin">adresse e-mail</label>
+                    <input type="text" placeholder="Adresse e-mail" name="email" id="emailLogin" required />
+                    
+                    <label for="passwordLogin">mot de passe</label>
+                    <input type="password" placeholder="Mot de passe" name="mot de passe" id="passwordLogin" required />
+                    
                     <button class="formSubmit" type="submit">Connexion</button>
                 </div>
 

@@ -16,10 +16,7 @@
         }
 
         form {
-            button {
-                margin: 1vw; //most of the button is styled at components/button/.formSubmit
-            }
-
+            //form is divided in containers: one for the inputs + submit btn, the other for the exit btn
             .container {
                 display: flex; //flexing items
             }
@@ -36,9 +33,18 @@
                     padding: 10px 20px;
                 }
             }
+            label {
+                font-size: 1px;
+                line-height: 1px;
+                opacity: 0;
+            }
 
             input {
                 margin: 1vw;
+            }
+
+            button {
+                margin: 1vw; //most of the button is styled at components/button/.formSubmit
             }
         }
     }
