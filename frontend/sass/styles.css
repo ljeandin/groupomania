@@ -397,19 +397,15 @@ input:focus {
   place-items: center;
 }
 
-.connexion__wrapper {
-  /* @media screen and (min-width: 768px) {
-            min-width: 600px;
-            max-width: 40vw;
-        }
-
-        @include respond(mobileLandscape) {
-            width: 80vw;
-        }*/
-}
-
 .connexion__wrapper .logo {
   width: 100%;
+}
+
+@media only screen and (max-width: 767px) {
+  .connexion__wrapper .logo {
+    width: 80%;
+    margin: 0 10%;
+  }
 }
 
 .connexion__wrapper form button {

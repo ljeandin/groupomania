@@ -5,18 +5,13 @@
     place-items: center;
 
     &__wrapper {
-        /* @media screen and (min-width: 768px) {
-            min-width: 600px;
-            max-width: 40vw;
-        }
-
-        @include respond(mobileLandscape) {
-            width: 80vw;
-        }*/
-
         .logo {
             //logos take 100% of the space they are allowed to
             width: 100%;
+            @include respond(mobileLandscape) {
+                width: 80%;
+                margin: 0 10%;
+            }
         }
 
         form {
