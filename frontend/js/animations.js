@@ -11,15 +11,9 @@ document.addEventListener(
             const logoPaths = document.querySelectorAll(`#${id} path`);
             delay = delay;
             for (let i = 0; i < logoPaths.length; i++) {
-                logoPaths[i].style.strokeDasharray = logoPaths[
-                    i
-                ].getTotalLength();
-                logoPaths[i].style.strokeDashoffset = logoPaths[
-                    i
-                ].getTotalLength();
-                logoPaths[
-                    i
-                ].style.animation = `line-anim 1s ease-out forwards ${delay}s`;
+                logoPaths[i].style.strokeDasharray = logoPaths[i].getTotalLength();
+                logoPaths[i].style.strokeDashoffset = logoPaths[i].getTotalLength();
+                logoPaths[i].style.animation = `line-anim 1s ease-out forwards ${delay}s`;
                 delay += delayIncrement;
                 console.log(delay);
             }
@@ -40,15 +34,9 @@ document.addEventListener(
             const logoPaths = document.querySelectorAll(`#${id} path`);
             delay = delay;
             for (let i = 0; i < logoPaths.length; i++) {
-                logoPaths[i].style.strokeDasharray = logoPaths[
-                    i
-                ].getTotalLength();
-                logoPaths[i].style.strokeDashoffset = logoPaths[
-                    i
-                ].getTotalLength();
-                logoPaths[
-                    i
-                ].style.animation = `line-anim 2s ease forwards ${delay}s`;
+                logoPaths[i].style.strokeDasharray = logoPaths[i].getTotalLength();
+                logoPaths[i].style.strokeDashoffset = logoPaths[i].getTotalLength();
+                logoPaths[i].style.animation = `line-anim 2s ease forwards ${delay}s`;
                 delay += delayIncrement;
                 console.log(delay);
             }
@@ -66,9 +54,21 @@ document.addEventListener(
 
 /***Dropdown***/
 // When the user clicks on the button,toggle between hiding and showing the dropdown content */
-function myFunction() {
+function dropdown() {
     document.getElementById("myDropdown").classList.toggle("show");
 }
+
+window.onkeypress = function (event) {
+    if (!event.target.matches(".dropdown__btn")) {
+        let dropdowns = document.getElementsByClassName("dropdown__content");
+        for (var i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains("show")) {
+                openDropdown.classList.remove("show");
+            }
+        }
+    }
+};
 
 // Close the dropdown menu if the user clicks outside of it
 window.onclick = function (event) {
@@ -148,8 +148,7 @@ myInput.onkeyup = function () {
         number.classList.contains("valid") &&
         length.classList.contains("valid")
     ) {
-        document.getElementById("validationTitle").innerHTML =
-            "Le mot de passe est valide";
+        document.getElementById("validationTitle").innerHTML = "Le mot de passe est valide";
     }
 };
 
@@ -168,27 +167,40 @@ function seePassword() {
     }
 }
 
-/*let input = document.getElementById("uploadAvatar");
-let label = document.getElementById("labelUpload");
+/***Focus style on custom buttons***/
 
-input.onfocus = function () {
-    label.style.backgroundColor = "#d1d9e6"; //color correspond to $focus-color in sass/abstracts/variables
-};
-
-input.onblur = function () {
-    label.style.backgroundColor = "#ecf0f3"; //color correspond to $background-color in sass/abstracts/variables
-};*/
-
-function focusBtn() {
-    let label = document.getElementsByClassName("custom-file-upload");
-    for (var i = 0; i < label.length; i++) {
-        label[i].style.backgroundColor = "#d1d9e6"; //color correspond to $focus-color in sass/abstracts/variables
-    }
+//for uploading avatar (on login page)
+function focusBtnUploadAvatar() {
+    document.getElementById("labelUploadAvatar").style.backgroundColor = "#d1d9e6"; //color correspond to $focus-color in sass/abstracts/variables
 }
 
-function blurBtn() {
-    let label = document.getElementsByClassName("custom-file-upload");
-    for (var i = 0; i < label.length; i++) {
-        label[i].style.backgroundColor = "#ecf0f3"; //color correspond to $background-color in sass/abstracts/variables
-    }
+function blurBtnUploadAvatar() {
+    document.getElementById("labelUploadAvatar").style.backgroundColor = "#ecf0f3"; //color correspond to $background-color in sass/abstracts/variables
+}
+
+//for changing the avatar
+function focusBtnChangeAvatar() {
+    document.getElementById("labelChangeAvatar").style.backgroundColor = "#d1d9e6"; //color correspond to $focus-color in sass/abstracts/variables
+}
+
+function blurBtnChangeAvatar() {
+    document.getElementById("labelChangeAvatar").style.backgroundColor = "#ecf0f3"; //color correspond to $background-color in sass/abstracts/variables
+}
+
+//adding image to post
+function focusBtnImg() {
+    document.getElementById("labelImage").style.backgroundColor = "#d1d9e6"; //color correspond to $focus-color in sass/abstracts/variables
+}
+
+function blurBtnImg() {
+    document.getElementById("labelImage").style.backgroundColor = "#ecf0f3"; //color correspond to $background-color in sass/abstracts/variables
+}
+
+//adding gif to post
+function focusBtnGif() {
+    document.getElementById("labelGif").style.backgroundColor = "#d1d9e6"; //color correspond to $focus-color in sass/abstracts/variables
+}
+
+function blurBtnGif() {
+    document.getElementById("labelGif").style.backgroundColor = "#ecf0f3"; //color correspond to $background-color in sass/abstracts/variables
 }

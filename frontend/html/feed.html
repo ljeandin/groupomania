@@ -45,18 +45,17 @@
             <!--clicking on the avatar reveals a dropdown menu-->
             <div class="dropdown">
                 <!--this is the dropdown button but also the profile picture-->
-                <img onclick="myFunction()" class="avatar dropdown__btn" src="../images/avatar_vertical.jpg" tabindex="0"/>  
+                <img onclick="dropdown()" onkeydown="dropdown()" class="avatar dropdown__btn" id="headerAvatar" src="../images/avatar_vertical.jpg" tabindex="0"/>  
             </div>
             <div id="myDropdown" class="dropdown__content">
                 <div class="dropdown__content__text">
                     <p>Paramètres</p>
-                    <!--<a href="#">Changer la photo de profil</a>-->
-                    <label for="uploadImage" class="custom-file-upload" tabindex="0" >
+                    <label for="télécharger_photo_de_profil" class="custom-file-upload" id="labelChangeAvatar" tabindex="-1" >
                         <span>Changer la photo de profil</span>
-                        <input type="file" id="uploadGif" name="image" accept="image/*" tabindex="-1" />
+                        <input type="file" id="télécharger_photo_de_profil" name="image" accept="image/*"  onfocus="focusBtnChangeAvatar()" onblur="blurBtnChangeAvatar()" tabindex="0"/>
                     </label>
-                    <a href="#">Déconnexion</a>
-                    <a href="#">Supprimer le compte</a>
+                    <a href="#" tabindex="0">Déconnexion</a>
+                    <a href="#" tabindex="0">Supprimer le compte</a>
                 </div> 
             </div>         
         </header>
@@ -72,14 +71,14 @@
                         </button>
                     </div>
                     <div class="post__line post__line--media">
-                        <label for="télécharger_image" class="custom-file-upload" tabindex="-1" >
+                        <label for="télécharger_image" class="custom-file-upload" id="labelImage" tabindex="-1" >
                             <i class="material-icons" tabindex="-1">insert_photo</i>
-                            <input type="file" id="télécharger_image" name="image" accept="image/*" onfocus="focusBtn()" onblur="blurBtn()" tabindex="0" />
+                            <input type="file" id="télécharger_image" name="image" accept="image/*" onfocus="focusBtnImg()" onblur="blurBtnImg()" tabindex="0" />
                         </label>
                         
-                        <label for="télécharger_gif" class="custom-file-upload" tabindex="-1" >
+                        <label for="télécharger_gif" class="custom-file-upload" id="labelGif" tabindex="-1" >
                             <i class="material-icons" tabindex="-1">gif</i>
-                            <input type="file" id="télécharger_gif" name="image" accept="image/*" onfocus="focusBtn()" onblur="blurBtn()" tabindex="0" />       
+                            <input type="file" id="télécharger_gif" name="image" accept="image/*" onfocus="focusBtnGif()" onblur="blurBtnGif()" tabindex="0" />       
                         </label>
                     </div>
                 </form>

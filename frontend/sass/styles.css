@@ -349,6 +349,8 @@ input:focus {
   height: 60px;
   width: 60px;
   border: 0px solid #d1d9e6;
+  -webkit-transition: 0.1s;
+  transition: 0.1s;
 }
 
 @media only screen and (max-width: 767px) {

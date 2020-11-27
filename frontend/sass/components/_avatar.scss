@@ -5,12 +5,13 @@
     height: 60px;
     width: 60px;
     border: 0px solid $focus-color; //defining invisible border with $focus color so the transition doesn't start from black
+    transition: 0.1s; //transition when avatar looses focus
     @include respond(mobileLandscape) {
         height: 50px;
         width: 50px;
     }
     &:focus {
         border: 5px solid $focus-color;
-        transition: 0.1s; //lil transition makes my heart happy :)
+        transition: 0.1s; //lil transition on focus makes my heart happy :)
     }
 }
