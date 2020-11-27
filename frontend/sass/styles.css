@@ -19,6 +19,10 @@
 
 i {
   background-color: transparent;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 
 body {
@@ -537,10 +541,6 @@ input:focus {
   color: #091f43;
   font-size: 30px;
   cursor: pointer;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
 }
 
 .inscription form .message {

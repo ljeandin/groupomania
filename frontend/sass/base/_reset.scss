@@ -14,7 +14,8 @@
 }
 
 i {
-    background-color: transparent; // removing the background-color on the icons
+    background-color: transparent; // removing the background-color on the icon
+    user-select: none; //some blinking happended when the user mouse selected an icon
 }
 
 //styling the body to remove horizontal scrolling
