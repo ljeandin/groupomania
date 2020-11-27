@@ -83,8 +83,8 @@
                         <div>
                             <label for="mot_de_passe">Mot de passe</label>
                             <section class="passwordLine">
-                                <input id="psw mot_de_passe" type="password" placeholder="Mot de passe" name="nom" required />
-                                <i id="icon" class="material-icons" onclick="seePassword()" tabindex="0">visibility_off</i>
+                                <input id="mot_de_passe" type="password" placeholder="Mot de passe" name="nom" required />
+                                <i id="icon" class="material-icons" onclick="seePassword()" onkeydown="seePassword()" tabindex="0">visibility_off</i>
                             </section>
                         </div>
 
@@ -99,8 +99,10 @@
                         <div class="imgUpload">
                             <p class="label">Photo de profil <b>(vous pourrez en changer)</b></p>    
                             <div class="imgUpload__line">
-                                <label for="uploadAvatar" class="custom-file-upload" tabindex="0" >Parcourir les fichiers</label>
-                                <input type="file" id="uploadAvatar" name="avatar" accept="image/*" tabindex="-1"/>
+                                <label for="uploadAvatar" class="custom-file-upload" id="labelUpload" tabindex="-1" >
+                                    <input type="file" id="uploadAvatar" name="avatar" accept="image/*" tabindex="0"/>
+                                    Parcourir les fichiers
+                                </label>
                                 <!--This is the default avatar, replaced by user's avatar-->
                                 <img class="avatar" src="../images/avatar_default.png" />
                             </div>

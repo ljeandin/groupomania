@@ -110,14 +110,14 @@
             }
             //styling the custom file upload button by hiding the input behind the label
             input[type="file"] {
+                //making the actual input invisible
                 position: absolute;
-                width: 1px;
-                height: 1px;
-                padding: 0;
-                margin: -1px;
-                overflow: hidden;
-                clip: rect(0, 0, 0, 0);
-                border: 0;
+                left: 0;
+                opacity: 0;
+                top: 0;
+                bottom: 0;
+                width: 100%;
+                @include outline;
             }
             .custom-file-upload {
                 display: inline-block;

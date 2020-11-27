@@ -85,7 +85,7 @@ window.onclick = function (event) {
 };
 
 /***Password validation***/
-let myInput = document.getElementById("psw");
+let myInput = document.getElementById("mot_de_passe");
 let letter = document.getElementById("letter");
 let capital = document.getElementById("capital");
 let number = document.getElementById("number");
@@ -154,10 +154,9 @@ myInput.onkeyup = function () {
 };
 
 /***Password visibility***/
-let icon = document.getElementById("icon");
-
 function seePassword() {
-    let password = document.getElementById("psw");
+    let icon = document.getElementById("icon");
+    let password = document.getElementById("mot_de_passe");
     //if password is hidden (with type=password in HTML)
     if (password.type === "password") {
         password.type = "text"; //show password with type=text
@@ -168,3 +167,14 @@ function seePassword() {
         icon.innerHTML = "visibility_off"; // change icon
     }
 }
+
+let input = document.getElementById("uploadAvatar");
+let label = document.getElementById("labelUpload");
+
+input.onfocus = function () {
+    label.style.backgroundColor = "#d1d9e6"; //color correspond to $focus-color in sass/abstracts/variables
+};
+
+input.onblur = function () {
+    label.style.backgroundColor = "#ecf0f3"; //color correspond to $background-color in sass/abstracts/variables
+};
