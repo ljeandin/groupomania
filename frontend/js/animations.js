@@ -206,7 +206,7 @@ function blurBtnGif() {
     document.getElementById("labelGif").style.backgroundColor = "#ecf0f3"; //color correspond to $background-color in sass/abstracts/variables
 }
 
-/******/
+/***Expandable textarea***/
 let elm = document.getElementById("posting");
 
 function getScrollHeight(elm) {

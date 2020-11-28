@@ -13,7 +13,7 @@
     .writeLine {
         display: flex;
         justify-content: space-between;
-        align-items: center;
+        align-items: flex-start;
 
         label {
             //hiding labels in a way that screenreaders can still use them
