@@ -162,7 +162,7 @@
             transition: 0.2s;
             &:focus {
                 background-color: transparent;
-                transform: scale(1.1, 1.1) rotate(5deg);
+                transform: rotate(5deg);
                 transition: 0.2s;
             }
         }

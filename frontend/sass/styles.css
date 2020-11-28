@@ -817,8 +817,8 @@ textarea:focus {
 
 .filActualite .reactionLine i:focus {
   background-color: transparent;
-  -webkit-transform: scale(1.1, 1.1) rotate(5deg);
-          transform: scale(1.1, 1.1) rotate(5deg);
+  -webkit-transform: rotate(5deg);
+          transform: rotate(5deg);
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
