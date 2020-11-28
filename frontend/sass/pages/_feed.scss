@@ -9,7 +9,67 @@
         }
     }
 
-    //this is the line for both the img and gif adding buttons
+    //this is the line with the avatar, the input and the send button//
+    .writeLine {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        label {
+            //hiding labels in a way that screenreaders can still use them
+            font-size: 1px;
+            line-height: 1px;
+            opacity: 0;
+        }
+
+        //part of it is already styled at components/input
+        textarea {
+            resize: none; //removing the default resize thingy
+            overflow: hidden; //removes default scrollbars on IE, but still makes sure they appear when needed
+            display: block;
+            box-sizing: padding-box;
+            //sizing
+            width: 100%;
+            max-width: 50ch; //makes sure it stays readable
+            margin-left: 10px;
+            margin-right: 10px;
+            @include respond(mobile) {
+                padding: 8px;
+            }
+        }
+
+        button {
+            //modifying default stuff (as defined in components/buttons)
+            height: min-content;
+            width: min-content;
+            margin: 0;
+            padding: 0;
+            border-radius: 50%;
+            box-shadow: none;
+
+            //centering the icon
+            display: inline-flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            i {
+                color: $accent-color;
+            }
+        }
+    }
+
+    //that's for styling the writeline in the comments block
+    .comments {
+        .writeLine {
+            margin-bottom: 40px;
+            @include respond(mobileLandscape) {
+                margin-bottom: 20px;
+            }
+        }
+    }
+
+    //this is the line for both the img and gif adding buttons//
     .post__line--media {
         display: flex;
         justify-content: center;
@@ -59,67 +119,7 @@
         }
     }
 
-    //this is the line with the avatar, the input and the send button
-    .writeLine {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-
-        label {
-            //hiding labels in a way that screenreaders can still use them
-            font-size: 1px;
-            line-height: 1px;
-            opacity: 0;
-        }
-
-        //part of it is already styled at components/input
-        textarea {
-            resize: none; //removing the default resize thingy
-            overflow: hidden; //removes default scrollbars on IE, but still makes sure they appear when needed
-            display: block;
-            box-sizing: padding-box !important;
-            //sizing
-            width: 100%;
-            max-width: 50ch; //makes sure it stays readable
-            margin-left: 10px;
-            margin-right: 10px;
-            @include respond(mobile) {
-                padding: 8px;
-            }
-        }
-
-        button {
-            //modifying default stuff (as defined in components/buttons)
-            height: min-content;
-            width: min-content;
-            margin: 0;
-            padding: 0;
-            border-radius: 50%;
-            box-shadow: none;
-
-            //centering the icon
-            display: inline-flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-
-            i {
-                color: $accent-color;
-            }
-        }
-    }
-
-    //that's the block containing the comments
-    .comments {
-        .writeLine {
-            margin-bottom: 40px;
-            @include respond(mobileLandscape) {
-                margin-bottom: 20px;
-            }
-        }
-    }
-
-    //that's the line composed of the avatar, first and last names
+    //that's the line composed of the avatar, first and last names//
     .idLine {
         margin-bottom: 10px;
         display: flex;
@@ -134,7 +134,7 @@
         }
     }
 
-    //this is the bloc containing the other users' publication
+    //this is the bloc containing the other users' publication//
     .publication {
         margin-bottom: 20px;
         //that is the bloc for the actual publication (img and/or text)
@@ -149,7 +149,7 @@
         }
     }
 
-    //this is the line with the like and comment buttons and counters
+    //this is the line with the like and comment buttons and counters//
     .reactionLine {
         display: flex; //aligning icons
 
