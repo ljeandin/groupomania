@@ -207,30 +207,27 @@ function blurBtnGif() {
 }
 
 /******/
-function makeExpandingArea(container) {
-    var area = container.querySelector("textarea");
-    var span = container.querySelector("span");
-    if (area.addEventListener) {
-        area.addEventListener(
-            "input",
-            function () {
-                span.textContent = area.value;
-            },
-            false
-        );
-        span.textContent = area.value;
-    } else if (area.attachEvent) {
-        // IE8 compatibility
-        area.attachEvent("onpropertychange", function () {
-            span.innerText = area.value;
-        });
-        span.innerText = area.value;
-    }
-    // Enable extra CSS
-    container.className += "active";
+let elm = document.getElementById("posting");
+
+function getScrollHeight(elm) {
+    var savedValue = elm.value;
+    elm.value = "";
+    elm._baseScrollHeight = elm.scrollHeight;
+    elm.value = savedValue;
 }
-var areas = document.querySelectorAll(".expandingArea");
-var l = areas.length;
-while (l--) {
-    makeExpandingArea(areas[l]);
+
+function onExpandableTextareaInput({ target: elm }) {
+    // make sure the input event originated from a textarea and it's desired to be auto-expandable
+    if (!elm.classList.contains("autoExpand") || !elm.nodeName == "TEXTAREA") return;
+
+    var minRows = elm.getAttribute("data-min-rows") | 0,
+        rows;
+    !elm._baseScrollHeight && getScrollHeight(elm);
+
+    elm.rows = minRows;
+    rows = Math.ceil((elm.scrollHeight - elm._baseScrollHeight) / 16);
+    elm.rows = minRows + rows;
 }
+
+// global delegated event listener
+document.addEventListener("input", onExpandableTextareaInput);

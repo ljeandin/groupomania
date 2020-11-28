@@ -72,9 +72,12 @@
             opacity: 0;
         }
 
+        //part of it is already styled at components/input
         textarea {
             resize: none; //removing the default resize thingy
-            overflow: auto; //removes default scrollbars on IE, but still makes sure they appear when needed
+            overflow: hidden; //removes default scrollbars on IE, but still makes sure they appear when needed
+            display: block;
+            box-sizing: padding-box !important;
             //sizing
             width: 100%;
             max-width: 50ch; //makes sure it stays readable
