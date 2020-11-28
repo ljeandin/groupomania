@@ -811,14 +811,16 @@ textarea:focus {
 .filActualite .reactionLine i {
   cursor: pointer;
   color: #d1515a;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
 }
 
 .filActualite .reactionLine i:focus {
   background-color: transparent;
-  -webkit-transform: scale(1.1, 1.1);
-          transform: scale(1.1, 1.1);
-  -webkit-transition: 0.1s;
-  transition: 0.1s;
+  -webkit-transform: scale(1.1, 1.1) rotate(5deg);
+          transform: scale(1.1, 1.1) rotate(5deg);
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
 }
 
 .filActualite .reactionLine--comments {
