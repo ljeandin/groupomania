@@ -664,12 +664,6 @@ textarea:focus {
   margin-right: 10px;
 }
 
-@media only screen and (max-width: 420px) {
-  .filActualite .writeLine textarea {
-    padding: 8px;
-  }
-}
-
 .filActualite .writeLine button {
   height: -webkit-min-content;
   height: -moz-min-content;
