@@ -1,0 +1,51 @@
+.connexion {
+    //centering the logo and login form on the page
+    height: 100vh;
+    display: grid;
+    place-items: center;
+
+    //items are placed in a wrapper to be easily centered
+    &__wrapper {
+        .logo {
+            //logos take 100% of the space they are allowed to
+            width: 100%;
+            @include respond(mobileLandscape) {
+                width: 80%;
+                margin: 0 10%;
+            }
+        }
+
+        form {
+            //form is divided in containers: one for the inputs + submit btn, the other for the exit btn
+            .container {
+                display: flex; //flexing items
+            }
+
+            :nth-child(1) {
+                flex-direction: column; //login items will be stacked
+            }
+
+            :nth-child(2) {
+                justify-content: space-between; //aligning signup button to the right
+                align-items: baseline;
+                .formQuestion {
+                    //aligning the text with other elements
+                    padding: 10px 20px;
+                }
+            }
+            label {
+                font-size: 1px;
+                line-height: 1px;
+                opacity: 0;
+            }
+
+            input {
+                margin: 1vw;
+            }
+
+            button {
+                margin: 1vw; //most of the button is styled at components/button/.formSubmit
+            }
+        }
+    }
+}

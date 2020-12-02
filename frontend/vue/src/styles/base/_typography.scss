@@ -1,0 +1,13 @@
+//here is the font management (see abstact/mixin to see the font mixin)
+
+* {
+    //default is raleway, 18px, black, regular
+    @include raleway;
+
+    //on smaller devices : 14px
+    @include respond(mobileLandscape) {
+        @include raleway($font-smaller);
+    }
+
+    line-height: 140%; //this is for added readability
+}

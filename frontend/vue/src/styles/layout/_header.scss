@@ -1,0 +1,124 @@
+//This file contains all the styling for the header
+
+header {
+    position: fixed; //fixed position so the header stays in place
+    z-index: 1; //this is to avoid elemnts going over the header
+    height: $header-height; //padding is added to <main> so that the header doesn't hide any content (see layout/feed)
+    padding: 0 20px;
+    width: 100vw;
+    @include shadow;
+
+    //position of the header's elements (logo on the left and profile pic on the right for small devices, logo in the center for bigger devices)
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    //for bigger devices, logo is centered and profile pic to the right
+    @media screen and (min-width: 768px) {
+        justify-content: flex-end;
+        .logo {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    }
+
+    .logo {
+        //logo sizing
+        height: 65px;
+        max-width: 60%;
+    }
+
+    //dropdown styling
+    .dropdown {
+        &__btn {
+            cursor: pointer; //cursor changes to indicate that it's a button
+        }
+
+        &__content {
+            display: none; //hidden by default
+
+            //content positioned to the right
+            position: absolute;
+            right: 0;
+            top: $header-height + 20px; //content is lowered by the height of the header + 20px
+            @include respond(mobileLandscape) {
+                top: $header-height + 10px;
+            }
+
+            background-color: $background-color; //same color as the rest of the website
+
+            padding: 10px 60px 10px 10px;
+
+            //content sizing
+            @media screen and (min-width: 768px) {
+                min-width: 250px;
+                max-width: 40vw;
+            }
+
+            @include respond(mobile) {
+                width: 85vw;
+            }
+
+            &__text {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-evenly;
+
+                p {
+                    //styling the dropdown content title
+                    @include raleway($font-bigger, 700, $accent-color);
+                    @include respond(mobileLandscape) {
+                        font-size: $font-default;
+                    }
+                    margin-bottom: 20px;
+                }
+
+                //styling the buttons to change the avatar
+                .custom-file-upload {
+                    display: inline-block;
+                    position: relative;
+                    //defining size of the button
+                    height: 45px; //height sufficient to be clicable
+                    line-height: 45px; //same as height so that the text is vertically centered
+                    padding: 0 5px;
+                    margin-top: 10px;
+
+                    &:hover {
+                        background-color: $focus-color; //see the variable at abstracts/varaibles
+                    }
+
+                    input[type="file"] {
+                        //making the actual input invisible
+                        position: absolute;
+                        left: 0;
+                        opacity: 0;
+                        top: 0;
+                        bottom: 0;
+                        width: 100%;
+                    }
+
+                    span {
+                        background-color: transparent;
+                    }
+                }
+
+                //this is the links styling
+                a {
+                    display: inline-block;
+                    height: 45px; //height sufficient to be clicable
+                    line-height: 45px; //same as height so that the text is vertically centered
+                    padding: 0 5px; // helps making the focus state prettier
+                    text-decoration: none; //removes default text underline
+                    &:hover {
+                        background-color: $focus-color; //see the variable at abstracts/varaibles
+                    }
+                }
+            }
+        }
+    }
+
+    //that's the toggleable class to show the content
+    .show {
+        display: block;
+    }
+}

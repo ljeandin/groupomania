@@ -1,0 +1,171 @@
+// This is the file where all the specific styles for the feed are defined (everything that's not defined at pages/general)
+
+.filActualite {
+    //icons
+    i {
+        font-size: 40px;
+        @include respond(mobile) {
+            font-size: 35px;
+        }
+    }
+
+    //this is the line with the avatar, the input and the send button//
+    .writeLine {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+
+        label {
+            //hiding labels in a way that screenreaders can still use them
+            font-size: 1px;
+            line-height: 1px;
+            opacity: 0;
+        }
+
+        //text area styling
+        //part of it is already styled at components/input
+        textarea {
+            resize: none; //removing the default resize thingy
+            overflow: hidden; //removes default scrollbars on IE, but still makes sure they appear when needed
+            display: block;
+            box-sizing: padding-box;
+            //sizing
+            width: 100%;
+            max-width: 50ch; //makes sure it stays readable
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+
+        button {
+            //modifying default stuff (as defined in components/buttons)
+            height: min-content;
+            width: min-content;
+            margin: 0;
+            padding: 0;
+            border-radius: 50%;
+            box-shadow: none;
+
+            //centering the icon
+            display: inline-flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            i {
+                color: $accent-color;
+            }
+        }
+    }
+
+    //that's for styling the writeline in the comments block
+    .comments {
+        .writeLine {
+            margin-bottom: 40px;
+            @include respond(mobileLandscape) {
+                margin-bottom: 20px;
+            }
+        }
+    }
+
+    //this is the line for both the img and gif adding buttons//
+    .post__line--media {
+        display: flex;
+        justify-content: center;
+        @include respond(mobile) {
+            justify-content: flex-start;
+        }
+
+        //styling the buttons to insert gifs or images
+        .custom-file-upload {
+            display: inline-block;
+            position: relative;
+            //defining size of the button
+            height: 50px;
+            width: 50px;
+            margin-top: 10px;
+            border-radius: 50%;
+            @include shadow;
+
+            &:nth-of-type(2) {
+                //margin-left to the second button
+                margin-left: 10px;
+            }
+
+            input[type="file"] {
+                //making the actual input invisible
+                position: absolute;
+                left: 0;
+                opacity: 0;
+                top: 0;
+                bottom: 0;
+                width: 100%;
+            }
+
+            i {
+                //centering icon in the button
+                position: absolute;
+                left: 0;
+                top: 0;
+                bottom: 0;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                //color of the icon
+                color: $accent-color;
+            }
+        }
+    }
+
+    //that's the line composed of the avatar, first and last names//
+    .idLine {
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        .firstName {
+            margin-left: 10px;
+            margin-right: 5px;
+        }
+        span {
+            font-weight: 700;
+            color: $accent-color;
+        }
+    }
+
+    //this is the bloc containing the other users' publication//
+    .publication {
+        margin-bottom: 20px;
+        //that is the bloc for the actual publication (img and/or text)
+        &__content {
+            img {
+                max-width: 100%;
+            }
+
+            p {
+                margin: 10px 0;
+            }
+        }
+    }
+
+    //this is the line with the like and comment buttons and counters//
+    .reactionLine {
+        display: flex; //aligning icons
+
+        //styling icons
+        i {
+            cursor: pointer;
+            color: $primary-color;
+
+            transition: 0.2s;
+            &:focus {
+                background-color: transparent;
+                transform: rotate(5deg);
+                transition: 0.2s;
+            }
+        }
+
+        &--comments {
+            margin-left: 20px; //margin to the comment bloc
+        }
+    }
+}

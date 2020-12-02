@@ -1,0 +1,40 @@
+//this is where the genral layout of the website is defined
+
+main {
+    //lowering content so it isn't hidden by header + adding some padding for aesthetic purpose
+    padding-top: $header-height + 40px;
+    @include respond(mobileLandscape) {
+        padding-top: $header-height + 20px;
+    }
+
+    //centering blocs
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+//blocs are the containers (ie: forms, publications, etc.) this guarantees the consistency of the layout
+.bloc {
+    //for screens larger than a smarthphone in portrait mode
+    @media screen and (min-width: 767px) {
+        min-width: 400px; //400 px to make sure there is some space around the bloc even in smaller resolutions
+        width: 60ch; // 60 ch makes the character count at around 70 charachters, good for readability
+        max-width: 60vw; // 60vw makes sure the whole bloc is visible one every screen
+        padding: 25px;
+
+        margin-bottom: 40px;
+    }
+
+    @include respond(mobileLandscape) {
+        width: 100vw; //blac takes up the whole screen
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+
+    //rounded corners on larger screens
+    @include card;
+    @include respond(mobileLandscape) {
+        border-radius: 0;
+    }
+    @include shadow;
+}

@@ -1,0 +1,30 @@
+// here is the style for all the inputs
+
+input {
+    //size of elements
+    height: 50px;
+    padding: 10px 20px;
+    //removing default border
+    border: none;
+    //using neumorphic inner shadow and corners rounding
+    @include inner-shadow;
+    @include card;
+
+    &:focus {
+        @include shadow;
+    }
+}
+
+textarea {
+    //size of elements
+    padding: 10px 20px;
+    //removing default border
+    border: none;
+    //using neumorphic inner shadow and corners rounding
+    @include inner-shadow;
+    @include card;
+
+    &:focus {
+        @include shadow;
+    }
+}

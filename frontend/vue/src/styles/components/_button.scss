@@ -1,0 +1,31 @@
+//Here is all things button
+
+//standard button
+button {
+    height: 50px;
+    padding: 10px 20px;
+    //removing default border
+    border: none;
+    //using neumorphic shadow and corners rounding
+    @include shadow;
+    @include card;
+}
+
+.formSubmit {
+    background-color: $primary-color;
+    @include raleway($font-bigger, 700, white);
+    //responsive for buttons font-size
+    @include respond(mobileLandscape) {
+        font-size: $font-default;
+    }
+    &:focus {
+        background-color: $focus-color;
+    }
+}
+
+.formExit {
+    @include raleway($font-default, 300, $accent-color);
+    @include respond(mobileLandscape) {
+        font-size: $font-smaller;
+    }
+}

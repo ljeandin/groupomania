@@ -1,0 +1,141 @@
+.inscription {
+    header .dropdown {
+        display: none; //the avatar/dropdown menu is useless in this page so we remove it
+    }
+
+    form {
+        input,
+        label {
+            display: block; //this makes sure the labels stack on top of eachother and are easy to style
+        }
+
+        button {
+            margin: 10px 0; //adding a top margin (general button styling is at components/buttons)
+        }
+
+        input {
+            max-width: 100%; //the goal here is to have inputs that take all the space they can while adapting to the screen size
+            width: 100%;
+        }
+
+        label {
+            margin-bottom: 5px; //adding a margin so that the form is easily readable and understandable
+        }
+
+        //styling the labels
+        label,
+        .label {
+            margin-left: 20px; // aligning everything
+            color: $accent-color;
+            font-weight: 500;
+        }
+
+        //containers represent both parts of the form (one with the actual form, the other with the exit button)
+        .container {
+            display: flex; //flexing items
+            div {
+                margin: 10px 0; //adding a top margin so that inputs don't crash into eachother
+            }
+        }
+
+        //this is the container with all the inputs
+        :nth-child(1) {
+            flex-direction: column;
+            //button is styled at components/button/.formSubmit
+        }
+
+        //this is the container with the button to login
+        :nth-child(2) {
+            justify-content: space-between; //aligning signup button to the right
+            align-items: baseline;
+            //button is styled at components/button/.formExit
+        }
+
+        //this is the div containing the first and last name, styled so that the inputs stay next to eachother
+        .name {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        //this is the line where the password is entered, it has an input and a visibility toggle
+        .passwordLine {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            input {
+                // outline: 2px solid aquamarine;
+                width: 90%;
+            }
+
+            i {
+                margin: 0 20px;
+                color: $accent-color;
+                font-size: 30px;
+                cursor: pointer;
+            }
+        }
+
+        //this is the message for the password validation
+        .message {
+            display: none; //hidden by default
+            padding-left: 20px;
+            list-style-position: inside;
+            p {
+                color: $accent-color;
+                padding-left: 0;
+                padding-bottom: 5px;
+                font-weight: 500;
+            }
+
+            li {
+                color: $accent-color;
+            }
+        }
+
+        //when something is valid (ie: min 6 characters) the corresponding message disappears
+        .valid {
+            display: none;
+        }
+
+        //when something is invalid (ie: min 6 characters) the corresponding message appears
+        .invalid {
+            display: list-item;
+        }
+
+        //this is the button to add an avatar
+        .imgUpload {
+            b {
+                color: $accent-color;
+                font-weight: 400;
+            }
+            //styling the custom file upload button by hiding the input behind the label
+            input[type="file"] {
+                //making the actual input invisible
+                position: absolute;
+                left: 0;
+                opacity: 0;
+                top: 0;
+                bottom: 0;
+                width: 100%;
+            }
+            .custom-file-upload {
+                display: inline-block;
+                cursor: pointer;
+                width: max-content;
+
+                //this styling matches the button styling at components/button/.button
+                @include card;
+                @include shadow;
+                height: 50px;
+                margin: 10px 0;
+                padding: 10px 20px;
+            }
+
+            &__line {
+                display: flex;
+                align-items: center;
+            }
+        }
+    }
+}

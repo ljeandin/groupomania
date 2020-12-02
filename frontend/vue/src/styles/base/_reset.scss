@@ -1,0 +1,29 @@
+//here are the default styles applied across the whole code
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: $background-color;
+
+    :focus {
+        //border on focus
+        outline: none; //removing default outline
+        background-color: $focus-color;
+    }
+
+    :disabled {
+        background-color: $disabled-color;
+    }
+}
+
+i {
+    background-color: transparent; // removing the background-color on the icon
+    user-select: none; //some blinking happended when the user mouse selected an icon
+}
+
+//styling the body to remove horizontal scrolling
+body {
+    max-width: 100%;
+    overflow-x: hidden;
+}

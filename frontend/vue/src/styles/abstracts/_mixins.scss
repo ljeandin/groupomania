@@ -1,0 +1,62 @@
+//ce fichiers contient les mixins utilisées sur le site
+
+//Ombre neumorphique (composée d'une ombre claire et une foncée)
+@mixin shadow {
+    box-shadow: -5px -5px 15px $shadow-highlight, 5px 5px 15px $shadow-dark;
+}
+
+//Ombre neumorphique qui "rentre" dans la page (composée d'une ombre claire et une foncée)
+@mixin inner-shadow {
+    box-shadow: inset -2px -2px 8px $shadow-highlight, inset 2px 2px 8px $shadow-dark;
+}
+
+//format "carte"
+@mixin card($border-radius: 20px) {
+    border-radius: $border-radius;
+}
+
+//mixin police
+@mixin raleway($font-size: 18px, $font-weight: 400, $font-colour: $font-color) {
+    font-family: Raleway, sans-serif;
+    font-size: $font-size;
+    font-weight: $font-weight;
+    color: $font-colour;
+}
+
+//media queries mixin
+@mixin respond($breakpoint) {
+    //fullHD monitors
+    @if $breakpoint==desktop {
+        @media only screen and (min-width: 1366px) {
+            @content;
+        }
+    }
+
+    //landscape mode tablets, older monitors
+    @if $breakpoint==tabletLandscape {
+        @media only screen and (max-width: 1365px) {
+            @content;
+        }
+    }
+
+    //portrait mode tablet
+    @if $breakpoint==tablet {
+        @media only screen and (max-width: 1023px) {
+            @content;
+        }
+    }
+
+    //landscape mode smartphone
+    @if $breakpoint==mobileLandscape {
+        @media only screen and (max-width: 767px) {
+            @content;
+        }
+    }
+
+    //portrait mode smartphone
+    @if $breakpoint==mobile {
+        @media only screen and (max-width: 420px) {
+            @content;
+        }
+    }
+}
