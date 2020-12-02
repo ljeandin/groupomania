@@ -1,3 +1,4 @@
+<!--This is the root file of our App-->
 <template>
     <div id="app">
         <router-view/>

@@ -1,5 +1,6 @@
+<!--This is the login page-->
 <template>
-    <body class="connexion">
+    <div class="connexion">
         <div class="connexion__wrapper">
             <!-- logo with the planet icon for bigger devices-->
             <svg class="logo logo--icon" id="logoIcon" width="935" height="145" viewBox="0 0 935 145" fill="#ecf0f3" xmlns="http://www.w3.org/2000/svg">
@@ -36,7 +37,7 @@
                 
 
             <!--login form-->
-            <form class="bloc">
+            <form class="bloc" @submit.prevent="loginToSite">
                 <div class="container">
                     <!--here are the inputs and submit btn-->
                     <!--labels are made invisible via the css, but screenreaders can still read them-->
@@ -45,23 +46,35 @@
                     
                     <label for="passwordLogin">mot de passe</label>
                     <input type="password" placeholder="Mot de passe" name="mot de passe" id="passwordLogin" required />
-                    
+
                     <button class="formSubmit" type="submit">Connexion</button>
                 </div>
 
                 <div class="container">
                     <!--here is the btn to go create an account-->
                     <span class="formQuestion">Pas de compte ?</span>
-                    <button class="formExit" type="button">Inscription</button>
+                    <router-link to="/signup"><button class="formExit" type="button">Inscription</button></router-link>
                 </div>
             </form>
         </div>
-    </body>
+    </div>
 </template>
 
 <script>
+import { reactive} from 'vue';
+import { users } from '../assets/users';
+
 export default {
-    
+    name: "Login",
+    setup(){
+        const state = reactive ({
+            user: users
+        })
+
+        return {
+            state
+        }
+    }
 }
 </script>
 

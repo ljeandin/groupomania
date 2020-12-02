@@ -1,3 +1,4 @@
+//this is where the routes are created
 import { createRouter, createWebHistory } from "vue-router";
 import Feed from "../views/Feed.vue";
 import Login from "../views/Login.vue";
