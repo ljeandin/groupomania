@@ -47,7 +47,7 @@
                                 Parcourir les fichiers
                                 <input type="file" id="télécharger_avatar" name="avatar" accept="image/*" onfocus="focusBtnUploadAvatar()" onblur="blurBtnUploadAvatar()" tabindex="0"/>
                             </label>
-                            <!--This is the default avatar, replaced by user's avatar-->
+                            <!--This is the default avatar, replaced by user's avatar if there's one-->
                             <img class="avatar" src="../assets/images/avatar_default.png" alt=""/>
                         </div>
                     </div>
@@ -67,7 +67,7 @@
 <script>
 import { reactive } from 'vue';
 import Header from '../components/Header';
-import PasswordCues from '../components/Password';
+import PasswordCues from '../components/PasswordCues';
 
 export default {
   
@@ -79,8 +79,6 @@ export default {
                 PasswordCues,
             },
         })
-
-        
 
         function seePassword() {
             let icon = document.getElementById("icon");
@@ -98,6 +96,8 @@ export default {
 
         return {
             state,
+            Header,
+            PasswordCues,
             seePassword
         }
     }
