@@ -1,9 +1,10 @@
+//prettier-ignore
 module.exports = {
     css: {
         loaderOptions: {
             sass: {
-                additionalData: '@import "@/styles/styles.scss";',
-            },
-        },
-    },
-};
+                additionalData: '@import "@/styles/styles.scss";'
+            }
+        }
+    }
+}
