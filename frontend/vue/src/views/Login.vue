@@ -53,7 +53,7 @@
             <div class="container">
                 <!--here is the btn to go create an account-->
                 <span class="formQuestion">Pas de compte ?</span>
-                <router-link to="/signup"><button class="formExit" type="button">Inscription</button></router-link>
+                <router-link to="signup"><button class="formExit" type="button">Inscription</button></router-link>
             </div>
         </form>
     </div>
@@ -65,7 +65,7 @@ import { reactive} from 'vue';
 import { users } from '../assets/users';
 
 export default {
-    name: "Login",
+    name: "login",
     setup(){
         const state = reactive ({
             user: users

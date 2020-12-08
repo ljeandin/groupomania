@@ -6,13 +6,13 @@ import Signup from "../views/Signup.vue";
 
 const routes = [
     {
-        path: "/",
-        name: "Login",
+        path: "/user/login",
+        name: "login",
         component: Login,
     },
     {
-        path: "/signup",
-        name: "Signup",
+        path: "/user/signup",
+        name: "signup",
         component: Signup,
     },
     {
