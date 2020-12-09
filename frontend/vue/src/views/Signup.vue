@@ -80,7 +80,6 @@
                     </div>
                     <button class="formSubmit" id="formSubmit--signup" type="submit" @click.prevent="handleSubmit">Inscription</button>
                 </div>
-                <p>{{ state.user.avatar }}</p>
                 <div class="container">
                     <span class="formQuestion">Déjà inscrit·e ?</span>
                     <router-link to="login"><button class="formExit" type="button">Connexion</button></router-link>
