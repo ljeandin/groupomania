@@ -78,7 +78,8 @@
                             <img class="avatar" :src="state.user.avatar" alt="avatar"/>
                         </div>
                     </div>
-                    <button class="formSubmit" id="formSubmit--signup" type="submit" @click.prevent="handleSubmit">Inscription</button>
+                    <button class="formSubmit" id="formSubmit--signup" type="submit">Inscription</button>
+                    <!--<button class="formSubmit" id="formSubmit--signup" type="submit" @click.prevent="handleSubmit">Inscription</button>-->
                 </div>
                 <div class="container">
                     <span class="formQuestion">Déjà inscrit·e ?</span>

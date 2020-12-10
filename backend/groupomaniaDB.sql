@@ -80,7 +80,7 @@ CREATE TABLE `users` (
   `firstname` varchar(45) NOT NULL,
   `lastname` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
-  `password` varchar(45) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `isAdmin` tinyint NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `email_UNIQUE` (`email`)

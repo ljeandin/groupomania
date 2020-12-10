@@ -34,7 +34,7 @@ exports.signup = (req, res, next) => {
                 //setting up new user and inserting it into mysql db
                 const string =
                     "INSERT INTO users (avatar, firstName, lastName, email, password) VALUES (?, ?, ?, ?, ?)";
-                const inserts = [avatar, firstName, lastName, email, hash];
+                const inserts = [avatar, firstname, lastname, email, hash];
                 const sql = mysql.format(string, inserts);
 
                 const signupUser = db.query(sql, (error, user) => {
