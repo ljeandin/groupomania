@@ -7,7 +7,7 @@ const maskData = require("maskdata"); //mask data is used to hide part of the da
 const mysql = require("mysql2"); //we'll use mysql functions
 
 const HttpError = require("../models/http-error");
-const db = require("../models/model"); //importing database
+const db = require("../models/db"); //importing database
 
 /***Setting up the password validation***/
 var schema = new passwordValidator();
