@@ -17,7 +17,7 @@ const routes = [
     },
     {
         path: "/feed",
-        name: "Feed",
+        name: "feed",
         component: Feed,
     },
 ];

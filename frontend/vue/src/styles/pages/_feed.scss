@@ -57,6 +57,16 @@
         }
     }
 
+    .imagePreview {
+        display: flex;
+        justify-content: center;
+        img {
+            max-width: 100%;
+            margin-top: 10px;
+            display: none;
+        }
+    }
+
     //that's for styling the writeline in the comments block
     .comments {
         .writeLine {
