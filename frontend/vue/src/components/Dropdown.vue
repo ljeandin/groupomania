@@ -6,7 +6,7 @@
     </div>
     <div id="myDropdown" class="dropdown__content">
         <div class="dropdown__content__text">
-            <p>Paramètres {{state.user.avatar}}</p>
+            <p>Paramètres</p>
             <label for="télécharger_photo_de_profil" class="custom-file-upload" id="labelChangeAvatar" tabindex="-1" >
                 <span>Changer la photo de profil</span>
                 <input type="file" id="télécharger_photo_de_profil" name="image" accept=".jpg, .png, .jpeg" tabindex="0" @change="avatarChange"/>
@@ -30,7 +30,7 @@ export default {
         })
         
         function dropdown() {
-            //document.getElementById("myDropdown").classList.toggle("show");
+            document.getElementById("myDropdown").classList.toggle("show");
         }    
 
         function avatarChange(e){
