@@ -69,7 +69,6 @@ export default {
             document.getElementById('imagePreview').style.display="block";
 
         }
-
         return{
             state,
             imageChange
