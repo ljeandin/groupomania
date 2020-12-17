@@ -1,4 +1,4 @@
-const User = require("../models/user.model.js");
+const User = require("../models/user.model");
 
 exports.getAll = (req, res) => {
     User.getAll((err, data) => {

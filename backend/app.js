@@ -1,9 +1,9 @@
 const express = require("express"); //well, you know what that's for
 const bodyParser = require("body-parser"); // body parser to read form input and storing it as JS object
-const path = require("path"); // path is used to make path manipulation easier
+//const path = require("path"); // path is used to make path manipulation easier
 
 //Declaring routes
-const userRoutes = require("./routes/user.js");
+const userRoutes = require("./routes/user.routes");
 
 //Using express
 const app = express();
@@ -22,10 +22,14 @@ app.use((req, res, next) => {
 //using bodyParser
 app.use(bodyParser.json());
 
+app.get("/", (req, res) => {
+    res.json({ message: "Welcome" });
+});
+
 //path to images
-app.use("/images", express.static(path.join(__dirname, "images")));
+//app.use("/images", express.static(path.join(__dirname, "images")));
 
 //path to sauces and authentication in the API
-app.use("/user", userRoutes);
+app.use("/api/user", userRoutes);
 
 module.exports = app;

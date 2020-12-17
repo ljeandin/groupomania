@@ -62,13 +62,11 @@
 
 <script>
 import { reactive} from 'vue';
-import { users } from '../assets/users';
 
 export default {
     name: "login",
     setup(){
         const state = reactive ({
-            user: users
         })
 
         return {

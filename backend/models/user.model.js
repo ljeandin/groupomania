@@ -2,13 +2,13 @@ sql = require("./db.js");
 
 // constructor
 const User = function (user) {
-    this.id = user.id;
+    this.id = users.id;
     this.avatar = user.avatar;
-    this.firstname = user.firstname;
-    this.lastname = user.lastname;
-    this.email = user.email;
-    this.password = user.password;
-    this.isAdmin = user.isAdmin;
+    this.firstname = users.firstname;
+    this.lastname = users.lastname;
+    this.email = users.email;
+    this.password = users.password;
+    this.isAdmin = users.isAdmin;
 };
 
 User.getAll = (result) => {
@@ -18,7 +18,6 @@ User.getAll = (result) => {
             result(null, err);
             return;
         }
-
         console.log("users: ", res);
         result(null, res);
     });
