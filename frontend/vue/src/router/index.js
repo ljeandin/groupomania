@@ -6,17 +6,17 @@ import Signup from "../views/Signup.vue";
 
 const routes = [
     {
-        path: "/user/login",
+        path: "/api/user/login",
         name: "login",
         component: Login,
     },
     {
-        path: "/user/signup",
+        path: "/api/user/signup",
         name: "signup",
         component: Signup,
     },
     {
-        path: "/feed",
+        path: "/api/feed",
         name: "feed",
         component: Feed,
     },

@@ -161,13 +161,26 @@ export default {
             state.user.avatar = URL.createObjectURL(file);
         }
 
+        function getDB(){
+            let url="http://localhost:3000/api/user/signup";
+
+           fetch(url).then(function(reponse){
+                reponse.json().then(function(data){
+                    /*data.forEach(element=>{
+                    })*/
+                    console.log(data);
+                })
+            }) 
+        }
+
         return {
             state,
             Header,
             PasswordCues,
             seePassword,
             handleSubmit,
-            avatarChange
+            avatarChange,
+            getDB
         }
     }
 }
