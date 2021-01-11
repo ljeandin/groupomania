@@ -1,4 +1,4 @@
-import http from "../http-common";
+/*import http from "../http-common";
 
 class UserServices {
     getAll() {
@@ -6,4 +6,4 @@ class UserServices {
     }
 }
 
-export default new UserServices();
+export default new UserServices();*/

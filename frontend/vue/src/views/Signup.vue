@@ -7,7 +7,7 @@
                 <div class="container">
                     <section class="name">
                         <div>
-                            <label for="nom">Nom</label>
+                            <label for="nom">Nom {{ state.user.number }}</label>
                             <input type="text" placeholder="ex : Durand" name="nom" id="nom" required v-model="state.user.lastname" />
                         </div>
                         
@@ -109,12 +109,23 @@ export default {
             password: '',
             avatar: DefaultAvatar,
             },
+            users :[],
             
             components : {
                 Header,
                 PasswordCues,
             },
         })
+
+        function getDB(){
+            const API_URL="http://localhost:3000/api/user/signup";
+
+           fetch(API_URL)
+           .then(response => response.json())
+           .then(result => {
+               this.users = result;
+           })
+        }
 
         function seePassword() {
             let icon = document.getElementById("icon");
@@ -160,27 +171,15 @@ export default {
             let file = e.target.files[0];
             state.user.avatar = URL.createObjectURL(file);
         }
-
-        function getDB(){
-            let url="http://localhost:3000/api/user/signup";
-
-           fetch(url).then(function(reponse){
-                reponse.json().then(function(data){
-                    /*data.forEach(element=>{
-                    })*/
-                    console.log(data);
-                })
-            }) 
-        }
-
         return {
             state,
             Header,
+            getDB,
             PasswordCues,
             seePassword,
             handleSubmit,
-            avatarChange,
-            getDB
+            avatarChange
+            
         }
     }
 }
