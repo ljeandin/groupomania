@@ -7,7 +7,7 @@
                 <div class="container">
                     <section class="name">
                         <div>
-                            <label for="nom">Nom {{ state.user.number }}</label>
+                            <label for="nom">Nom {{ state.user.id }}</label>
                             <input type="text" placeholder="ex : Durand" name="nom" id="nom" required v-model="state.user.lastname" />
                         </div>
                         
@@ -96,10 +96,21 @@ import { reactive } from 'vue';
 import Header from '../components/Header';
 import PasswordCues from '../components/PasswordCues';
 import DefaultAvatar from '@/assets/images/avatar_default.png';
+import { onMounted } from 'vue';
 
 export default {
   
     setup(){
+        const API_URL="http://localhost:3000/api/user/signup";
+        
+        onMounted(() => {
+           fetch(API_URL)
+           .then(response => response.json())
+           .then(result => {
+               this.user = result;
+           }) 
+        })
+
         const state = reactive ({
             name: 'signup',
             user :{
@@ -109,23 +120,12 @@ export default {
             password: '',
             avatar: DefaultAvatar,
             },
-            users :[],
             
             components : {
                 Header,
                 PasswordCues,
             },
         })
-
-        function getDB(){
-            const API_URL="http://localhost:3000/api/user/signup";
-
-           fetch(API_URL)
-           .then(response => response.json())
-           .then(result => {
-               this.users = result;
-           })
-        }
 
         function seePassword() {
             let icon = document.getElementById("icon");
@@ -174,7 +174,6 @@ export default {
         return {
             state,
             Header,
-            getDB,
             PasswordCues,
             seePassword,
             handleSubmit,

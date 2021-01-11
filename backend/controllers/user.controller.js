@@ -9,10 +9,13 @@ const User = require("../models/user.model.js");
 };*/
 
 exports.list_all_users = function (req, res) {
-    User.getAllUsers(function (err, task) {
+    User.getAllUsers(function (err, user) {
         console.log("controller");
-        if (err) res.send(err);
-        console.log("res", task);
-        res.send(task);
+        if (err) {
+            res.send(err);
+        } else {
+            console.log("res", user);
+            res.send(user);
+        }
     });
 };
