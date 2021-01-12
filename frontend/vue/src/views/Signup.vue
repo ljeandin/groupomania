@@ -101,15 +101,7 @@ import { onMounted } from 'vue';
 export default {
   
     setup(){
-        const API_URL="http://localhost:3000/api/user/signup";
-        onMounted(() => {
-           fetch(API_URL)
-           .then(response => response.json())
-           .then(result => {
-               this.user = result;
-           }) 
-        })
-
+        
         const state = reactive ({
             name: 'signup',
             user :{
@@ -125,6 +117,24 @@ export default {
                 PasswordCues,
             },
         })
+
+        onMounted(() => {
+            fetchApi();
+        })
+
+        function fetchApi(){
+            let url = 'http://localhost:3000/api/user/signup';
+            fetch(url).then(function(reponse){
+                reponse.json().then(function(data){
+                    data.forEach(element=>{
+                        console.log(element);
+                    })
+                })
+            })
+            .catch(function(err) {
+            console.log('Fetch Error :-S', err);
+            });
+        }
 
         function seePassword() {
             let icon = document.getElementById("icon");
@@ -146,9 +156,9 @@ export default {
         return {
             state,
             Header,
+            fetchApi,
             PasswordCues,
             seePassword,
-            handleSubmit,
             avatarChange
             
         }
