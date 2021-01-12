@@ -102,7 +102,6 @@ export default {
   
     setup(){
         const API_URL="http://localhost:3000/api/user/signup";
-        
         onMounted(() => {
            fetch(API_URL)
            .then(response => response.json())
@@ -140,33 +139,6 @@ export default {
                 icon.innerHTML = "visibility_off"; // change icon
             }
         }
-
-        function handleSubmit(){
-            /*try {
-                let response = Auth.handleSubmit({
-                    lastname: state.user.lastname,
-                    firstname:  state.user.firstname,
-                    email: state.user.email,
-                    password: state.user.password,
-                    avatar: state.user.avatar,
-                });
-                
-                this.$store.dispatch("setToken", response.data.token);
-                this.$store.dispatch("setUser", response.data.user);
-                this.$store.dispatch("getUserById", response.data.user.id);
-                
-                let router = this.$router;
-                setTimeout(function() {
-                    router.push("/posts");
-                }, 1500);
-            } catch (error) {
-                this.errorMessage = error.response.data.error;
-                setTimeout(() => {
-                    this.errorMessage = "";
-                }, 1500);
-            }*/
-        }    
-
         function avatarChange(e){
             let file = e.target.files[0];
             state.user.avatar = URL.createObjectURL(file);
