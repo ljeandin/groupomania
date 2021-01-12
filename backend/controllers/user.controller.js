@@ -15,7 +15,6 @@ exports.list_all_users = function (req, res) {
             res.send(err);
         } else {
             console.log("res", user);
-            res.send(user);
         }
     });
 };

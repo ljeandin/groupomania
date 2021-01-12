@@ -1,3 +1,17 @@
+let url = "http://localhost:3000/api/user/signup";
+
+fetch(url)
+    .then(function (reponse) {
+        reponse.json().then(function (data) {
+            data.forEach((element) => {
+                console.log(element);
+            });
+        });
+    })
+    .catch(function (err) {
+        console.log("Fetch Error :-S", err);
+    });
+
 /***Password validation***/
 let myInput = document.getElementById("mot_de_passe");
 let letter = document.getElementById("letter");
