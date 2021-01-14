@@ -16,6 +16,7 @@ import Header from '@/components/Header';
 import PostingPanel from '@/components/PostingPanel';
 import Publication from '@/components/Publication';
 import DefaultAvatar from '@/assets/images/avatar_default.png';
+import { onMounted } from 'vue';
 
 
 export default {
@@ -25,6 +26,20 @@ export default {
             user :{
                 avatar: DefaultAvatar,
             }
+        })
+
+        onMounted(() => {
+            let url = 'http://localhost:3000/api/feed';
+            fetch(url).then(function(reponse){
+                reponse.json().then(function(data){
+                    data.forEach(element=>{
+                        console.log(element);
+                    })
+                })
+            })
+            .catch(function(err) {
+            console.log('Fetch Error :-S', err);
+            });
         })
 
         /***Expandable textarea***/
@@ -53,6 +68,7 @@ export default {
         return{
             state,
             Header,
+            //fetchApi,
             PostingPanel,
             Publication,
             getScrollHeight,

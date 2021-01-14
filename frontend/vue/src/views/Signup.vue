@@ -96,7 +96,6 @@ import { reactive } from 'vue';
 import Header from '../components/Header';
 import PasswordCues from '../components/PasswordCues';
 import DefaultAvatar from '@/assets/images/avatar_default.png';
-import { onMounted } from 'vue';
 
 export default {
   
@@ -118,24 +117,6 @@ export default {
             },
         })
 
-        onMounted(() => {
-            fetchApi();
-        })
-
-        function fetchApi(){
-            let url = 'http://localhost:3000/api/user/signup';
-            fetch(url).then(function(reponse){
-                reponse.json().then(function(data){
-                    data.forEach(element=>{
-                        console.log(element);
-                    })
-                })
-            })
-            .catch(function(err) {
-            console.log('Fetch Error :-S', err);
-            });
-        }
-
         function seePassword() {
             let icon = document.getElementById("icon");
             let password = document.getElementById("mot_de_passe");
@@ -156,7 +137,6 @@ export default {
         return {
             state,
             Header,
-            fetchApi,
             PasswordCues,
             seePassword,
             avatarChange

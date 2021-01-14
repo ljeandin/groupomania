@@ -1,3 +1,15 @@
+let url = "http://localhost:3000/api/feed";
+
+fetch(url)
+    .then(function (reponse) {
+        reponse.json().then(function (data) {
+            console.log(data);
+        });
+    })
+    .catch(function (err) {
+        console.log("Fetch Error :-S", err);
+    });
+
 /***Dropdown***/
 // When the user clicks on the button,toggle between hiding and showing the dropdown content */
 function dropdown() {

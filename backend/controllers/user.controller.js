@@ -9,11 +9,13 @@ const User = require("../models/user.model.js");
 };*/
 
 exports.list_all_users = function (req, res) {
-    sql.query("SELECT * FROM users", function (result) {
-        console.log(result);
-    })
-        .then((users) => res.status(200).json(users))
-        .catch((error) => res.status(400).json({ error }));
+    User.getAll((err, data) => {
+        if (err)
+            res.status(500).send({
+                message: err.message || "Some error occurred while retrieving customers.",
+            });
+        else res.send(data);
+    });
 };
 
 /*exports.index = function (req, res) {

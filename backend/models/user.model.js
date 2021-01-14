@@ -1,5 +1,4 @@
-sql = require("./db.js");
-
+sql = require("../models/db.js");
 // constructor
 const User = function (user) {
     this.id = user.id;
@@ -9,6 +8,19 @@ const User = function (user) {
     this.email = user.email;
     this.password = user.password;
     this.isAdmin = user.isAdmin;
+};
+
+User.getAll = (result) => {
+    sql.query("SELECT * FROM users", (err, res) => {
+        if (err) {
+            console.log("error : ", err);
+            result(null, err);
+            return;
+        }
+
+        console.log("users: ", res);
+        result(null, res);
+    });
 };
 
 /*sql.query(

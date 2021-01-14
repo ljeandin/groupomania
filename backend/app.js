@@ -30,6 +30,6 @@ app.get("/", (req, res) => {
 //app.use("/images", express.static(path.join(__dirname, "images")));
 
 //path to use
-app.use("/api/user", userRoutes);
+app.use("/api", userRoutes);
 
 module.exports = app;
