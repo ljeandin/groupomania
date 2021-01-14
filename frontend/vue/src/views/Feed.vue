@@ -3,6 +3,7 @@
      <body class="filActualite">
         <Header />
         <main>
+            {{state.user.firstname}}
             <PostingPanel />
             
             <Publication />
