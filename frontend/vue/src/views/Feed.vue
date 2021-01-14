@@ -21,13 +21,7 @@ import { onMounted } from 'vue';
 
 export default {
     setup(){
-        const state = reactive ({
-            name: 'feed',
-            user :{
-                avatar: DefaultAvatar,
-            }
-        })
-
+        //connecting to the API
         onMounted(() => {
             let url = 'http://localhost:3000/api/feed';
             fetch(url).then(function(reponse){
@@ -40,6 +34,13 @@ export default {
             .catch(function(err) {
             console.log('Fetch Error :-S', err);
             });
+        })
+
+        const state = reactive ({
+            name: 'feed',
+            user :{
+                avatar: DefaultAvatar,
+            }
         })
 
         /***Expandable textarea***/
