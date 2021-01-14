@@ -3,9 +3,7 @@ let url = "http://localhost:3000/api/user/signup";
 fetch(url)
     .then(function (reponse) {
         reponse.json().then(function (data) {
-            data.forEach((element) => {
-                console.log(element);
-            });
+            console.log(data);
         });
     })
     .catch(function (err) {
