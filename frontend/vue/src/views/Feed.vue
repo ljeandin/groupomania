@@ -6,10 +6,6 @@
             <PostingPanel />
             
             <Publication />
-
-            <div v-for="post in state.posts" :key="post.id">
-                {{ post.id }} - {{ post.content }}
-            </div>
         </main>
     </body>
 </template>
