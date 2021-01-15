@@ -3,10 +3,13 @@
      <body class="filActualite">
         <Header />
         <main>
-            {{state.user.firstname}}
             <PostingPanel />
             
             <Publication />
+
+            <div v-for="post in state.posts" :key="post.id">
+                {{ post.id }} - {{ post.content }}
+            </div>
         </main>
     </body>
 </template>
@@ -22,26 +25,23 @@ import { onMounted } from 'vue';
 
 export default {
     setup(){
-        //connecting to the API
-        onMounted(() => {
-            let url = 'http://localhost:3000/api/feed';
-            fetch(url).then(function(reponse){
-                reponse.json().then(function(data){
-                    data.forEach(element=>{
-                        console.log(element);
-                    })
-                })
-            })
-            .catch(function(err) {
-            console.log('Fetch Error :-S', err);
-            });
-        })
-
         const state = reactive ({
             name: 'feed',
             user :{
                 avatar: DefaultAvatar,
-            }
+            },
+            posts :[],
+        })
+        
+        //connecting to the API and retrieving data
+        onMounted(() => {
+            let url = 'http://localhost:3000/api/feed';
+            fetch(url)
+            .then(response => response.json())
+            .then(data => data.forEach(post => {
+                state.posts.push(post);
+            }))
+            .catch(err => console.log('Fetch Error :-S', err));
         })
 
         /***Expandable textarea***/
