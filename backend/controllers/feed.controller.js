@@ -4,7 +4,7 @@ exports.list_all_posts = function (req, res) {
     Post.getAll((err, data) => {
         if (err)
             res.status(500).send({
-                message: err.message || "Some error occurred while retrieving customers.",
+                message: err.message || "An error occured while retrieving posts",
             });
         else res.send(data);
     });

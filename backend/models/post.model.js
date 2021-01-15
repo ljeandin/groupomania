@@ -1,5 +1,3 @@
-const { post } = require("../app.js");
-
 sql = require("../models/db.js");
 // constructor
 const Post = function (post) {
@@ -11,16 +9,19 @@ const Post = function (post) {
     this.comments = post.comments;
 };
 
+//This function gets all the infos that will appear on the posts (ie : name of the poster, avatar, content, etc...)
 Post.getAll = (result) => {
-    sql.query("SELECT * FROM posts", (err, res) => {
-        if (err) {
-            console.log("error : ", err);
-            result(null, err);
-            return;
+    sql.query(
+        //this query selects relevant infos in the posts and users tables, and joins them with the userID
+        "SELECT posts.content, posts.image, posts.likes, posts.comments, users.avatar, users.firstname, users.lastname FROM posts INNER JOIN users ON posts.user_id=users.id",
+        (err, res) => {
+            if (err) {
+                console.log("error : ", err);
+                result(null, err);
+                return;
+            }
+            result(null, res);
         }
-
-        console.log("users: ", res);
-        result(null, res);
-    });
+    );
 };
 module.exports = Post;

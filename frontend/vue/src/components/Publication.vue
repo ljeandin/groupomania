@@ -3,9 +3,9 @@
 
         <div class="publication">
             <div class="idLine">
-                <img class="avatar" :src="state.user.avatar" alt=""/>
-                <span class="firstName">Louise</span>
-                <span class="lastName">Bourgeois</span>
+                <img class="avatar" :src="post.avatar" alt=""/>
+                <span class="firstName">{{ post.firstname }}</span>
+                <span class="lastName">{{ post.lastname }}</span>
                 <button class="adminDelete" type="button">
                     <i class="material-icons">delete_forever</i>
                 </button>
