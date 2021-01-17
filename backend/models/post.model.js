@@ -24,4 +24,19 @@ Post.getAll = (result) => {
         }
     );
 };
+
+//this function creates a new post
+/*Post.createPost = (newPost, result) => {
+    sql.query("INSERT INTO posts SET ?", newPost, (err, res) => {
+        if (err) {
+            console.log("error :", err);
+            result(err, null);
+            return;
+        }
+
+        console.log("created post: ", { id: res.insertId, ...newPost });
+        result(null, { id: res.insertId, ...newPost });
+    }); //'?' in the query replaces dynamic content
+};
+*/
 module.exports = Post;
