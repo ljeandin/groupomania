@@ -42,9 +42,9 @@ import DefaultAvatar from '@/assets/images/avatar_default.png';
 import { onMounted } from 'vue';
 
 export default {
+    name: 'Publication',
     setup(){
         const state = reactive ({
-            name: 'Publication',
             user :{
                 avatar: DefaultAvatar,
             },

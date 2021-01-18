@@ -12,9 +12,9 @@
 import { reactive } from 'vue';
 
 export default {
+    name: 'PasswordCues',
     setup(){
         const state = reactive({
-            name: 'PasswordCues',
         })
 
         function passwordCueBlur(){

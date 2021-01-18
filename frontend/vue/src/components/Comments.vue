@@ -30,9 +30,9 @@ import { reactive } from 'vue';
 import DefaultAvatar from '@/assets/images/avatar_default.png';
 
 export default {
+    name: 'Comments',
     setup(){
         const state = reactive ({
-            name: 'Comments',
             user :{
                 avatar: DefaultAvatar,
             }

@@ -48,13 +48,12 @@
 
 <script>
 import { reactive } from 'vue';
-//import { onMounted } from 'vue';
 import DefaultAvatar from '@/assets/images/avatar_default.png';
 
 export default {
+    name: 'PostingPanel',
     setup(){
         const state = reactive ({
-            name: 'PostingPanel',
             newPost: {
                 content : '',
             },

@@ -20,9 +20,9 @@ import { onMounted } from 'vue';
 
 
 export default {
+    name: 'feed',
     setup(){
         const state = reactive ({
-            name: 'feed',
             user :{
                 avatar: DefaultAvatar,
             },

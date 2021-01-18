@@ -98,11 +98,9 @@ import PasswordCues from '../components/PasswordCues';
 import DefaultAvatar from '@/assets/images/avatar_default.png';
 
 export default {
-  
+    name: 'signup',
     setup(){
-        
         const state = reactive ({
-            name: 'signup',
             user :{
             lastname: '',
             firstname: '',

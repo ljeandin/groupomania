@@ -21,9 +21,9 @@
 import { reactive } from 'vue';
 import DefaultAvatar from '@/assets/images/avatar_default.png';
 export default {
+    name:'Dropdown',
     setup(){
         const state = reactive({
-            name:"Dropdown",
             user:{
                 avatar: DefaultAvatar,
             }
