@@ -25,6 +25,7 @@ exports.create_an_account = function (req, res) {
         lastname: req.body.lastname,
         email: req.body.email,
         password: req.body.password,
+        isAdmin: 0,
     });
 
     //save post to the db

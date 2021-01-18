@@ -22,7 +22,7 @@ User.getAll = (result) => {
     });
 };
 
-User.signup = () => {
+User.signup = (newUser, result) => {
     console.log("create an account");
     sql.query("INSERT INTO users SET ? ", newUser, (err, res) => {
         if (err) {
