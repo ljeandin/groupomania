@@ -25,6 +25,8 @@ exports.post_something = (req, res) => {
         user_id: req.body.user_id,
         content: req.body.content,
         image: req.body.image,
+        likes: 0,
+        comments: 0,
     });
 
     //save post to the db

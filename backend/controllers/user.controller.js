@@ -18,6 +18,8 @@ exports.create_an_account = function (req, res) {
         });
     }
 
+    /***Insert validation here***/
+
     //create a new user with the frontend inputs
     const user = new User({
         avatar: req.body.avatar,
