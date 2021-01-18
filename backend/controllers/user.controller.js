@@ -1,14 +1,6 @@
 const User = require("../models/user.model.js");
 
-/*exports.getAllUsers = (req, res) => {
-    User.getAllUsers = (req, res, next) => {
-        User.find()
-            .then((users) => res.status(200).json(users))
-            .catch((error) => res.status(400).json({ error }));
-    };
-};*/
-
-exports.list_all_users = function (req, res) {
+exports.list_all_users = function (res) {
     User.getAll((err, data) => {
         if (err)
             res.status(500).send({
@@ -18,6 +10,29 @@ exports.list_all_users = function (req, res) {
     });
 };
 
-/*exports.index = function (req, res) {
-    res.json({ message: "Welcome" });
-};*/
+exports.create_an_account = function (req, res) {
+    //Check if there is content
+    if (!req.body) {
+        res.status(400).send({
+            message: "You must fill-in the form!",
+        });
+    }
+
+    //create a new user with the frontend inputs
+    const user = new User({
+        avatar: req.body.avatar,
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
+        email: req.body.email,
+        password: req.body.password,
+    });
+
+    //save post to the db
+    User.signup(user, (err, data) => {
+        if (err)
+            res.status(500).send({
+                message: err.message || "Something went wrong when creating the user !",
+            });
+        else res.send(data);
+    });
+};

@@ -18,6 +18,8 @@ exports.post_something = (req, res) => {
         });
     }
 
+    /***Insert validation here***/
+
     //create a new post with the frontend inputs
     const post = new Post({
         user_id: req.body.user_id,
