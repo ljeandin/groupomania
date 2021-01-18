@@ -5,6 +5,6 @@ const feed = require("../controllers/feed.controller"); //path to the right cont
 
 router.get("/", feed.list_all_posts); //router.httpVerb('URL', path to the right controller)
 
-//router.post("/", feed.post_something);
+router.post("/", feed.post_something);
 
 module.exports = router;

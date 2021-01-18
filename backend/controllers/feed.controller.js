@@ -10,21 +10,22 @@ exports.list_all_posts = (req, res) => {
     });
 };
 
-/*exports.post_something = (req, res) => {
-    //Validate if there is a request
+exports.post_something = (req, res) => {
+    //Check if there is content
     if (!req.body) {
         res.status(400).send({
             message: "You must add content to your post!",
         });
     }
 
-    //create a new post
+    //create a new post with the frontend inputs
     const post = new Post({
+        user_id: req.body.user_id,
         content: req.body.content,
         image: req.body.image,
     });
 
-    //send post to the db
+    //save post to the db
     Post.createPost(post, (err, data) => {
         if (err)
             res.status(500).send({
@@ -32,4 +33,4 @@ exports.list_all_posts = (req, res) => {
             });
         else res.send(data);
     });
-};*/
+};

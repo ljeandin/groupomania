@@ -1,7 +1,7 @@
 sql = require("../models/db.js");
 // constructor
 const Post = function (post) {
-    this.id = post.id;
+    //this.id = post.id;
     this.user_id = post.user_id;
     this.content = post.content;
     this.image = post.image;
@@ -26,8 +26,8 @@ Post.getAll = (result) => {
 };
 
 //this function creates a new post
-/*Post.createPost = (newPost, result) => {
-    sql.query("INSERT INTO posts SET ?", newPost, (err, res) => {
+Post.createPost = (newPost, result) => {
+    sql.query("INSERT INTO posts SET ? ", newPost, (err, res) => {
         if (err) {
             console.log("error :", err);
             result(err, null);
@@ -36,7 +36,7 @@ Post.getAll = (result) => {
 
         console.log("created post: ", { id: res.insertId, ...newPost });
         result(null, { id: res.insertId, ...newPost });
-    }); //'?' in the query replaces dynamic content
+    }); //'?' in the query replaces dynamic content (it sets what the user posts)
 };
-*/
+
 module.exports = Post;
