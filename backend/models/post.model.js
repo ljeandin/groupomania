@@ -34,7 +34,6 @@ Post.createPost = (newPost, result) => {
             return;
         }
 
-        console.log("created post: ", { id: res.insertId, ...newPost });
         result(null, { id: res.insertId, ...newPost });
     }); //'?' in the query replaces dynamic content (it sets what the user posts)
 };
