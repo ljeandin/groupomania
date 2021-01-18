@@ -1,7 +1,6 @@
 sql = require("../models/db.js");
 // constructor
 const Post = function (post) {
-    //this.id = post.id;
     this.user_id = post.user_id;
     this.content = post.content;
     this.image = post.image;

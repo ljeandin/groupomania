@@ -1,7 +1,6 @@
 sql = require("../models/db.js");
 // constructor
 const User = function (user) {
-    this.id = user.id;
     this.avatar = user.avatar;
     this.firstname = user.firstname;
     this.lastname = user.lastname;
