@@ -3,11 +3,11 @@
     <Header />
     <main>
         <div class="bloc">
-            <form>
+            <form method="POST" @submit.prevent="createNewAccount">
                 <div class="container">
                     <section class="name">
                         <div>
-                            <label for="nom">Nom {{ state.user.id }}</label>
+                            <label for="nom">Nom</label>
                             <input type="text" placeholder="ex : Durand" name="nom" id="nom" required v-model="state.user.lastname" />
                         </div>
                         
@@ -78,7 +78,7 @@
                             <img class="avatar" :src="state.user.avatar" alt="avatar"/>
                         </div>
                     </div>
-                    <button class="formSubmit" id="formSubmit--signup" type="submit">Inscription</button>
+                    <button class="formSubmit" id="formSubmit--signup">Inscription</button>
                     <!--<button class="formSubmit" id="formSubmit--signup" type="submit" @click.prevent="handleSubmit">Inscription</button>-->
                 </div>
                 <div class="container">
@@ -102,11 +102,11 @@ export default {
     setup(){
         const state = reactive ({
             user :{
-            lastname: '',
-            firstname: '',
-            email: '',
-            password: '',
-            avatar: DefaultAvatar,
+                lastname: '',
+                firstname: '',
+                email: '',
+                password: '',
+                avatar: DefaultAvatar,
             },
             
             components : {
@@ -114,6 +114,26 @@ export default {
                 PasswordCues,
             },
         })
+
+        function createNewAccount(){
+            fetch("http://localhost:3000/api/user/signup", {
+                body:JSON.stringify(state.user),
+                method: "post",
+                headers:  { 'Content-Type': 'application/json;charset=UTF-8' },
+            })
+            .then(()=>{
+                console.log("User sent to server");
+                //emptying the textarea once post is sent to server
+                state.user = {
+                    lastname: '',
+                    firstname: '',
+                    email: '',
+                    password: '',
+                    avatar: DefaultAvatar,
+                };
+            })
+            .catch(err => console.log('Fetch Error :-S', err));
+        }
 
         function seePassword() {
             let icon = document.getElementById("icon");
@@ -135,6 +155,7 @@ export default {
         return {
             state,
             Header,
+            createNewAccount,
             PasswordCues,
             seePassword,
             avatarChange
