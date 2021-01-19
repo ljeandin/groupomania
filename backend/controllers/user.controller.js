@@ -45,7 +45,7 @@ exports.connect_to_account = function (req, res, next) {
             if (results.length > 0) {
                 bcrypt.compare(password, results[0].password).then((valid) => {
                     if (!valid) {
-                        res.status(401).json({ message: "Wrong password" });
+                        res.status(401).json({ message: "The password is wrong" });
                     } else {
                         console.log(email, "is logged-in");
                         res.status(200).json({
