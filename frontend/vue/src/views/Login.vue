@@ -61,8 +61,7 @@
 </template>
 
 <script>
-import { reactive} from 'vue';
-import { onMounted } from 'vue';
+import { reactive, onMounted} from 'vue';
 
 
 export default {
