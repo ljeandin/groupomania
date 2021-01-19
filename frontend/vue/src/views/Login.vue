@@ -139,7 +139,7 @@ export default {
                 };
                 
                 //redirecting to the feed
-                window.location.href = "http://localhost:8080/api/feed";
+                window.location.href = "http://localhost:8080/feed";
                 
             })
             .catch(err => console.log('Fetch Error :-S', err));
