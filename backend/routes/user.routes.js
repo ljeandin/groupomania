@@ -7,4 +7,6 @@ router.post("/signup", user.create_an_account);
 
 router.post("/login", user.connect_to_account);
 
+router.get("/connected/:id", user.get_user_infos);
+
 module.exports = router;

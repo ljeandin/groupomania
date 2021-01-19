@@ -43,4 +43,6 @@ User.login = (emailLogin, result) => {
     });
 };
 
+User.getUser = () => {};
+
 module.exports = User;

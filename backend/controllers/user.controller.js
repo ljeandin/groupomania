@@ -65,3 +65,7 @@ exports.connect_to_account = function (req, res, next) {
         res.status(500).json({ message: "You must fill-in the form" });
     }
 };
+
+exports.get_user_infos = function (req, res) {
+    User.getUser(req.params.userId, (err, data) => {});
+};
