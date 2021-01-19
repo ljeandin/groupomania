@@ -42,12 +42,14 @@
                 <!--here are the inputs and submit btn-->
                 <!--labels are made invisible via the css, but screenreaders can still read them-->
                 <label for="emailLogin">adresse e-mail</label>
-                <input type="text" placeholder="Adresse e-mail" name="email" id="emailLogin" required />
+                <input type="text" placeholder="Adresse e-mail" name="email" id="emailLogin" v-model="state.user.email" required />
                 
                 <label for="passwordLogin">mot de passe</label>
-                <input type="password" placeholder="Mot de passe" name="mot de passe" id="passwordLogin" required />
+                <input type="password" placeholder="Mot de passe" name="mot de passe" id="passwordLogin" v-model="state.user.password" required />
 
-                <button class="formSubmit" type="submit">Connexion</button>
+                <button class="formSubmit">Connexion</button>
+
+                {{ state.user.email }} {{ state.user.password }}
             </div>
 
             <div class="container">
@@ -69,9 +71,8 @@ export default {
     setup(){
         const state = reactive ({
             user : {
-                id:'',
                 email:'',
-                token:'',
+                password:'',
             }
         })
 
@@ -112,22 +113,34 @@ export default {
         })
 
         function logIntoAccount(){
+            let token = ''; //initialise connection token
+
+            //connecting and posting data to the api
             fetch("http://localhost:3000/api/user/login", {
                 body:JSON.stringify(state.user),
                 method: "post",
                 headers:  {
                     'Content-Type': 'application/json;charset=UTF-8',
-                    Authorization: `Bearer${state.user.token}`
+                    Authorization: `Bearer${token}` //this token is used to identify end keep the user logged-in
                 },
             })
-            .then(()=>{
-                console.log("User logged-in");
+            .then (response => response.json())
+            .then(data => {
+                console.log(data);
+                localStorage.setItem('user', JSON.stringify(data)); //converting the user object into a JSON object, and adding to local storage
+
+                let user = JSON.parse(localStorage.getItem('user')); //retrieving the user from localStorage
+                token = user.token; //defines the token so that in can be used in the Authorization header
+
                 //emptying the textarea once post is sent to server
                 state.user = {
-                    id:'',
                     email:'',
-                    token:'',
+                    password:'',
                 };
+                
+                //redirecting to the feed
+                window.location.href = "http://localhost:8080/api/feed";
+                
             })
             .catch(err => console.log('Fetch Error :-S', err));
         }
@@ -141,4 +154,13 @@ export default {
 }
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+
+    /*
+    //emptying the textarea once post is sent to server
+    state.user = {
+        email:'',
+        password:'',
+    };window.location.href = "http://localhost:8080/api/feed";
+    */
+</style>
