@@ -49,9 +49,9 @@ exports.connect_to_account = function (req, res, next) {
                     } else {
                         console.log(email, "is logged-in");
                         res.status(200).json({
-                            userId: results[0].id,
+                            id: results[0].id,
                             email: results[0].email,
-                            token: jwt.sign({ userId: results[0].id }, "RANDOM_TOKEN_SECRET", {
+                            token: jwt.sign({ id: results[0].id }, "RANDOM_TOKEN_SECRET", {
                                 expiresIn: "24h",
                             }),
                         });

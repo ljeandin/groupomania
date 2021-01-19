@@ -37,7 +37,7 @@
             
 
         <!--login form-->
-        <form class="bloc" @submit.prevent="loginToSite">
+        <form class="bloc" method="POST" @submit.prevent="logIntoAccount">
             <div class="container">
                 <!--here are the inputs and submit btn-->
                 <!--labels are made invisible via the css, but screenreaders can still read them-->
@@ -67,7 +67,15 @@ import { reactive, onMounted} from 'vue';
 export default {
     name: "login",
     setup(){
-        /**Logo animations**/
+        const state = reactive ({
+            user : {
+                id:'',
+                email:'',
+                token:'',
+            }
+        })
+
+         /**Logo animations**/
         onMounted(() => {
             document.onreadystatechange = () => {
                 //animationg the logo with the globe icon
@@ -104,11 +112,32 @@ export default {
             // Set the id of SVG, delay time in seconds to start animation and delay between each animation
             animateSgv("logoTypography", 0, 0.1);
         })
-        const state = reactive ({
-        })
 
+        function logIntoAccount(){
+            fetch("http://localhost:3000/api/user/login", {
+                body:JSON.stringify(state.user),
+                method: "post",
+                headers:  {
+                    'Content-Type': 'application/json;charset=UTF-8',
+                    Authorization: `Bearer${state.user.token}`
+                },
+            })
+            .then(()=>{
+                console.log("User logged-in");
+                //emptying the textarea once post is sent to server
+                state.user = {
+                    id:'',
+                    email:'',
+                    token:'',
+                };
+            })
+            .catch(err => console.log('Fetch Error :-S', err));
+        }
+        
+       
         return {
-            state
+            state,
+            logIntoAccount,
         }
     }
 }
