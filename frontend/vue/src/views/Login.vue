@@ -87,7 +87,6 @@ export default {
                         logoPaths[i].style.strokeDashoffset = logoPaths[i].getTotalLength();
                         logoPaths[i].style.animation = `line-anim 1s ease-out forwards ${delay}s`;
                         delay += delayIncrement;
-                        console.log(delay);
                     }
                     logo.style.animation = `fill 1s linear forwards ${delayFill}s`;
                 }
@@ -105,7 +104,6 @@ export default {
                     logoPaths[i].style.strokeDashoffset = logoPaths[i].getTotalLength();
                     logoPaths[i].style.animation = `line-anim 2s ease forwards ${delay}s`;
                     delay += delayIncrement;
-                    console.log(delay);
                 }
                 logo.style.animation = `fill 0.5s ease-out forwards ${delay}s`;
             }
