@@ -67,5 +67,17 @@ exports.connect_to_account = function (req, res, next) {
 };
 
 exports.get_user_infos = function (req, res) {
-    User.getUser(req.params.userId, (err, data) => {});
+    User.getUser(req.params.userId, (err, data) => {
+        if (err) {
+            if (err.kind === "not_found") {
+                res.status(404).send({
+                    message: "Can't find user with this id : " + req.params.userId,
+                });
+            } else {
+                res.status(500).send({
+                    message: "An error happened when retrieving user with id" + req.params.userId,
+                });
+            }
+        } else res.send(data);
+    });
 };
