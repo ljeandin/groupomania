@@ -48,8 +48,6 @@
                 <input type="password" placeholder="Mot de passe" name="mot de passe" id="passwordLogin" v-model="state.user.password" required />
 
                 <button class="formSubmit">Connexion</button>
-
-                {{ state.user.email }} {{ state.user.password }}
             </div>
 
             <div class="container">
@@ -121,7 +119,7 @@ export default {
                 method: "post",
                 headers:  {
                     'Content-Type': 'application/json;charset=UTF-8',
-                    Authorization: `Bearer${token}` //this token is used to identify end keep the user logged-in
+                    'Authorization': `Bearer${token}` //this token is used to identify end keep the user logged-in
                 },
             })
             .then (response => response.json())
@@ -133,13 +131,13 @@ export default {
                 token = user.token; //defines the token so that in can be used in the Authorization header
 
                 //emptying the textarea once post is sent to server
-                state.user = {
+                /*state.user = {
                     email:'',
                     password:'',
-                };
+                };*/
                 
                 //redirecting to the feed
-                window.location.href = "http://localhost:8080/feed";
+                //window.location.href = "http://localhost:8080/feed";
                 
             })
             .catch(err => console.log('Fetch Error :-S', err));

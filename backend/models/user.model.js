@@ -38,11 +38,17 @@ User.login = (emailLogin, result) => {
         if (!user) {
             return res.status(401).json({ error: "User not found" });
         }
-
-        console.log;
     });
 };
 
-User.getUser = () => {};
-
+User.findOne = (userId, result) => {
+    sql.query("SELECT * FROM users WHERE id = ? ", userId, (err, res) => {
+        if (err) {
+            console.log("error : ", err);
+            result(null, err);
+            return;
+        }
+        result(null, res);
+    });
+};
 module.exports = User;
