@@ -73,3 +73,17 @@ exports.connect_to_account = function (req, res) {
         res.status(500).json({ message: "You must fill-in the form" });
     }
 };
+
+exports.get_user_infos = function (req, res) {
+    const token = req.headers.authorization.split(" ")[1]; //extracting token from authorization header
+    const decodedToken = jwt.verify(token, "RANDOM_TOKEN_SECRET"); //decoding token with the key indicated at controllers/user.controller.js:53
+    const userId = decodedToken.userId; //defining decoded token as user id
+
+    User.getOne(userId, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: "Error retrieving user with this id : " + req.params.customerId,
+            });
+        } else res.send(data);
+    });
+};

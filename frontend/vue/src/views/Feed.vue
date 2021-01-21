@@ -3,15 +3,15 @@
      <body class="filActualite">
         <Header />
         <main>
-            <PostingPanel />
+            <PostingPanel :connectedUser="state.connectedUser"/>
             
-            <Publication />
+            <Publication :connectedUser="state.connectedUser"/>
         </main>
     </body>
 </template>
 
 <script>
-import { reactive } from 'vue';
+import { reactive, onMounted } from 'vue';
 import Header from '@/components/Header';
 import PostingPanel from '@/components/PostingPanel';
 import Publication from '@/components/Publication';
@@ -20,7 +20,23 @@ import Publication from '@/components/Publication';
 export default {
     name: 'feed',
     setup(){
-        const state = reactive ({})
+        const state = reactive ({
+            connectedUser : {}
+        })
+
+        //connecting to the API and retrieving the connected user data
+        onMounted(() => {
+            fetch("http://localhost:3000/api/user/getone", {
+                method: "get",
+                headers:  {
+                    'Content-Type': 'application/json;charset=UTF-8',
+                    'Authorization': 'Bearer ' + localStorage.token , //token is extracted from local storage (see Login.vue)
+                },
+            })
+            .then(response => response.json())
+            .then(data => state.connectedUser = data)
+            .catch(err => console.log('Fetch Error :-S', err));
+        })
         
         /***Expandable textarea***/
         function getScrollHeight(elm) {

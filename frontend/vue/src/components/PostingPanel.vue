@@ -1,5 +1,6 @@
 <template>
     <div class="bloc post">
+        {{ connectedUser.firstname }}
         <form method="POST" @submit.prevent="createNewPost">
             <div class="writeLine">
                 <img class="avatar" :src="state.user.avatar" alt=""/>
@@ -52,6 +53,9 @@ import DefaultAvatar from '@/assets/images/avatar_default.png';
 
 export default {
     name: 'PostingPanel',
+    props: {
+        connectedUser: Object
+    },
     setup(){
         const state = reactive ({
             newPost: {
@@ -61,7 +65,6 @@ export default {
                 avatar: DefaultAvatar,
                 firstname: 'Lucie'
             },
-
             posts :[],
         })
 

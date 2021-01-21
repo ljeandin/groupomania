@@ -1,6 +1,5 @@
 <template>
-     <div class="bloc" v-for="post in state.posts" :key="post.id"> 
-
+     <div class="bloc" v-for="post in state.posts" :key="post.id">
         <div class="publication">
             <div class="idLine">
                 <img class="avatar" :src="post.avatar" alt=""/>
@@ -30,6 +29,7 @@
             </div>
         </div>
         
+        {{ connectedUser.firstname }}
         <Comments />
         
     </div>
@@ -43,6 +43,9 @@ import { onMounted } from 'vue';
 
 export default {
     name: 'Publication',
+    props: {
+        connectedUser: Object
+    },
     setup(){
         const state = reactive ({
             user :{
