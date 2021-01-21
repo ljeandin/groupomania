@@ -71,7 +71,7 @@ export default {
                 fetch("http://localhost:3000/api/feed", {
                     body:JSON.stringify(state.newPost),
                     method: "post",
-                    headers:  { 'Content-Type': 'application/json;charset=UTF-8' },
+                    headers:  {'Content-Type': 'application/json;charset=UTF-8' },
                 })
                 .then(()=>{
                     console.log("Post sent to server");

@@ -1,5 +1,4 @@
 const jwt = require("jsonwebtoken"); // JSONwebtoken for token generating
-sql = require("../models/db.js");
 
 //authentication middleware
 module.exports = (req, res, next) => {

@@ -15,31 +15,13 @@ import { reactive } from 'vue';
 import Header from '@/components/Header';
 import PostingPanel from '@/components/PostingPanel';
 import Publication from '@/components/Publication';
-import DefaultAvatar from '@/assets/images/avatar_default.png';
-import { onMounted } from 'vue';
 
 
 export default {
     name: 'feed',
     setup(){
-        const state = reactive ({
-            user :{
-                avatar: DefaultAvatar,
-            },
-            posts :[],
-        })
+        const state = reactive ({})
         
-        //connecting to the API and retrieving data
-        onMounted(() => {
-            let url = 'http://localhost:3000/api/feed';
-            fetch(url)
-            .then(response => response.json())
-            .then(data => data.forEach(post => {
-                state.posts.push(post);
-            }))
-            .catch(err => console.log('Fetch Error :-S', err));
-        })
-
         /***Expandable textarea***/
         function getScrollHeight(elm) {
             var savedValue = elm.value;
@@ -66,7 +48,6 @@ export default {
         return{
             state,
             Header,
-            //fetchApi,
             PostingPanel,
             Publication,
             getScrollHeight,

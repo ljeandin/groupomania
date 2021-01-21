@@ -111,24 +111,20 @@ export default {
         })
 
         function logIntoAccount(){
-            let token = ''; //initialise connection token
-
             //connecting and posting data to the api
             fetch("http://localhost:3000/api/user/login", {
                 body:JSON.stringify(state.user),
                 method: "post",
                 headers:  {
                     'Content-Type': 'application/json;charset=UTF-8',
-                    'Authorization': `Bearer${token}` //this token is used to identify end keep the user logged-in
                 },
             })
             .then (response => response.json())
-            .then(() => {
-                /*console.log(data);
-                localStorage.setItem('user', JSON.stringify(data)); //converting the user object into a JSON object, and adding to local storage
-
-                let user = JSON.parse(localStorage.getItem('user')); //retrieving the user from localStorage
-                token = user.token; //defines the token so that in can be used in the Authorization header*/
+            .then((data) => {
+                console.log(data);
+                let token = data.token;
+                console.log(token);
+                localStorage.setItem('token', token); //pushing token to localStorage
 
                 //emptying the textarea once post is sent to server
                 state.user = {

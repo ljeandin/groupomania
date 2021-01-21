@@ -53,8 +53,13 @@ export default {
 
         //connecting to the API and retrieving data
         onMounted(() => {
-            let url = 'http://localhost:3000/api/feed';
-            fetch(url)
+            fetch("http://localhost:3000/api/feed", {
+                method: "get",
+                headers:  {
+                    'Content-Type': 'application/json;charset=UTF-8',
+                    'Authorization': 'Bearer ' + localStorage.token , //token is extracted from local storage (see Login.vue)
+                },
+            })
             .then(response => response.json())
             .then(data => data.forEach(post => {
                 state.posts.push(post);
