@@ -123,21 +123,21 @@ export default {
                 },
             })
             .then (response => response.json())
-            .then(data => {
-                console.log(data);
+            .then(() => {
+                /*console.log(data);
                 localStorage.setItem('user', JSON.stringify(data)); //converting the user object into a JSON object, and adding to local storage
 
                 let user = JSON.parse(localStorage.getItem('user')); //retrieving the user from localStorage
-                token = user.token; //defines the token so that in can be used in the Authorization header
+                token = user.token; //defines the token so that in can be used in the Authorization header*/
 
                 //emptying the textarea once post is sent to server
-                /*state.user = {
+                state.user = {
                     email:'',
                     password:'',
-                };*/
+                };
                 
                 //redirecting to the feed
-                //window.location.href = "http://localhost:8080/feed";
+                window.location.href = "http://localhost:8080/feed";
                 
             })
             .catch(err => console.log('Fetch Error :-S', err));
