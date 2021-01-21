@@ -121,9 +121,7 @@ export default {
             })
             .then (response => response.json())
             .then((data) => {
-                console.log(data);
                 let token = data.token;
-                console.log(token);
                 localStorage.setItem('token', token); //pushing token to localStorage
 
                 //emptying the textarea once post is sent to server
