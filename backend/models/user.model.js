@@ -23,7 +23,7 @@ User.signup = (newUser, result) => {
 };
 
 User.getOne = (userId, result) => {
-    sql.query(`SELECT avatar, firstname, lastname, isAdmin FROM users WHERE id = ${userId}`, (err, res) => {
+    sql.query(`SELECT id, avatar, firstname, lastname, isAdmin FROM users WHERE id = ${userId}`, (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);

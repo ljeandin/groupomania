@@ -3,7 +3,7 @@
      <body class="filActualite">
         <Header />
         <main>
-            <PostingPanel :connectedUser="state.connectedUser"/>
+            <PostingPanel />
             
             <Publication :connectedUser="state.connectedUser"/>
         </main>

@@ -35,7 +35,7 @@ Post.createPost = (newPost, result) => {
 
         console.log("New post created");
         result(null, { id: res.insertId, ...newPost });
-    }); //'?' in the query replaces dynamic content (it sets what the user posts)
+    });
 };
 
 module.exports = Post;
