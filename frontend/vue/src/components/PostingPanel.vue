@@ -22,8 +22,8 @@
                     id="télécharger_image" 
                     name="image" 
                     accept=".png, .jpg, .jpeg" 
-                    onfocus="focusBtnImg()" 
-                    onblur="blurBtnImg()" 
+                    @focus="focusBtnImg()" 
+                    @blur="blurBtnImg()"
                     tabindex="0" 
                     @change="imageChange"/>
                 </label>
@@ -36,14 +36,15 @@
                     id="télécharger_gif" 
                     name="image" 
                     accept=".gif" 
-                    onfocus="focusBtnGif()" 
-                    onblur="blurBtnGif()" 
+                    @focus="focusBtnGif()" 
+                    @blur="blurBtnGif()" 
                     tabindex="0" 
                     @change="imageChange"/>       
                 </label>
             </div>
         </form>
-        new post : {{ state.newPost }}
+        new post : {{ state.newPost }} <br /><br />
+        image : {{ state.newPost.image }}
     </div>
 </template>
 
@@ -85,7 +86,6 @@ export default {
 
         //function relative to the images inputs. It display a preview of the image that is going to be posted
         function imageChange(e){
-            //state.newPost.image = URL.createObjectURL(e.target.files[0]);
             let file = e.target.files[0];
             state.newPost.image = URL.createObjectURL(file);
             document.getElementById('imagePreview').style.display="block";
@@ -109,16 +109,39 @@ export default {
                     state.newPost = {
                         user_id : '',
                         content : '',
+                        image : null,
                     };
                 })
                 .catch(err => console.log('Fetch Error :-S', err));
             //}
         }
+
+        //adding image to post
+        function focusBtnImg() {
+            document.getElementById("labelImage").style.backgroundColor = "#d1d9e6"; //color correspond to $focus-color in sass/abstracts/variables
+        }
+
+        function blurBtnImg() {
+            document.getElementById("labelImage").style.backgroundColor = "#ecf0f3"; //color correspond to $background-color in sass/abstracts/variables
+        }
+
+        //adding gif to post
+        function focusBtnGif() {
+            document.getElementById("labelGif").style.backgroundColor = "#d1d9e6"; //color correspond to $focus-color in sass/abstracts/variables
+        }
+
+        function blurBtnGif() {
+            document.getElementById("labelGif").style.backgroundColor = "#ecf0f3"; //color correspond to $background-color in sass/abstracts/variables
+        }
         
         return{
             state,
             imageChange,
-            createNewPost
+            createNewPost,
+            focusBtnImg,
+            blurBtnImg,
+            focusBtnGif,
+            blurBtnGif,
             
         }
     }
