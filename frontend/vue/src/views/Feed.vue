@@ -5,7 +5,7 @@
         <main>
             <PostingPanel />
             
-            <Publication :connectedUser="state.connectedUser"/>
+            <Publication />
         </main>
     </body>
 </template>

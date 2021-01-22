@@ -28,8 +28,6 @@
                 </div>
             </div>
         </div>
-        
-        {{ connectedUser.firstname }}
         <Comments />
         
     </div>
@@ -43,9 +41,6 @@ import { onMounted } from 'vue';
 
 export default {
     name: 'Publication',
-    props: {
-        connectedUser: Object
-    },
     setup(){
         const state = reactive ({
             user :{

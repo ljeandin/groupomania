@@ -70,7 +70,7 @@ export default {
             posts :[],
         })
         
-        //connecting to the API and retrieving the connected user data
+        //this is for retrieving the connected user infos
         onMounted(() => {
             fetch("http://localhost:3000/api/user/getone", {
                 method: "get",
