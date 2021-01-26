@@ -1,4 +1,5 @@
 const Post = require("../models/post.model.js");
+const Comment = require("../models/comment.model.js");
 
 exports.list_all_posts = (req, res) => {
     Post.getAll((err, data) => {
@@ -34,6 +35,18 @@ exports.post_something = (req, res) => {
         if (err)
             res.status(500).send({
                 message: err.message || "Something went wrong when creating a new post !",
+            });
+        else res.send(data);
+    });
+};
+
+exports.retrieve_comments = (req, res) => {
+    const postId = req.body.post_id; //defining decoded token as user id
+
+    Comment.getAll(postId, (err, data) => {
+        if (err)
+            res.status(500).send({
+                message: err.message || "An error occured while retrieving posts",
             });
         else res.send(data);
     });

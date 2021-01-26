@@ -22,14 +22,38 @@
                     <span class="likes__counter">{{ post.likes }}</span>
                 </div>
                 <div class="reactionLine--comments">
-                    <i class="material-icons" tabindex="0" v-if="post.comments">chat_bubble</i>
+                    <i class="material-icons" tabindex="0" v-if="post.comments" @click="retrieveComments">chat_bubble</i>
                     <i class="material-icons" tabindex="0" v-else>chat_bubble_outline</i>
                     <span class="comments__counter">{{ post.comments }}</span>
                 </div>
             </div>
         </div>
-        <Comments />
-        
+        <!--<Comments />-->
+
+        <div class="comments">
+            <div class="writeLine">
+                <img class="avatar" :src="state.user.avatar" alt=""/>
+                <label for="commenting">Commenter</label>
+                <textarea id="commenting" class="autoExpand" placeholder="On vous écoute !" name="post" rows='1' data-min-rows='1' required></textarea>
+                <button type="submit">
+                    <i class="material-icons">send</i>
+                </button>
+            </div>
+
+            <div class="comments__comment">
+                <div class="idLine">
+                    <img class="avatar" :src="state.user.avatar" alt=""/>
+                    <span class="firstName">Mickaël</span>
+                    <span class="lastName">Georges</span>
+                    <button class="adminDelete" type="button">
+                        <i class="material-icons">delete_forever</i>
+                    </button>
+                </div>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                </p>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -46,7 +70,8 @@ export default {
             user :{
                 avatar: DefaultAvatar,
             },
-            posts :[]
+            posts :[],
+            comments : []
         })
 
         //connecting to the API and retrieving data
@@ -65,9 +90,27 @@ export default {
             .catch(err => console.log('Fetch Error :-S', err));
         })
 
+        function retrieveComments(){
+            fetch("http://localhost:3000/api/feed/comments", {
+                body : JSON.stringify({post_id: 2}),
+                method: "post",
+                headers:  {
+                    'Content-Type': 'application/json;charset=UTF-8',
+                    'Authorization': 'Bearer ' + localStorage.token , //token is extracted from local storage (see Login.vue)
+                },
+            })
+            .then(response => response.json())
+            /*.then(data => data.forEach(comment => {
+                state.comments.push(comment);
+            }))*/
+            .then(data => console.log(data))
+            .catch(err => console.log('Fetch Error :-S', err));
+        }
+
         return{
             state,
-            Comments
+            Comments,
+            retrieveComments,
         }
     }
 }

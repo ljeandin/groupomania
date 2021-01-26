@@ -9,4 +9,6 @@ router.get("/", auth, feed.list_all_posts); //router.httpVerb('URL', path to the
 
 router.post("/", auth, /*multer,*/ feed.post_something);
 
+router.post("/comments", auth, feed.retrieve_comments);
+
 module.exports = router;

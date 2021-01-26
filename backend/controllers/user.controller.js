@@ -82,7 +82,7 @@ exports.get_user_infos = function (req, res) {
     User.getOne(userId, (err, data) => {
         if (err) {
             res.status(500).send({
-                message: "Error retrieving user with this id : " + req.params.customerId,
+                message: "Error retrieving user with this id : " + userId,
             });
         } else res.send(data);
     });
