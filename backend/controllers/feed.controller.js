@@ -25,7 +25,7 @@ exports.post_something = (req, res) => {
     const post = new Post({
         user_id: req.body.user_id,
         content: req.body.content,
-        //image: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
+        image: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
         likes: 0,
         comments: 0,
     });

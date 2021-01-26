@@ -8,7 +8,6 @@ const MIME_TYPES = {
 };
 
 //multer middleware (images management)
-//files will be stored locally
 const storage = multer.diskStorage({
     destination: (req, file, callback) => {
         callback(null, "images");

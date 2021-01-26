@@ -7,7 +7,7 @@ const multer = require("../middlewares/multer-config"); //images management midd
 
 router.get("/", auth, feed.list_all_posts); //router.httpVerb('URL', path to the right controller)
 
-router.post("/", auth, /*multer,*/ feed.post_something);
+router.post("/", auth, multer, feed.post_something);
 
 router.post("/comments", auth, feed.retrieve_comments);
 

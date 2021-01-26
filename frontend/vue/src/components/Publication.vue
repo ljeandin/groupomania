@@ -11,7 +11,6 @@
             </div>
 
             <div class="publication__content">
-                <p v-if="post.image">image :{{ post.image }}</p>
                 <img :src="post.image" alt="" v-if="post.image"/>
                 <p>{{ post.content }}</p>
             </div>
@@ -22,7 +21,7 @@
                     <span class="likes__counter">{{ post.likes }}</span>
                 </div>
                 <div class="reactionLine--comments">
-                    <i class="material-icons" tabindex="0" v-if="post.comments" @click="retrieveComments">chat_bubble</i>
+                    <i class="material-icons" tabindex="0" v-if="post.comments" @keyup.enter="retrieveComments" @click="retrieveComments">chat_bubble</i>
                     <i class="material-icons" tabindex="0" v-else>chat_bubble_outline</i>
                     <span class="comments__counter">{{ post.comments }}</span>
                 </div>
