@@ -3,7 +3,7 @@
     <Header />
     <main>
         <div class="bloc">
-            <form method="POST" @submit.prevent="createNewAccount">
+            <form method="POST" @submit.prevent="createNewAccount" enctype="multipart/form-data">
                 <div class="container">
                     <section class="name">
                         <div>
@@ -75,7 +75,7 @@
                                 -->
                             </label>
                             <!--This is the default avatar, replaced by user's avatar if there's one-->
-                            <img class="avatar" :src="state.user.avatar" alt="avatar"/>
+                            <img class="avatar" :src="state.avatarPreview" alt="avatar"/>
                         </div>
                     </div>
                     <button class="formSubmit" id="formSubmit--signup">Inscription</button>
@@ -87,6 +87,7 @@
                 </div>
             </form>
         </div>
+        {{ state.user.avatar }}
     </main>
 </body>
 </template>
@@ -96,6 +97,7 @@ import { reactive } from 'vue';
 import Header from '../components/Header';
 import PasswordCues from '../components/PasswordCues';
 import DefaultAvatar from '@/assets/images/avatar_default.png';
+import axios from 'axios';
 
 export default {
     name: 'signup',
@@ -106,33 +108,38 @@ export default {
                 firstname: '',
                 email: '',
                 password: '',
-                avatar: DefaultAvatar,
+                avatar: null,
             },
+
+            avatarPreview : DefaultAvatar,
             
             components : {
                 Header,
                 PasswordCues,
             },
         })
-
+        
+        function avatarChange(e){
+            let file = e.target.files[0];
+            state.avatarPreview = URL.createObjectURL(file);
+            state.user.avatar = file;
+        }
+        
+        //function to create a new Post
         function createNewAccount(){
-            fetch("http://localhost:3000/api/user/signup", {
-                body:JSON.stringify(state.user),
-                method: "post",
-                headers:  { 'Content-Type': 'application/json;charset=UTF-8' },
-            })
-            .then(()=>{
-                console.log("User sent to server");
-                //emptying the textarea once post is sent to server
-                state.user = {
-                    lastname: '',
-                    firstname: '',
-                    email: '',
-                    password: '',
-                    avatar: DefaultAvatar,
-                };
-            })
-            .catch(err => console.log('Fetch Error :-S', err));
+            const formData = new FormData();
+            formData.append('lastname', state.user.lastname);
+            formData.append('firstname', state.user.firstname);
+            formData.append('email', state.user.email);
+            formData.append('password', state.user.password);
+            formData.append('avatar', state.user.avatar);
+            console.log(formData);
+
+            const config = {headers: {'Authorization': 'Bearer ' + localStorage.token, 'Content-Type': 'multipart/form-data'}} ; //token is extracted from local storage (see Login.vue)}
+            
+            axios.post('http://localhost:3000/api/user/signup', formData, config)
+            .then(response => console.log(response))
+            .catch(errors => console.log(errors));
         }
 
         function seePassword() {
@@ -148,17 +155,14 @@ export default {
                 icon.innerHTML = "visibility_off"; // change icon
             }
         }
-        function avatarChange(e){
-            let file = e.target.files[0];
-            state.user.avatar = URL.createObjectURL(file);
-        }
+        
         return {
             state,
             Header,
+            avatarChange,
             createNewAccount,
             PasswordCues,
             seePassword,
-            avatarChange
             
         }
     }

@@ -16,7 +16,7 @@ exports.create_an_account = function (req, res) {
             .then((hash) => {
                 //create a new user with the frontend inputs
                 const user = new User({
-                    avatar: req.body.avatar,
+                    avatar: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
                     firstname: req.body.firstname,
                     lastname: req.body.lastname,
                     email: req.body.email,
@@ -87,3 +87,19 @@ exports.get_user_infos = function (req, res) {
         } else res.send(data);
     });
 };
+
+/*exports.change_avatar = function (req, res) {
+    const token = req.headers.authorization.split(" ")[1]; //extracting token from authorization header
+    const decodedToken = jwt.verify(token, "RANDOM_TOKEN_SECRET"); //decoding token with the key indicated at controllers/user.controller.js:53
+    const userId = decodedToken.userId; //defining decoded token as user id
+
+    const avatar = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`;
+
+    User.changeAvatar(avatar, userId, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: "Error changing avatar !",
+            });
+        } else res.send(data);
+    });
+};*/

@@ -35,4 +35,17 @@ User.getOne = (userId, result) => {
     });
 };
 
+/*User.changeAvatar = (avatar, userId, result) => {
+    sql.query(`UPDATE users SET avatar = ${avatar} WHERE id = ${userId}`, (err, res) => {
+        if (err) {
+            console.log("error :", err);
+            result(err, null);
+            return;
+        } else {
+            result(null, res[0]);
+            return;
+        }
+    });
+};*/
+
 module.exports = User;
