@@ -11,7 +11,7 @@
                     <span>Changer la photo de profil</span>
                     <input type="file" id="télécharger_photo_de_profil" name="avatar" accept=".jpg, .png, .jpeg" tabindex="0" @change="avatarChange"/>
                 </label>
-            <a href="#" tabindex="0">Déconnexion</a>
+            <a href="#" tabindex="0" @click="logout">Déconnexion</a>
             <a href="#" tabindex="0">Supprimer le compte</a>
         </div> 
     </div>   
@@ -66,39 +66,17 @@ export default {
             .catch(errors => console.log(errors));
         }
 
-        /*//function to create a new Post
-        function sendNewAvatar(){
-            const formData = new FormData();
-            formData.append('avatar', state.avatar);
-            console.log(formData);
-
-            const config = {headers: {'Authorization': 'Bearer ' + localStorage.token, 'Content-Type': 'multipart/form-data'}} ; //token is extracted from local storage (see Login.vue)}
-            
-            axios.post('http://localhost:3000/api/user/changeavatar', formData, config)
-            .then(response => console.log(response))
-            .then(() => location.reload())
-            .catch(errors => console.log(errors));
-        }   */     
-
-        //function to create a new Post
-        /*function createNewPost(){
-            const formData = new FormData();
-            formData.append('avatar', state.avatar);
-            console.log(formData);
-
-            const config = {headers: {'Authorization': 'Bearer ' + localStorage.token, 'Content-Type': 'multipart/form-data'}} ; //token is extracted from local storage (see Login.vue)}
-            
-            axios.put('http://localhost:3000/api/feed/changeavatar', formData, config)
-            .then(response => response.json())
-            .then(data => state.avatarPreview = data.avatar)
-            .catch(errors => console.log(errors));
-        }*/
+        //function to log out of account. Simply removes the token from localStorages and redirects to login page
+        function logout(){
+            localStorage.removeItem("token"),
+            window.location.href = "http://localhost:8080/login"
+        }
 
         return{
             state,
             dropdown,
             avatarChange,
-            //sendNewAvatar,
+            logout
         }
     }
 }
