@@ -113,6 +113,7 @@ export default {
             },
             state.imagePreview = null,
             )
+            .then(() => location.reload())
             .catch(errors => console.log(errors));
         }
 

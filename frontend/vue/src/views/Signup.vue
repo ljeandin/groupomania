@@ -87,7 +87,6 @@
                 </div>
             </form>
         </div>
-        {{ state.user.avatar }}
     </main>
 </body>
 </template>
@@ -139,6 +138,7 @@ export default {
             
             axios.post('http://localhost:3000/api/user/signup', formData, config)
             .then(response => console.log(response))
+            .then(() => window.location.href = "http://localhost:8080/login")
             .catch(errors => console.log(errors));
         }
 

@@ -39,9 +39,9 @@
                 </button>
             </div>
 
-            <div class="comments__comment">
+            <div class="comments__comment" v-if="post.comments">
                 <div class="idLine">
-                    <img class="avatar" :src="state.user.avatar" alt=""/>
+                    <img class="avatar" :src="state.avatarOthers" alt=""/>
                     <span class="firstName">Mickaël</span>
                     <span class="lastName">Georges</span>
                     <button class="adminDelete" type="button">
@@ -67,8 +67,11 @@ export default {
     setup(){
         const state = reactive ({
             user :{
-                avatar: DefaultAvatar,
+                avatar: null,
             },
+
+            avatarOthers : DefaultAvatar,
+
             posts :[],
             comments : []
         })
@@ -86,6 +89,22 @@ export default {
             .then(data => data.forEach(post => {
                 state.posts.push(post);
             }))
+            .catch(err => console.log('Fetch Error :-S', err));
+        })
+
+        //this is for retrieving the connected user infos
+        onMounted(() => {
+            fetch("http://localhost:3000/api/user/getone", {
+                method: "get",
+                headers:  {
+                    'Content-Type': 'application/json;charset=UTF-8',
+                    'Authorization': 'Bearer ' + localStorage.token , //token is extracted from local storage (see Login.vue)
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                state.user.avatar = data.avatar //this retrieves all the infos about the user
+            })
             .catch(err => console.log('Fetch Error :-S', err));
         })
 
