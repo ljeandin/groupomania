@@ -11,6 +11,6 @@ router.post("/login", user.connect_to_account);
 
 router.get("/getone", auth, user.get_user_infos);
 
-//router.post("/changeavatar", auth, multer, user.change_avatar);
+router.post("/changeavatar", auth, multer, user.change_avatar);
 
 module.exports = router;

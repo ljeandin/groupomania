@@ -88,7 +88,7 @@ exports.get_user_infos = function (req, res) {
     });
 };
 
-/*exports.change_avatar = function (req, res) {
+exports.change_avatar = function (req, res) {
     const token = req.headers.authorization.split(" ")[1]; //extracting token from authorization header
     const decodedToken = jwt.verify(token, "RANDOM_TOKEN_SECRET"); //decoding token with the key indicated at controllers/user.controller.js:53
     const userId = decodedToken.userId; //defining decoded token as user id
@@ -102,4 +102,4 @@ exports.get_user_infos = function (req, res) {
             });
         } else res.send(data);
     });
-};*/
+};

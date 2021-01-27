@@ -43,11 +43,12 @@
             </div>
         </form>
     </div>
+    
 </template>
 
 <script>
 import { reactive, onMounted } from 'vue';
-import DefaultAvatar from '@/assets/images/avatar_default.png';
+//import DefaultAvatar from '@/assets/images/avatar_default.png';
 import axios from 'axios';
 
 export default {
@@ -63,10 +64,7 @@ export default {
 
             imagePreview: null,
 
-            user :{
-                avatar: DefaultAvatar,
-                firstname: 'Lucie'
-            },
+            user :{},
             posts :[],
         })
         
@@ -80,7 +78,10 @@ export default {
                 },
             })
             .then(response => response.json())
-            .then(data => state.newPost.user_id = data.id)
+            .then(data => {
+                state.newPost.user_id = data.id; //user_id in newPost will be used when a post is created
+                state.user = data //this retrieves all the infos about the user
+            })
             .catch(err => console.log('Fetch Error :-S', err));
         })
 
@@ -105,6 +106,13 @@ export default {
             
             axios.post('http://localhost:3000/api/feed', formData, config)
             .then(response => console.log(response))
+            .then(()=> state.newPost = {
+                user_id: '',
+                content : '',
+                image : null,
+            },
+            state.imagePreview = null,
+            )
             .catch(errors => console.log(errors));
         }
 
