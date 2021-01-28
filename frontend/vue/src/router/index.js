@@ -6,6 +6,10 @@ import Signup from "../views/Signup.vue";
 
 const routes = [
     {
+        path: "/",
+        redirect: "/login",
+    },
+    {
         path: "/login",
         name: "login",
         component: Login,

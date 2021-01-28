@@ -31,23 +31,23 @@
                                 placeholder="Mot de passe" 
                                 name="nom"
                                 required
-                                v-model="state.user.password"
-                            />
-                            <!--<input 
-                                id="mot_de_passe" 
-                                type="password" 
-                                placeholder="Mot de passe" 
-                                name="nom"
                                 @blur="passwordCueBlur"
                                 @focus="passwordCueFocus"
                                 @keyup="passwordCueKeyup"
-                                required
-                            />-->
+                                v-model="state.user.password"
+                            />
 
                             <i id="icon" class="material-icons" @click="seePassword()" @keypress="seePassword()" tabindex="0">visibility_off</i>
                         </section>
                     </div>
-                    <PasswordCues />
+                   <!-- <PasswordCues />-->
+                    <ul id="message" class="message">
+                        <p id="validationTitle">Le mot de passe doit contenir :</p>
+                        <li id="letter" class="invalid">Une minuscule</li>
+                        <li id="capital" class="invalid">Une majuscule</li>
+                        <li id="number" class="invalid">Un chiffre</li>
+                        <li id="length" class="invalid">6 charactères minimum</li>
+                    </ul>
                     
                     <div class="imgUpload">
                         <p class="label">Photo de profil <b>(vous pourrez en changer)</b></p>    
@@ -60,26 +60,16 @@
                                 name="avatar" 
                                 accept=".jpg, .png, .jpeg"
                                 tabindex="0"
+                                @focus="focusBtnUploadAvatar" 
+                                @blur="blurBtnUploadAvatar" 
                                 @change="avatarChange"
                                 />
-                                <!--
-                                <input 
-                                type="file" 
-                                id="télécharger_avatar" 
-                                name="avatar" 
-                                accept="image/*" 
-                                onfocus="focusBtnUploadAvatar()" 
-                                onblur="blurBtnUploadAvatar()" 
-                                tabindex="0"
-                                />
-                                -->
                             </label>
                             <!--This is the default avatar, replaced by user's avatar if there's one-->
                             <img class="avatar" :src="state.avatarPreview" alt="avatar"/>
                         </div>
                     </div>
                     <button class="formSubmit" id="formSubmit--signup">Inscription</button>
-                    <!--<button class="formSubmit" id="formSubmit--signup" type="submit" @click.prevent="handleSubmit">Inscription</button>-->
                 </div>
                 <div class="container">
                     <span class="formQuestion">Déjà inscrit·e ?</span>
@@ -142,6 +132,35 @@ export default {
             .catch(errors => console.log(errors));
         }
 
+        /*validation du formulaire
+        function formValidation() {
+            // création des regex
+            let checkString = /^[A-Za-z\é\è\ê\ë\ï\à\ö\ô-]+$/;
+            let checkEmail = /.+@.+\..+/;
+
+            // récupération des inputs
+            let formLast = state.user.lastname;
+            let formFirst = state.user.firstname;
+            let formEmail = state.user.email;
+
+            // vérification des inputs avec les regex
+            if (checkString.test(formLast) == false) {
+                alert("Votre nom doit être indiqué et ne doit pas contenir de chiffres");
+                return false;
+
+            } else if (checkString.test(formFirst) == false) {
+                alert("Votre prénom doit être indiqué et ne doit pas contenir de chiffres");
+                return false;
+
+            } else if (checkEmail.test(formEmail) == false) {
+                alert("Votre e-mail doit être indiqué et doit être au format xxx@yyy.zzz");
+                return false;
+
+            } else {
+                return true;
+            }
+        }*/
+
         function seePassword() {
             let icon = document.getElementById("icon");
             let password = document.getElementById("mot_de_passe");
@@ -155,15 +174,96 @@ export default {
                 icon.innerHTML = "visibility_off"; // change icon
             }
         }
+
+        //function for keyboard focus on custom button
+        function focusBtnUploadAvatar() {
+            document.getElementById("labelUploadAvatar").style.backgroundColor = "#d1d9e6"; //color correspond to $focus-color in sass/abstracts/variables
+        }
+
+        function blurBtnUploadAvatar() {
+            document.getElementById("labelUploadAvatar").style.backgroundColor = "#ecf0f3"; //color correspond to $background-color in sass/abstracts/variables
+        }
+
+        function passwordCueBlur(){
+            document.getElementById("message").style.display = "none";
+        }
+
+        function passwordCueFocus(){
+            document.getElementById("message").style.display = "block";
+        }
+
+        function passwordCueKeyup(){
+            let myInput = document.getElementById("mot_de_passe");
+            let letter = document.getElementById("letter");
+            let capital = document.getElementById("capital");
+            let number = document.getElementById("number");
+            let length = document.getElementById("length");   
+            
+            // Validate lowercase letters
+            var lowerCaseLetters = /[a-z]/g;
+            if (myInput.value.match(lowerCaseLetters)) {
+                letter.classList.remove("invalid");
+                letter.classList.add("valid");
+            } else {
+                letter.classList.remove("valid");
+                letter.classList.add("invalid");
+            }
+
+            // Validate capital letters
+            var upperCaseLetters = /[A-Z]/g;
+            if (myInput.value.match(upperCaseLetters)) {
+                capital.classList.remove("invalid");
+                capital.classList.add("valid");
+            } else {
+                capital.classList.remove("valid");
+                capital.classList.add("invalid");
+            }
+
+            // Validate numbers
+            var numbers = /[0-9]/g;
+            if (myInput.value.match(numbers)) {
+                number.classList.remove("invalid");
+                number.classList.add("valid");
+            } else {
+                number.classList.remove("valid");
+                number.classList.add("invalid");
+            }
+
+            // Validate length
+            if (myInput.value.length >= 6) {
+                length.classList.remove("invalid");
+                length.classList.add("valid");
+            } else {
+                length.classList.remove("valid");
+                length.classList.add("invalid");
+            }
+
+            //changing password message
+            if (
+                letter.classList.contains("valid") &&
+                capital.classList.contains("valid") &&
+                number.classList.contains("valid") &&
+                length.classList.contains("valid")
+            ) {
+                document.getElementById("validationTitle").textContent = "Le mot de passe est valide";
+            } else {
+                document.getElementById("validationTitle").textContent = "Le mot de passe doit contenir :";
+            }
+        }
         
         return {
             state,
             Header,
             avatarChange,
             createNewAccount,
+            //formValidation,
             PasswordCues,
             seePassword,
-            
+            focusBtnUploadAvatar,
+            blurBtnUploadAvatar,
+            passwordCueBlur,
+            passwordCueFocus,
+            passwordCueKeyup
         }
     }
 }

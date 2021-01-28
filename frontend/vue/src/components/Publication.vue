@@ -87,7 +87,7 @@ export default {
             })
             .then(response => response.json())
             .then(data => data.forEach(post => {
-                state.posts.push(post);
+                state.posts.unshift(post);
             }))
             .catch(err => console.log('Fetch Error :-S', err));
         })

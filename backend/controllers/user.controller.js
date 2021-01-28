@@ -1,13 +1,35 @@
 const User = require("../models/user.model.js");
+
 sql = require("../models/db.js");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const passwordValidator = require("password-validator");
+
+/***Setting up the password validation***/
+var schema = new passwordValidator();
+
+schema //for the password validation
+    .is()
+    .min(6) //min 6 characters
+    .is()
+    .max(20) //max 20 characters
+    .has()
+    .uppercase() //at least one uppercase letter
+    .has()
+    .lowercase() //at least one lowercase letter
+    .has()
+    .digits(1); //at least one digit
 
 exports.create_an_account = function (req, res) {
     //if there's no content sent, error
     if (!req.body) {
         res.status(400).send({
             message: "You must fill-in the form!",
+        });
+    } else if (!schema.validate(req.body.password)) {
+        res.status(422).send({
+            message:
+                "Le mot de passe doit faire entre 6 et 20 caractères et contenir 1 majuscule, 1 minuscule et 1 chiffre minimum",
         });
     } else {
         //hash password
