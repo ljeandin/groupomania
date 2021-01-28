@@ -48,7 +48,7 @@ export default {
         function dropdown() {
             document.getElementById("myDropdown").classList.toggle("show");
         }    
-
+        
         function avatarChange(e){
             let file = e.target.files[0];
             state.avatarPreview = URL.createObjectURL(file);
