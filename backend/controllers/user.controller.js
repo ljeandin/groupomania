@@ -4,6 +4,7 @@ sql = require("../models/db.js");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const passwordValidator = require("password-validator");
+const maskData = require("maskdata");
 
 /***Setting up the password validation***/
 var schema = new passwordValidator();
@@ -41,7 +42,7 @@ exports.create_an_account = function (req, res) {
                     avatar: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
                     firstname: req.body.firstname,
                     lastname: req.body.lastname,
-                    email: req.body.email,
+                    email: maskData.maskEmail2(req.body.email),
                     password: hash,
                     isAdmin: 0,
                 });
@@ -59,7 +60,7 @@ exports.create_an_account = function (req, res) {
 };
 
 exports.connect_to_account = function (req, res) {
-    const email = req.body.email;
+    const email = maskData.maskEmail2(req.body.email);
     const password = req.body.password;
 
     //if email and password are filled-in

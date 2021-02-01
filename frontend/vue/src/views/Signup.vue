@@ -116,50 +116,53 @@ export default {
         
         //function to create a new Post
         function createNewAccount(){
-            const formData = new FormData();
-            formData.append('lastname', state.user.lastname);
-            formData.append('firstname', state.user.firstname);
-            formData.append('email', state.user.email);
-            formData.append('password', state.user.password);
-            formData.append('avatar', state.user.avatar);
-            console.log(formData);
+            if(formValidation()==true){
+                const formData = new FormData();
+                formData.append('lastname', state.user.lastname);
+                formData.append('firstname', state.user.firstname);
+                formData.append('email', state.user.email);
+                formData.append('password', state.user.password);
+                formData.append('avatar', state.user.avatar);
+                console.log(formData);
 
-            const config = {headers: {'Authorization': 'Bearer ' + localStorage.token, 'Content-Type': 'multipart/form-data'}} ; //token is extracted from local storage (see Login.vue)}
-            
-            axios.post('http://localhost:3000/api/user/signup', formData, config)
-            .then(response => console.log(response))
-            .then(() => window.location.href = "http://localhost:8080/login")
-            .catch(errors => console.log(errors));
+                const config = {headers: {'Authorization': 'Bearer ' + localStorage.token, 'Content-Type': 'multipart/form-data'}} ; //token is extracted from local storage (see Login.vue)}
+                
+                axios.post('http://localhost:3000/api/user/signup', formData, config)
+                .then(response => console.log(response))
+                .then(() => window.location.href = "http://localhost:8080/login")
+                .catch(errors => console.log(errors));
+            }
         }
 
-        /*validation du formulaire
+        //form validation
         function formValidation() {
             // création des regex
-            let checkString = /^[A-Za-z\é\è\ê\ë\ï\à\ö\ô-]+$/;
-            let checkEmail = /.+@.+\..+/;
+            let nameRegex = /^[A-Za-zéèêëïàöô-]+$/;
+            let emailRegex = /.+@.+\..+/;
 
-            // récupération des inputs
-            let formLast = state.user.lastname;
-            let formFirst = state.user.firstname;
-            let formEmail = state.user.email;
-
-            // vérification des inputs avec les regex
-            if (checkString.test(formLast) == false) {
+            // inputs checking with the regex rules
+            if (nameRegex.test(state.user.lastname) == false) {
                 alert("Votre nom doit être indiqué et ne doit pas contenir de chiffres");
                 return false;
 
-            } else if (checkString.test(formFirst) == false) {
+            } else if (nameRegex.test(state.user.firstname) == false) {
                 alert("Votre prénom doit être indiqué et ne doit pas contenir de chiffres");
                 return false;
 
-            } else if (checkEmail.test(formEmail) == false) {
+            } else if (emailRegex.test(state.user.email) == false) {
                 alert("Votre e-mail doit être indiqué et doit être au format xxx@yyy.zzz");
+                return false;
+
+            } else if (passwordCueKeyup() == false) {
+                //password is verified with the passwordCueKeyup() function, this adds an alert
+                alert("Merci de respecter les consignes du mot de passe !");
                 return false;
 
             } else {
                 return true;
             }
-        }*/
+        }
+        
 
         function seePassword() {
             let icon = document.getElementById("icon");
@@ -193,7 +196,7 @@ export default {
         }
 
         function passwordCueKeyup(){
-            let myInput = document.getElementById("mot_de_passe");
+            let password = document.getElementById("mot_de_passe");
             let letter = document.getElementById("letter");
             let capital = document.getElementById("capital");
             let number = document.getElementById("number");
@@ -201,7 +204,7 @@ export default {
             
             // Validate lowercase letters
             var lowerCaseLetters = /[a-z]/g;
-            if (myInput.value.match(lowerCaseLetters)) {
+            if (password.value.match(lowerCaseLetters)) {
                 letter.classList.remove("invalid");
                 letter.classList.add("valid");
             } else {
@@ -211,7 +214,7 @@ export default {
 
             // Validate capital letters
             var upperCaseLetters = /[A-Z]/g;
-            if (myInput.value.match(upperCaseLetters)) {
+            if (password.value.match(upperCaseLetters)) {
                 capital.classList.remove("invalid");
                 capital.classList.add("valid");
             } else {
@@ -221,7 +224,7 @@ export default {
 
             // Validate numbers
             var numbers = /[0-9]/g;
-            if (myInput.value.match(numbers)) {
+            if (password.value.match(numbers)) {
                 number.classList.remove("invalid");
                 number.classList.add("valid");
             } else {
@@ -230,7 +233,7 @@ export default {
             }
 
             // Validate length
-            if (myInput.value.length >= 6) {
+            if (password.value.length >= 6) {
                 length.classList.remove("invalid");
                 length.classList.add("valid");
             } else {
@@ -248,6 +251,7 @@ export default {
                 document.getElementById("validationTitle").textContent = "Le mot de passe est valide";
             } else {
                 document.getElementById("validationTitle").textContent = "Le mot de passe doit contenir :";
+                return false;
             }
         }
         
@@ -256,7 +260,7 @@ export default {
             Header,
             avatarChange,
             createNewAccount,
-            //formValidation,
+            formValidation,
             PasswordCues,
             seePassword,
             focusBtnUploadAvatar,

@@ -57,7 +57,6 @@ export default {
     setup(){
         const state = reactive ({
             newPost: {
-                user_id: '',
                 content : '',
                 image : null,
             },
@@ -79,7 +78,6 @@ export default {
             })
             .then(response => response.json())
             .then(data => {
-                state.newPost.user_id = data.id; //user_id in newPost will be used when a post is created
                 state.user = data //this retrieves all the infos about the user
             })
             .catch(err => console.log('Fetch Error :-S', err));
@@ -98,7 +96,6 @@ export default {
         function createNewPost(){
             const formData = new FormData();
             formData.append('image', state.newPost.image);
-            formData.append('user_id', state.newPost.user_id);
             formData.append('content', state.newPost.content);
             console.log(formData);
 
@@ -107,7 +104,6 @@ export default {
             axios.post('http://localhost:3000/api/feed', formData, config)
             .then(response => console.log(response))
             .then(()=> state.newPost = {
-                user_id: '',
                 content : '',
                 image : null,
             },

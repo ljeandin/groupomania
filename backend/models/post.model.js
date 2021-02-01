@@ -38,4 +38,59 @@ Post.createPost = (newPost, result) => {
     });
 };
 
+Post.addComment = (comment, result) => {
+    sql.query(`UPDATE posts SET comments = comments + 1 WHERE id = ${comment.post_id}`, (err) => {
+        if (err) {
+            console.log("error :", err);
+            result(err, null);
+            return;
+        }
+    });
+};
+
+Post.like = (postId, userId, result) => {
+    //see if the user has already liked this post
+    sql.query(`SELECT * FROM likes WHERE likes.post_id = ${postId} AND likes.user_id = ${userId}`, (err, res) => {
+        if (err) {
+            console.log("error :", err);
+            result(err, null);
+            return;
+        } else if (res.length == 0) {
+            // if the user hasn't liked the post yet
+            //add 1 to the likes counter in the post table
+            sql.query(`UPDATE posts SET posts.likes = posts.likes + 1 WHERE id = ${postId}`, (err) => {
+                if (err) {
+                    console.log("error :", err);
+                    result(err, null);
+                    return;
+                }
+            });
+            //add the post_id and user_id to the likes table
+            sql.query(`INSERT INTO likes SET likes.post_id = ${postId}, likes.user_id = ${userId}`, (err) => {
+                if (err) {
+                    console.log("error :", err);
+                    result(err, null);
+                    return;
+                }
+            });
+        } else {
+            sql.query(`UPDATE posts SET posts.likes = posts.likes - 1 WHERE id = ${postId}`, (err) => {
+                if (err) {
+                    console.log("error :", err);
+                    result(err, null);
+                    return;
+                }
+            });
+            //add the post_id and user_id to the likes table
+            sql.query(`DELETE FROM likes WHERE likes.post_id = ${postId} AND likes.user_id = ${userId}`, (err) => {
+                if (err) {
+                    console.log("error :", err);
+                    result(err, null);
+                    return;
+                }
+            });
+        }
+    });
+};
+
 module.exports = Post;

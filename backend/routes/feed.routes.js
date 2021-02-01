@@ -13,4 +13,6 @@ router.post("/comments", auth, feed.retrieve_comments);
 
 router.post("/comments/newcomment", auth, feed.comment_a_post);
 
+router.post("/like", auth, feed.like_a_post);
+
 module.exports = router;

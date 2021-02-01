@@ -1,5 +1,6 @@
 const Post = require("../models/post.model.js");
 const Comment = require("../models/comment.model.js");
+const jwt = require("jsonwebtoken");
 
 exports.list_all_posts = (req, res) => {
     Post.getAll((err, data) => {
@@ -22,8 +23,13 @@ exports.post_something = (req, res) => {
     /***Insert validation here***/
 
     //create a new post with the frontend inputs
+
+    const token = req.headers.authorization.split(" ")[1]; //extracting token from authorization header
+    const decodedToken = jwt.verify(token, "RANDOM_TOKEN_SECRET"); //decoding token with the key indicated at controllers/user.controller.js:53
+    const userId = decodedToken.userId; //defining decoded token as user id
+
     const post = new Post({
-        user_id: req.body.user_id,
+        user_id: userId,
         content: req.body.content,
         image: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
         likes: 0,
@@ -40,8 +46,22 @@ exports.post_something = (req, res) => {
     });
 };
 
+exports.like_a_post = (req, res) => {
+    const token = req.headers.authorization.split(" ")[1]; //extracting token from authorization header
+    const decodedToken = jwt.verify(token, "RANDOM_TOKEN_SECRET"); //decoding token with the key indicated at controllers/user.controller.js:53
+    const userId = decodedToken.userId; //defining decoded token as user id*/
+    const postId = req.body.post_id;
+
+    Post.like(postId, userId, (err) => {
+        if (err)
+            res.status(500).send({
+                message: err.message || "Something went wrong when liking the post !",
+            });
+    });
+};
+
 exports.retrieve_comments = (req, res) => {
-    const postId = req.body.post_id; //defining decoded token as user id
+    const postId = req.body.post_id;
 
     Comment.getAll(postId, (err, data) => {
         if (err)
@@ -64,6 +84,14 @@ exports.comment_a_post = (req, res) => {
             res.status(500).send({
                 message: err.message || "Something went wrong when creating a new comment !",
             });
-        else res.send(data);
+        else {
+            Post.addComment(data, (err) => {
+                if (err)
+                    res.status(500).send({
+                        message: err.message || "An error occured while counting the comment",
+                    });
+            });
+            res.send(data);
+        }
     });
 };

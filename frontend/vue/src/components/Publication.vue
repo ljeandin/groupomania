@@ -16,8 +16,8 @@
             </div>
             <div class="reactionLine">
                 <div class="reactionLine--likes">
-                    <i class="material-icons" tabindex="0" v-if="post.likes">favorite</i>
-                    <i class="material-icons" tabindex="0" v-else>favorite_outline</i>
+                    <i class="material-icons" tabindex="0" v-if="post.likes" @click="likePost(post.id)">favorite</i>
+                    <i class="material-icons" tabindex="0" v-else @click="likePost(post.id)">favorite_outline</i>
                     <span class="likes__counter">{{ post.likes }}</span>
                 </div>
                 <div class="reactionLine--comments">
@@ -110,6 +110,7 @@ export default {
 
         //this is for retrieving the comments and displaying them if post.comments > 0. (see line 24)
         function onClickComment(postId){
+            state.comments = [];
             let commentsBlock = document.getElementById("commentsBlock"+postId);
             commentsBlock.style.display = "block";
 
@@ -130,6 +131,7 @@ export default {
 
         //this is for displaying the line for writing comments when there's no comments under the post yet (see line 25)
         function onClickNoComment(target){
+            state.comments = [];
             let id = target.srcElement.id.split("=")[1];
             let commentsBlock = document.getElementById("commentsBlock"+id);
             commentsBlock.style.display = "block";
@@ -151,12 +153,26 @@ export default {
 
         }
 
+        function likePost(postId) {
+            fetch("http://localhost:3000/api/feed/like", {
+                body : JSON.stringify({post_id : postId}),
+                method: "post",
+                headers:  {
+                    'Content-Type': 'application/json;charset=UTF-8',
+                    'Authorization': 'Bearer ' + localStorage.token , //token is extracted from local storage (see Login.vue)
+                },
+            })
+            .then(location.reload())
+            .catch(err => console.log('Fetch Error :-S', err));
+        }
+
         return{
             state,
             Comments,
             onClickComment,
             onClickNoComment,
             sendComment,
+            likePost,
         }
     }
 }
