@@ -13,4 +13,6 @@ router.get("/getone", auth, user.get_user_infos);
 
 router.post("/changeavatar", auth, multer, user.change_avatar);
 
+router.delete("/deleteaccount", auth, user.delete_the_account);
+
 module.exports = router;

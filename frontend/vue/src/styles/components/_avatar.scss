@@ -17,3 +17,14 @@
         transition: 0.1s; //lil transition on focus makes my heart happy :)
     }
 }
+
+.comments__comment {
+    .avatar {
+        height: 55px;
+        width: 55px;
+    }
+    @include respond(mobileLandscape) {
+        height: 45px;
+        width: 45px;
+    }
+}

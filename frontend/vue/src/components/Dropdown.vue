@@ -12,7 +12,7 @@
                     <input type="file" id="télécharger_photo_de_profil" name="avatar" accept=".jpg, .png, .jpeg" tabindex="0" @change="avatarChange"/>
                 </label>
             <a href="#" tabindex="0" @click="logout">Déconnexion</a>
-            <a href="#" tabindex="0">Supprimer le compte</a>
+            <a href="#" tabindex="0" @click="deleteAccount">Supprimer le compte</a>
         </div> 
     </div>   
 </template>
@@ -72,11 +72,26 @@ export default {
             window.location.href = "http://localhost:8080/login"
         }
 
+        function deleteAccount(){
+            if (confirm("Vous vous apprêtez à supprimer votre compte de manière irréversible, voulez vous continuer ?")) {
+                fetch("http://localhost:3000/api/user/deleteaccount", {
+                method: "delete",
+                headers:  {
+                    'Content-Type': 'application/json;charset=UTF-8',
+                    'Authorization': 'Bearer ' + localStorage.token , //token is extracted from local storage (see Login.vue)
+                },
+                })
+                .then(() => logout())
+                .catch(err => console.log('Fetch Error :-S', err));
+            }
+        }
+
         return{
             state,
             dropdown,
             avatarChange,
-            logout
+            logout,
+            deleteAccount,
         }
     }
 }

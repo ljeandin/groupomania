@@ -21,36 +21,34 @@
                     <span class="likes__counter">{{ post.likes }}</span>
                 </div>
                 <div class="reactionLine--comments">
-                    <i class="material-icons" tabindex="0" v-if="post.comments" @keyup.enter="retrieveComments" @click="retrieveComments">chat_bubble</i>
-                    <i class="material-icons" tabindex="0" v-else>chat_bubble_outline</i>
+                    <i class="material-icons" tabindex="0" v-if="post.comments" @keyup.enter="onClickComment(post.id)" @click="onClickComment(post.id)">chat_bubble</i>
+                    <i class="material-icons" :id="'noComments=' + post.id" tabindex="0" v-else @keyup.enter="onClickNoComment" @click="onClickNoComment">chat_bubble_outline</i>
                     <span class="comments__counter">{{ post.comments }}</span>
                 </div>
             </div>
         </div>
         <!--<Comments />-->
 
-        <div class="comments">
+        <div class="comments" :id="'commentsBlock' + post.id">
             <div class="writeLine">
                 <img class="avatar" :src="state.user.avatar" alt=""/>
-                <label for="commenting">Commenter</label>
-                <textarea id="commenting" class="autoExpand" placeholder="On vous écoute !" name="post" rows='1' data-min-rows='1' required></textarea>
-                <button type="submit">
-                    <i class="material-icons">send</i>
+                <label for="commenting" >Commenter</label>
+                <textarea id="commenting" class="autoExpand" placeholder="On vous écoute !" name="post" rows='1' data-min-rows='1' required v-model="state.newComment.content"></textarea>
+                <button @click="sendComment(post.id)">
+                    <i class="material-icons" :id="'commentUnderPost='+ post.id">send</i>
                 </button>
             </div>
 
-            <div class="comments__comment" v-if="post.comments">
+            <div class="comments__comment" v-for="comment in state.comments" :key="comment.id">
                 <div class="idLine">
-                    <img class="avatar" :src="state.avatarOthers" alt=""/>
-                    <span class="firstName">Mickaël</span>
-                    <span class="lastName">Georges</span>
+                    <img class="avatar" :src="comment.avatar" alt=""/>
+                    <span class="firstName">{{ comment.firstname }}</span>
+                    <span class="lastName">{{ comment.lastname }}</span>
                     <button class="adminDelete" type="button">
                         <i class="material-icons">delete_forever</i>
                     </button>
                 </div>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                </p>
+                <p>{{ comment.content }}</p>
             </div>
         </div>
     </div>
@@ -66,14 +64,15 @@ export default {
     name: 'Publication',
     setup(){
         const state = reactive ({
-            user :{
-                avatar: null,
-            },
-
+            user :{},
             avatarOthers : DefaultAvatar,
-
             posts :[],
-            comments : []
+            comments : [],
+            newComment : {
+                post_id : null,
+                user_id : null,
+                content : '',
+            }
         })
 
         //connecting to the API and retrieving data
@@ -103,14 +102,19 @@ export default {
             })
             .then(response => response.json())
             .then(data => {
-                state.user.avatar = data.avatar //this retrieves all the infos about the user
+                state.user = data,//this retrieves all the infos about the user
+                state.newComment.user_id = data.id // this puts the user_id in the newComment object for when the user comments something
             })
             .catch(err => console.log('Fetch Error :-S', err));
         })
 
-        function retrieveComments(){
+        //this is for retrieving the comments and displaying them if post.comments > 0. (see line 24)
+        function onClickComment(postId){
+            let commentsBlock = document.getElementById("commentsBlock"+postId);
+            commentsBlock.style.display = "block";
+
             fetch("http://localhost:3000/api/feed/comments", {
-                body : JSON.stringify({post_id: 2}),
+                body : JSON.stringify({ post_id : postId}),
                 method: "post",
                 headers:  {
                     'Content-Type': 'application/json;charset=UTF-8',
@@ -118,17 +122,41 @@ export default {
                 },
             })
             .then(response => response.json())
-            /*.then(data => data.forEach(comment => {
-                state.comments.push(comment);
-            }))*/
-            .then(data => console.log(data))
+            .then(data => data.forEach(comment => {
+                state.comments.unshift(comment);
+            }))
             .catch(err => console.log('Fetch Error :-S', err));
+        }
+
+        //this is for displaying the line for writing comments when there's no comments under the post yet (see line 25)
+        function onClickNoComment(target){
+            let id = target.srcElement.id.split("=")[1];
+            let commentsBlock = document.getElementById("commentsBlock"+id);
+            commentsBlock.style.display = "block";
+        }
+
+        function sendComment(postId){
+            state.newComment.post_id = postId;
+            fetch("http://localhost:3000/api/feed/comments/newcomment", {
+                body : JSON.stringify(state.newComment),
+                method: "post",
+                headers:  {
+                    'Content-Type': 'application/json;charset=UTF-8',
+                    'Authorization': 'Bearer ' + localStorage.token , //token is extracted from local storage (see Login.vue)
+                },
+            })
+            .then(response => response.json())
+            .then(location.reload())
+            .catch(err => console.log('Fetch Error :-S', err));
+
         }
 
         return{
             state,
             Comments,
-            retrieveComments,
+            onClickComment,
+            onClickNoComment,
+            sendComment,
         }
     }
 }

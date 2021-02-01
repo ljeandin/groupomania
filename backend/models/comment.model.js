@@ -10,7 +10,7 @@ const Comment = function (comment) {
 Comment.getAll = (postId, result) => {
     sql.query(
         //this query selects relevant infos in the comments and past tables, and joins them with the post_id
-        `SELECT comments.post_id, comments.content, users.firstname, users.lastname, users.avatar FROM comments INNER JOIN users ON comments.user_id = users.id WHERE comments.post_id = ${postId}`,
+        `SELECT comments.id, comments.post_id, comments.content, users.firstname, users.lastname, users.avatar FROM comments INNER JOIN users ON comments.user_id = users.id WHERE comments.post_id = ${postId}`,
         (err, res) => {
             if (err) {
                 console.log("error : ", err);
@@ -20,6 +20,19 @@ Comment.getAll = (postId, result) => {
             result(null, res);
         }
     );
+};
+
+Comment.createComment = (newComment, result) => {
+    sql.query("INSERT INTO comments SET ?", newComment, (err, res) => {
+        if (err) {
+            console.log("error :", err);
+            result(err, null);
+            return;
+        }
+
+        console.log("New comment created");
+        result(null, { id: res.insertId, ...newComment });
+    });
 };
 
 module.exports = Comment;

@@ -295,17 +295,6 @@ textarea:focus {
   transition: 0.1s;
 }
 
-.comments__comment .avatar {
-  height: 55px;
-  width: 55px;
-}
-@media only screen and (max-width: 767px) {
-  .comments__comment {
-    height: 45px;
-    width: 45px;
-  }
-}
-
 .adminDelete {
   display: none !important;
   width: 50px;
@@ -506,18 +495,6 @@ textarea:focus {
 .filActualite .writeLine button i {
   color: #091f43;
 }
-.filActualite .imagePreview {
-  display: flex;
-  justify-content: center;
-}
-.filActualite .imagePreview img {
-  width: 100%;
-  margin-top: 10px;
-  display: none;
-}
-.filActualite .comments {
-  display: none;
-}
 .filActualite .comments .writeLine {
   margin-bottom: 40px;
 }
@@ -583,7 +560,7 @@ textarea:focus {
   margin-bottom: 20px;
 }
 .filActualite .publication__content img {
-  width: 100%;
+  max-width: 100%;
 }
 .filActualite .publication__content p {
   margin: 10px 0;

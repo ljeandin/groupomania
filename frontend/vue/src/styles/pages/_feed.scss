@@ -69,6 +69,7 @@
 
     //that's for styling the writeline in the comments block
     .comments {
+        display: none;
         .writeLine {
             margin-bottom: 40px;
             @include respond(mobileLandscape) {

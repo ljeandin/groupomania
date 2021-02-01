@@ -51,3 +51,19 @@ exports.retrieve_comments = (req, res) => {
         else res.send(data);
     });
 };
+
+exports.comment_a_post = (req, res) => {
+    const comment = new Comment({
+        post_id: req.body.post_id,
+        user_id: req.body.user_id,
+        content: req.body.content,
+    });
+
+    Comment.createComment(comment, (err, data) => {
+        if (err)
+            res.status(500).send({
+                message: err.message || "Something went wrong when creating a new comment !",
+            });
+        else res.send(data);
+    });
+};

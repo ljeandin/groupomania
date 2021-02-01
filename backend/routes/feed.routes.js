@@ -11,4 +11,6 @@ router.post("/", auth, multer, feed.post_something);
 
 router.post("/comments", auth, feed.retrieve_comments);
 
+router.post("/comments/newcomment", auth, feed.comment_a_post);
+
 module.exports = router;
