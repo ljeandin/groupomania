@@ -4,7 +4,7 @@
             <div class="writeLine">
                 <img class="avatar" :src="state.user.avatar" alt=""/>
                 <label for="posting">Poster quelque chose</label>
-                <textarea id="posting" class="autoExpand" placeholder="On vous écoute !" name="post" rows='1' data-min-rows='1' v-model="state.newPost.content" ></textarea>
+                <textarea id="posting" class="autoExpand" :placeholder="'Que voulez-vous dire, ' + state.user.firstname + ' ?'" name="post" rows='1' data-min-rows='1' v-model="state.newPost.content" ></textarea>
                 <button>
                     <i class="material-icons">send</i>
                 </button>

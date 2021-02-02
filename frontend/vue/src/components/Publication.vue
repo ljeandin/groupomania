@@ -1,11 +1,11 @@
 <template>
-     <div class="bloc" v-for="post in state.posts" :key="post.id">
+    <div class="bloc" v-for="post in state.posts" :key="post.id">
         <div class="publication">
             <div class="idLine">
                 <img class="avatar" :src="post.avatar" alt=""/>
                 <span class="firstName">{{ post.firstname }}</span>
                 <span class="lastName">{{ post.lastname }}</span>
-                <button class="adminDelete" type="button">
+                <button class="adminDelete" type="button" v-if="post.user_id == state.user.id || state.user.isAdmin == 1">
                     <i class="material-icons">delete_forever</i>
                 </button>
             </div>
@@ -21,14 +21,13 @@
                     <span class="likes__counter">{{ post.likes }}</span>
                 </div>
                 <div class="reactionLine--comments">
-                    <i class="material-icons" tabindex="0" v-if="post.comments" @keyup.enter="onClickComment(post.id)" @click="onClickComment(post.id)">chat_bubble</i>
+                    <i class="material-icons" tabindex="0" v-if="post.comments" @keyup.enter="onClickComment(post.id)" @click="onClickComment(post, post.id)">chat_bubble</i>
                     <i class="material-icons" :id="'noComments=' + post.id" tabindex="0" v-else @keyup.enter="onClickNoComment" @click="onClickNoComment">chat_bubble_outline</i>
                     <span class="comments__counter">{{ post.comments }}</span>
                 </div>
             </div>
         </div>
-        <!--<Comments />-->
-
+        
         <div class="comments" :id="'commentsBlock' + post.id">
             <div class="writeLine">
                 <img class="avatar" :src="state.user.avatar" alt=""/>
@@ -39,7 +38,7 @@
                 </button>
             </div>
 
-            <div class="comments__comment" v-for="comment in state.comments" :key="comment.id">
+            <div class="comments__comment" v-for="comment in post.commentsContent" :key="comment.id">
                 <div class="idLine">
                     <img class="avatar" :src="comment.avatar" alt=""/>
                     <span class="firstName">{{ comment.firstname }}</span>
@@ -70,7 +69,6 @@ export default {
             comments : [],
             newComment : {
                 post_id : null,
-                user_id : null,
                 content : '',
             }
         })
@@ -109,11 +107,7 @@ export default {
         })
 
         //this is for retrieving the comments and displaying them if post.comments > 0. (see line 24)
-        function onClickComment(postId){
-            state.comments = [];
-            let commentsBlock = document.getElementById("commentsBlock"+postId);
-            commentsBlock.style.display = "block";
-
+        function onClickComment(post, postId){
             fetch("http://localhost:3000/api/feed/comments", {
                 body : JSON.stringify({ post_id : postId}),
                 method: "post",
@@ -123,15 +117,21 @@ export default {
                 },
             })
             .then(response => response.json())
-            .then(data => data.forEach(comment => {
-                state.comments.unshift(comment);
-            }))
+            .then(data => {
+                post = {...post, commentsContent : data};
+
+                console.log(post.commentsContent);
+            })
+            .then(() =>  {
+                let commentsBlock = document.getElementById("commentsBlock"+postId);
+                commentsBlock.style.display = "block";
+            }
+            )
             .catch(err => console.log('Fetch Error :-S', err));
         }
 
         //this is for displaying the line for writing comments when there's no comments under the post yet (see line 25)
         function onClickNoComment(target){
-            state.comments = [];
             let id = target.srcElement.id.split("=")[1];
             let commentsBlock = document.getElementById("commentsBlock"+id);
             commentsBlock.style.display = "block";

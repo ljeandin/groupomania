@@ -307,7 +307,6 @@ textarea:focus {
 }
 
 .adminDelete {
-  display: none !important;
   width: 50px;
   margin-bottom: 10px;
   padding: 0;
@@ -319,7 +318,10 @@ textarea:focus {
   margin-left: auto;
 }
 .adminDelete i {
-  color: #eb1135;
+  color: #d12f39;
+}
+.adminDelete :hover {
+  cursor: pointer;
 }
 
 .connexion {

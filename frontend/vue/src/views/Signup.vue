@@ -19,7 +19,7 @@
                         
                     <div>
                         <label for="email">E-mail</label>
-                        <input type="text" placeholder="ex : martinmarie@email.com" name="email" id="email" required v-model="state.user.email"/>
+                        <input type="text" placeholder="ex : durandmarie@email.com" name="email" id="email" required v-model="state.user.email"/>
                     </div>
                     
                     <div>

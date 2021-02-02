@@ -73,9 +73,13 @@ exports.retrieve_comments = (req, res) => {
 };
 
 exports.comment_a_post = (req, res) => {
+    const token = req.headers.authorization.split(" ")[1]; //extracting token from authorization header
+    const decodedToken = jwt.verify(token, "RANDOM_TOKEN_SECRET"); //decoding token with the key indicated at controllers/user.controller.js:53
+    const userId = decodedToken.userId; //defining decoded token as user id*/
+
     const comment = new Comment({
         post_id: req.body.post_id,
-        user_id: req.body.user_id,
+        user_id: userId,
         content: req.body.content,
     });
 
