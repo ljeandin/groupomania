@@ -22,9 +22,9 @@
     .avatar {
         height: 55px;
         width: 55px;
-    }
-    @include respond(mobileLandscape) {
-        height: 45px;
-        width: 45px;
+        @include respond(mobileLandscape) {
+            height: 45px;
+            width: 45px;
+        }
     }
 }

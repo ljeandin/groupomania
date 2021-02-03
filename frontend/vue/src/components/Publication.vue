@@ -5,8 +5,19 @@
                 <img class="avatar" :src="post.avatar" alt=""/>
                 <span class="firstName">{{ post.firstname }}</span>
                 <span class="lastName">{{ post.lastname }}</span>
-                <button class="adminDelete" type="button" v-if="post.user_id == state.user.id || state.user.isAdmin == 1">
+                
+                <button class="adminDelete"
+                type="button"
+                v-if="post.user_id == state.user.id || state.user.isAdmin == 1"
+                @click="deletePost(post.id)">
                     <i class="material-icons">delete_forever</i>
+                </button>
+
+                <button class="adminApprove"
+                type="button"
+                v-if="state.user.isAdmin == 1 && post.adminApproved == 0"
+                @click="approvePost(post.id)">
+                    <i class="material-icons">check_circle_outline</i>
                 </button>
             </div>
 
@@ -21,9 +32,9 @@
                     <span class="likes__counter">{{ post.likes }}</span>
                 </div>
                 <div class="reactionLine--comments">
-                    <i class="material-icons" tabindex="0" v-if="post.comments" @keyup.enter="onClickComment(post.id)" @click="onClickComment(post, post.id)">chat_bubble</i>
-                    <i class="material-icons" :id="'noComments=' + post.id" tabindex="0" v-else @keyup.enter="onClickNoComment" @click="onClickNoComment">chat_bubble_outline</i>
-                    <span class="comments__counter">{{ post.comments }}</span>
+                    <i class="material-icons" tabindex="0" v-if="post.commentsContent.length > 0" @keyup.enter="onClickComment(post.id)" @click="onClickComment(post.id)">chat_bubble</i>
+                    <i class="material-icons" :id="'noComments=' + post.id" tabindex="0" v-else @keyup.enter="onClickComment(post.id)" @click="onClickComment(post.id)">chat_bubble_outline</i>
+                    <span class="comments__counter">{{ post.commentsContent.length }}</span>
                 </div>
             </div>
         </div>
@@ -43,7 +54,10 @@
                     <img class="avatar" :src="comment.avatar" alt=""/>
                     <span class="firstName">{{ comment.firstname }}</span>
                     <span class="lastName">{{ comment.lastname }}</span>
-                    <button class="adminDelete" type="button">
+                    <button class="adminDelete" 
+                    type="button" 
+                    v-if="comment.user_id == state.user.id || state.user.isAdmin == 1"
+                    @click="deleteComment(comment.id)">
                         <i class="material-icons">delete_forever</i>
                     </button>
                 </div>
@@ -66,7 +80,6 @@ export default {
             user :{},
             avatarOthers : DefaultAvatar,
             posts :[],
-            comments : [],
             newComment : {
                 post_id : null,
                 content : '',
@@ -84,7 +97,22 @@ export default {
             })
             .then(response => response.json())
             .then(data => data.forEach(post => {
-                state.posts.unshift(post);
+                fetch("http://localhost:3000/api/feed/comments", {
+                    body : JSON.stringify({ post_id : post.id}),
+                    method: "post",
+                    headers:  {
+                        'Content-Type': 'application/json;charset=UTF-8',
+                        'Authorization': 'Bearer ' + localStorage.token , //token is extracted from local storage (see Login.vue)
+                    },
+                })
+                .then(response => response.json())
+                .then(data => {
+                    post = {...post, commentsContent : data};
+                    
+                    state.posts.unshift(post);
+                })
+                .catch(err => console.log('Fetch Error :-S', err));
+                
             }))
             .catch(err => console.log('Fetch Error :-S', err));
         })
@@ -107,34 +135,9 @@ export default {
         })
 
         //this is for retrieving the comments and displaying them if post.comments > 0. (see line 24)
-        function onClickComment(post, postId){
-            fetch("http://localhost:3000/api/feed/comments", {
-                body : JSON.stringify({ post_id : postId}),
-                method: "post",
-                headers:  {
-                    'Content-Type': 'application/json;charset=UTF-8',
-                    'Authorization': 'Bearer ' + localStorage.token , //token is extracted from local storage (see Login.vue)
-                },
-            })
-            .then(response => response.json())
-            .then(data => {
-                post = {...post, commentsContent : data};
-
-                console.log(post.commentsContent);
-            })
-            .then(() =>  {
-                let commentsBlock = document.getElementById("commentsBlock"+postId);
-                commentsBlock.style.display = "block";
-            }
-            )
-            .catch(err => console.log('Fetch Error :-S', err));
-        }
-
-        //this is for displaying the line for writing comments when there's no comments under the post yet (see line 25)
-        function onClickNoComment(target){
-            let id = target.srcElement.id.split("=")[1];
-            let commentsBlock = document.getElementById("commentsBlock"+id);
-            commentsBlock.style.display = "block";
+        function onClickComment(postId){
+            let commentsBlock = document.getElementById("commentsBlock"+postId);
+            commentsBlock.classList.toggle("show-comments");
         }
 
         function sendComment(postId){
@@ -166,13 +169,58 @@ export default {
             .catch(err => console.log('Fetch Error :-S', err));
         }
 
+        function deletePost(postId) {
+            if (confirm("La suppression d'une publication est irréversible, voulez vous continuer ?")) {
+                fetch("http://localhost:3000/api/feed/deletepost", {
+                    body : JSON.stringify({post_id : postId}),
+                    method: "delete",
+                    headers:  {
+                        'Content-Type': 'application/json;charset=UTF-8',
+                        'Authorization': 'Bearer ' + localStorage.token , //token is extracted from local storage (see Login.vue)
+                    },
+                })
+                .then(location.reload())
+                .catch(err => console.log('Fetch Error :-S', err));
+            }
+        }
+
+        function deleteComment(commentId) {
+            if (confirm("La suppression d'un commentaire est irréversible, voulez vous continuer ?")) {
+                fetch("http://localhost:3000/api/feed/deletecomment", {
+                    body : JSON.stringify({comment_id : commentId}),
+                    method: "delete",
+                    headers:  {
+                        'Content-Type': 'application/json;charset=UTF-8',
+                        'Authorization': 'Bearer ' + localStorage.token , //token is extracted from local storage (see Login.vue)
+                    },
+                })
+                .then(location.reload())
+                .catch(err => console.log('Fetch Error :-S', err));
+            }
+        }
+
+        function approvePost(postId) {
+                fetch("http://localhost:3000/api/feed/approvepost", {
+                    body : JSON.stringify({post_id : postId}),
+                    method: "put",
+                    headers:  {
+                        'Content-Type': 'application/json;charset=UTF-8',
+                        'Authorization': 'Bearer ' + localStorage.token , //token is extracted from local storage (see Login.vue)
+                    },
+                })
+                .then(location.reload())
+                .catch(err => console.log('Fetch Error :-S', err));
+        }
+
         return{
             state,
             Comments,
             onClickComment,
-            onClickNoComment,
             sendComment,
             likePost,
+            deletePost,
+            deleteComment,
+            approvePost
         }
     }
 }

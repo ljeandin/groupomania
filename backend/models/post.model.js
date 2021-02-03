@@ -5,14 +5,14 @@ const Post = function (post) {
     this.content = post.content;
     this.image = post.image;
     this.likes = post.likes;
-    this.comments = post.comments;
+    this.adminApproved = post.adminApproved;
 };
 
 //This function gets all the infos that will appear on the posts (ie : name of the poster, avatar, content, etc...)
 Post.getAll = (result) => {
     sql.query(
         //this query selects relevant infos in the posts and users tables, and joins them with the userID
-        "SELECT posts.id, posts.user_id, posts.content, posts.image, posts.likes, posts.comments, users.avatar, users.firstname, users.lastname FROM posts INNER JOIN users ON posts.user_id=users.id",
+        "SELECT posts.id, posts.user_id, posts.content, posts.image, posts.likes, posts.adminApproved, users.avatar, users.firstname, users.lastname FROM posts INNER JOIN users ON posts.user_id=users.id",
         (err, res) => {
             if (err) {
                 console.log("error : ", err);
@@ -35,16 +35,6 @@ Post.createPost = (newPost, result) => {
 
         console.log("New post created");
         result(null, { id: res.insertId, ...newPost });
-    });
-};
-
-Post.addComment = (comment, result) => {
-    sql.query(`UPDATE posts SET comments = comments + 1 WHERE id = ${comment.post_id}`, (err) => {
-        if (err) {
-            console.log("error :", err);
-            result(err, null);
-            return;
-        }
     });
 };
 
@@ -89,6 +79,32 @@ Post.like = (postId, userId, result) => {
                     return;
                 }
             });
+        }
+    });
+};
+
+Post.delete = (postId, result) => {
+    sql.query(`DELETE FROM posts WHERE posts.id = ${postId}`, (err, res) => {
+        if (err) {
+            console.log("error :", err);
+            result(err, null);
+            return;
+        } else {
+            result(null, res[0]);
+            return;
+        }
+    });
+};
+
+Post.approve = (postId, result) => {
+    sql.query(`UPDATE posts SET posts.adminApproved = 1 WHERE posts.id = ${postId}`, (err, res) => {
+        if (err) {
+            console.log("error :", err);
+            result(err, null);
+            return;
+        } else {
+            result(null, res[0]);
+            return;
         }
     });
 };

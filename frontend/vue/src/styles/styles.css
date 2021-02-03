@@ -300,7 +300,7 @@ textarea:focus {
   width: 55px;
 }
 @media only screen and (max-width: 767px) {
-  .comments__comment {
+  .comments__comment .avatar {
     height: 45px;
     width: 45px;
   }
@@ -322,6 +322,37 @@ textarea:focus {
 }
 .adminDelete :hover {
   cursor: pointer;
+}
+@media only screen and (max-width: 767px) {
+  .adminDelete {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.adminApprove {
+  width: 50px;
+  margin-bottom: 10px;
+  padding: 0;
+  border-radius: 50%;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 30px;
+}
+.adminApprove i {
+  color: #76d12f;
+}
+.adminApprove :hover {
+  cursor: pointer;
+}
+@media only screen and (max-width: 767px) {
+  .adminApprove {
+    width: 40px;
+    height: 40px;
+    margin-left: 15px;
+  }
 }
 
 .connexion {
@@ -527,6 +558,9 @@ textarea:focus {
   .filActualite .comments .writeLine {
     margin-bottom: 20px;
   }
+}
+.filActualite .show-comments {
+  display: block;
 }
 .filActualite .post__line--media {
   display: flex;

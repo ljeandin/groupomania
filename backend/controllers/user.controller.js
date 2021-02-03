@@ -38,23 +38,43 @@ exports.create_an_account = function (req, res) {
             .hash(req.body.password, 10) //password hashing
             .then((hash) => {
                 //create a new user with the frontend inputs
-                const user = new User({
-                    avatar: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
-                    firstname: req.body.firstname,
-                    lastname: req.body.lastname,
-                    email: maskData.maskEmail2(req.body.email),
-                    password: hash,
-                    isAdmin: 0,
-                });
+                if (!req.file) {
+                    const user = new User({
+                        avatar: `${req.protocol}://${req.get("host")}/images/avatar_default.png`,
+                        firstname: req.body.firstname,
+                        lastname: req.body.lastname,
+                        email: maskData.maskEmail2(req.body.email),
+                        password: hash,
+                        isAdmin: 0,
+                    });
 
-                //save post to the db
-                User.signup(user, (err, data) => {
-                    if (err)
-                        res.status(500).send({
-                            message: err.message || "Something went wrong when creating the user !",
-                        });
-                    else res.send(data);
-                });
+                    //save post to the db
+                    User.signup(user, (err, data) => {
+                        if (err)
+                            res.status(500).send({
+                                message: err.message || "Something went wrong when creating the user !",
+                            });
+                        else res.send(data);
+                    });
+                } else if (req.file) {
+                    const user = new User({
+                        avatar: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
+                        firstname: req.body.firstname,
+                        lastname: req.body.lastname,
+                        email: maskData.maskEmail2(req.body.email),
+                        password: hash,
+                        isAdmin: 0,
+                    });
+
+                    //save post to the db
+                    User.signup(user, (err, data) => {
+                        if (err)
+                            res.status(500).send({
+                                message: err.message || "Something went wrong when creating the user !",
+                            });
+                        else res.send(data);
+                    });
+                }
             });
     }
 };

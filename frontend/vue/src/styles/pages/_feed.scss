@@ -78,6 +78,11 @@
         }
     }
 
+    //toggleable class to show comments
+    .show-comments {
+        display: block;
+    }
+
     //this is the line for both the img and gif adding buttons//
     .post__line--media {
         display: flex;

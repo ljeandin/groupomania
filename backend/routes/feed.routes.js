@@ -15,4 +15,10 @@ router.post("/comments/newcomment", auth, feed.comment_a_post);
 
 router.post("/like", auth, feed.like_a_post);
 
+router.delete("/deletepost", auth, feed.delete_a_post);
+
+router.delete("/deletecomment", auth, feed.delete_a_comment);
+
+router.put("/approvepost", auth, feed.approve_a_post);
+
 module.exports = router;
