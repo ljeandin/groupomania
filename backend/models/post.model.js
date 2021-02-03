@@ -6,13 +6,14 @@ const Post = function (post) {
     this.image = post.image;
     this.likes = post.likes;
     this.adminApproved = post.adminApproved;
+    this.reported = post.reported;
 };
 
 //This function gets all the infos that will appear on the posts (ie : name of the poster, avatar, content, etc...)
 Post.getAll = (result) => {
     sql.query(
         //this query selects relevant infos in the posts and users tables, and joins them with the userID
-        "SELECT posts.id, posts.user_id, posts.content, posts.image, posts.likes, posts.adminApproved, users.avatar, users.firstname, users.lastname FROM posts INNER JOIN users ON posts.user_id=users.id",
+        "SELECT posts.id, posts.user_id, posts.content, posts.image, posts.likes, posts.adminApproved, posts.reported, users.avatar, users.firstname, users.lastname FROM posts INNER JOIN users ON posts.user_id=users.id",
         (err, res) => {
             if (err) {
                 console.log("error : ", err);
@@ -64,6 +65,8 @@ Post.like = (postId, userId, result) => {
                 }
             });
         } else {
+            //if the user has already liked the post
+            //remove the like from the post
             sql.query(`UPDATE posts SET posts.likes = posts.likes - 1 WHERE id = ${postId}`, (err) => {
                 if (err) {
                     console.log("error :", err);
@@ -71,7 +74,7 @@ Post.like = (postId, userId, result) => {
                     return;
                 }
             });
-            //add the post_id and user_id to the likes table
+            //delete the post_id and user_id to the likes table
             sql.query(`DELETE FROM likes WHERE likes.post_id = ${postId} AND likes.user_id = ${userId}`, (err) => {
                 if (err) {
                     console.log("error :", err);
@@ -98,6 +101,39 @@ Post.delete = (postId, result) => {
 
 Post.approve = (postId, result) => {
     sql.query(`UPDATE posts SET posts.adminApproved = 1 WHERE posts.id = ${postId}`, (err, res) => {
+        if (err) {
+            console.log("error :", err);
+            result(err, null);
+            return;
+        } else {
+            result(null, res[0]);
+            return;
+        }
+    });
+    sql.query(`UPDATE posts SET posts.reported = 0 WHERE posts.id = ${postId}`, (err, res) => {
+        if (err) {
+            console.log("error :", err);
+            result(err, null);
+            return;
+        } else {
+            result(null, res[0]);
+            return;
+        }
+    });
+};
+
+Post.report = (postId, result) => {
+    sql.query(`UPDATE posts SET posts.reported = 1 WHERE posts.id = ${postId}`, (err, res) => {
+        if (err) {
+            console.log("error :", err);
+            result(err, null);
+            return;
+        } else {
+            result(null, res[0]);
+            return;
+        }
+    });
+    sql.query(`UPDATE posts SET posts.adminApproved = 0 WHERE posts.id = ${postId}`, (err, res) => {
         if (err) {
             console.log("error :", err);
             result(err, null);

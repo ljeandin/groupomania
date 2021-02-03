@@ -24,6 +24,10 @@ export default {
             connectedUser : {}
         })
 
+        if(localStorage.getItem("token") === null){
+            window.location.href = "http://localhost:8080/login";
+        }
+
         //connecting to the API and retrieving the connected user data
         onMounted(() => {
             fetch("http://localhost:3000/api/user/getone", {

@@ -11,7 +11,7 @@
             </div>
 
             <div class="imagePreview">
-                <img id="imagePreview" :src="state.imagePreview" />
+                <img id="imagePreview" :src="state.imagePreview" alt="" />
             </div>
             
             <div class="post__line post__line--media">
@@ -27,8 +27,7 @@
                     @change="imageChange"/>
                 </label>
                 
-                <label for="télé
-                charger_gif" class="custom-file-upload" id="labelGif" tabindex="-1" >
+                <label for="télécharger_gif" class="custom-file-upload" id="labelGif" tabindex="-1" >
                     <i class="material-icons" tabindex="-1">gif</i>
                     <input 
                     type="file" 

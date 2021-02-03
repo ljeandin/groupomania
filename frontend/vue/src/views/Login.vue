@@ -46,7 +46,6 @@
                 
                 <label for="passwordLogin">mot de passe</label>
                 <input type="password" placeholder="Mot de passe" name="mot de passe" id="passwordLogin" v-model="state.user.password" required />
-
                 <button class="formSubmit">Connexion</button>
             </div>
 
@@ -122,17 +121,16 @@ export default {
             .then (response => response.json())
             .then((data) => {
                 let token = data.token;
-                localStorage.setItem('token', token); //pushing token to localStorage
 
-                //emptying the textarea once post is sent to server
-                state.user = {
-                    email:'',
-                    password:'',
-                };
-                
-                //redirecting to the feed
-                window.location.href = "http://localhost:8080/feed";
-                
+                if(token == null ){
+                    alert("E-mail ou mot de passe éronné")
+                } else {
+                    localStorage.setItem('token', token); //pushing token to localStorage
+
+                    //redirecting to the feed
+                    window.location.href = "http://localhost:8080/feed";
+                }
+
             })
             .catch(err => console.log('Fetch Error :-S', err));
         }

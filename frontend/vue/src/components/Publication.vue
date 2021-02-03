@@ -6,19 +6,34 @@
                 <span class="firstName">{{ post.firstname }}</span>
                 <span class="lastName">{{ post.lastname }}</span>
                 
-                <button class="adminDelete"
-                type="button"
-                v-if="post.user_id == state.user.id || state.user.isAdmin == 1"
-                @click="deletePost(post.id)">
-                    <i class="material-icons">delete_forever</i>
-                </button>
+                <div class="adminLine">
+                    <button class="report"
+                    type="button"
+                    v-if="state.user.isAdmin == 0 && post.user_id !== state.user.id"
+                    @click="reportPost(post.id)">
+                        <i class="material-icons">report</i>
+                    </button>
 
-                <button class="adminApprove"
-                type="button"
-                v-if="state.user.isAdmin == 1 && post.adminApproved == 0"
-                @click="approvePost(post.id)">
-                    <i class="material-icons">check_circle_outline</i>
-                </button>
+                    <span class="adminReport"
+                    type="button"
+                    v-if="state.user.isAdmin == 1 && post.reported == 1">
+                        <i class="material-icons material-icons--rounded">warning</i>
+                    </span>
+
+                    <button class="adminDelete"
+                    type="button"
+                    v-if="post.user_id == state.user.id || state.user.isAdmin == 1"
+                    @click="deletePost(post.id)">
+                        <i class="material-icons">delete_forever</i>
+                    </button>
+
+                    <button class="adminApprove"
+                    type="button"
+                    v-if="state.user.isAdmin == 1 && post.adminApproved == 0"
+                    @click="approvePost(post.id)">
+                        <i class="material-icons">check_circle_outline</i>
+                    </button>
+                </div>
             </div>
 
             <div class="publication__content">
@@ -42,8 +57,8 @@
         <div class="comments" :id="'commentsBlock' + post.id">
             <div class="writeLine">
                 <img class="avatar" :src="state.user.avatar" alt=""/>
-                <label for="commenting" >Commenter</label>
-                <textarea id="commenting" class="autoExpand" placeholder="On vous écoute !" name="post" rows='1' data-min-rows='1' required v-model="state.newComment.content"></textarea>
+                <label :for="'commenting post number' + post.id" >Commenter</label>
+                <textarea :id="'commenting post number' + post.id" class="autoExpand" placeholder="On vous écoute !" name="post" rows='1' data-min-rows='1' required v-model="state.newComment.content"></textarea>
                 <button @click="sendComment(post.id)">
                     <i class="material-icons" :id="'commentUnderPost='+ post.id">send</i>
                 </button>
@@ -54,7 +69,7 @@
                     <img class="avatar" :src="comment.avatar" alt=""/>
                     <span class="firstName">{{ comment.firstname }}</span>
                     <span class="lastName">{{ comment.lastname }}</span>
-                    <button class="adminDelete" 
+                    <button class="adminDelete adminDelete__comments" 
                     type="button" 
                     v-if="comment.user_id == state.user.id || state.user.isAdmin == 1"
                     @click="deleteComment(comment.id)">
@@ -200,7 +215,21 @@ export default {
         }
 
         function approvePost(postId) {
-                fetch("http://localhost:3000/api/feed/approvepost", {
+            fetch("http://localhost:3000/api/feed/approvepost", {
+                body : JSON.stringify({post_id : postId}),
+                method: "put",
+                headers:  {
+                    'Content-Type': 'application/json;charset=UTF-8',
+                    'Authorization': 'Bearer ' + localStorage.token , //token is extracted from local storage (see Login.vue)
+                },
+            })
+            .then(location.reload())
+            .catch(err => console.log('Fetch Error :-S', err));
+        }
+
+        function reportPost(postId) {
+            if (confirm("Vous vous apprêtez à signaler une publication, voulez-vous continuer ?")) {
+                fetch("http://localhost:3000/api/feed/reportpost", {
                     body : JSON.stringify({post_id : postId}),
                     method: "put",
                     headers:  {
@@ -210,6 +239,7 @@ export default {
                 })
                 .then(location.reload())
                 .catch(err => console.log('Fetch Error :-S', err));
+            }
         }
 
         return{
@@ -220,7 +250,8 @@ export default {
             likePost,
             deletePost,
             deleteComment,
-            approvePost
+            approvePost,
+            reportPost,
         }
     }
 }

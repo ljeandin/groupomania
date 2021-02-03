@@ -76,6 +76,12 @@
                 margin-bottom: 20px;
             }
         }
+        &__comment {
+            margin-bottom: 20px;
+            @include respond(mobileLandscape) {
+                margin-bottom: 15px;
+            }
+        }
     }
 
     //toggleable class to show comments

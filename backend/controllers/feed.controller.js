@@ -35,6 +35,7 @@ exports.post_something = (req, res) => {
             image: null,
             likes: 0,
             adminApproved: 0,
+            reported: 0,
         });
 
         //save post to the db
@@ -52,6 +53,7 @@ exports.post_something = (req, res) => {
             image: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
             likes: 0,
             adminApproved: 0,
+            reported: 0,
         });
 
         //save post to the db
@@ -142,6 +144,30 @@ exports.delete_a_comment = (req, res) => {
         if (err) {
             res.status(500).send({
                 message: "Error deleting the post with id :" + postId,
+            });
+        } else res.send(data);
+    });
+};
+
+exports.report_a_post = (req, res) => {
+    const postId = req.body.post_id;
+
+    Post.report(postId, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: "Error reporting the post with id :" + postId,
+            });
+        } else res.send(data);
+    });
+};
+
+exports.unreport_a_post = (req, res) => {
+    const postId = req.body.post_id;
+
+    Post.unreport(postId, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: "Error un-reporting the post with id :" + postId,
             });
         } else res.send(data);
     });

@@ -21,4 +21,8 @@ router.delete("/deletecomment", auth, feed.delete_a_comment);
 
 router.put("/approvepost", auth, feed.approve_a_post);
 
+router.put("/reportpost", auth, feed.report_a_post);
+
+router.put("/unreportpost", auth, feed.unreport_a_post);
+
 module.exports = router;

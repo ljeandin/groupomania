@@ -306,6 +306,11 @@ textarea:focus {
   }
 }
 
+.adminLine {
+  margin-left: auto;
+  display: flex;
+}
+
 .adminDelete {
   width: 50px;
   margin-bottom: 10px;
@@ -315,7 +320,7 @@ textarea:focus {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-left: auto;
+  margin-left: 30px;
 }
 .adminDelete i {
   color: #d12f39;
@@ -327,7 +332,13 @@ textarea:focus {
   .adminDelete {
     width: 40px;
     height: 40px;
+    margin-left: 15px;
   }
+}
+.adminDelete__comments {
+  margin-left: auto;
+  width: 40px;
+  height: 40px;
 }
 
 .adminApprove {
@@ -342,13 +353,60 @@ textarea:focus {
   margin-left: 30px;
 }
 .adminApprove i {
-  color: #76d12f;
+  color: #479d10;
 }
 .adminApprove :hover {
   cursor: pointer;
 }
 @media only screen and (max-width: 767px) {
   .adminApprove {
+    width: 40px;
+    height: 40px;
+    margin-left: 15px;
+  }
+}
+
+.report {
+  width: 50px;
+  margin-bottom: 10px;
+  padding: 0;
+  border-radius: 50%;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 30px;
+}
+.report i {
+  color: #091f43;
+}
+.report :hover {
+  cursor: pointer;
+}
+@media only screen and (max-width: 767px) {
+  .report {
+    width: 40px;
+    height: 40px;
+    margin-left: 15px;
+  }
+}
+
+.adminReport {
+  width: 50px;
+  margin-bottom: 10px;
+  padding: 0;
+  border-radius: 50%;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 30px;
+}
+.adminReport i {
+  color: #e1541f;
+}
+@media only screen and (max-width: 767px) {
+  .adminReport {
     width: 40px;
     height: 40px;
     margin-left: 15px;
@@ -557,6 +615,14 @@ textarea:focus {
 @media only screen and (max-width: 767px) {
   .filActualite .comments .writeLine {
     margin-bottom: 20px;
+  }
+}
+.filActualite .comments__comment {
+  margin-bottom: 20px;
+}
+@media only screen and (max-width: 767px) {
+  .filActualite .comments__comment {
+    margin-bottom: 15px;
   }
 }
 .filActualite .show-comments {
