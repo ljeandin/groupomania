@@ -96,7 +96,6 @@ exports.connect_to_account = function (req, res) {
                         res.status(401).json({ message: "Wrong password" });
                     } else {
                         //if it matches, send the infos and create auth token
-                        console.log(email, "is logged-in");
                         res.status(200).json({
                             userId: results[0].id,
                             email: results[0].email,

@@ -16,8 +16,6 @@ User.signup = (newUser, result) => {
             result(err, null);
             return;
         }
-
-        console.log("The account has been created ");
         result(null, { id: res.insertId, ...newUser });
     });
 };

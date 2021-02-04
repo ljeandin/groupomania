@@ -160,15 +160,3 @@ exports.report_a_post = (req, res) => {
         } else res.send(data);
     });
 };
-
-exports.unreport_a_post = (req, res) => {
-    const postId = req.body.post_id;
-
-    Post.unreport(postId, (err, data) => {
-        if (err) {
-            res.status(500).send({
-                message: "Error un-reporting the post with id :" + postId,
-            });
-        } else res.send(data);
-    });
-};

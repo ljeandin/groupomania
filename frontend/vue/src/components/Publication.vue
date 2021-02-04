@@ -5,6 +5,7 @@
                 <img class="avatar" :src="post.avatar" alt=""/>
                 <span class="firstName">{{ post.firstname }}</span>
                 <span class="lastName">{{ post.lastname }}</span>
+                {{ post.id }}
                 
                 <div class="adminLine">
                     <button class="report"
@@ -123,8 +124,7 @@ export default {
                 .then(response => response.json())
                 .then(data => {
                     post = {...post, commentsContent : data};
-                    
-                    state.posts.unshift(post);
+                    state.posts.push(post);
                 })
                 .catch(err => console.log('Fetch Error :-S', err));
                 
