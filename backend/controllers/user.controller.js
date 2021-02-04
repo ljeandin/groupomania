@@ -41,8 +41,8 @@ exports.create_an_account = function (req, res) {
                 if (!req.file) {
                     const user = new User({
                         avatar: `${req.protocol}://${req.get("host")}/images/avatar_default.png`,
-                        firstname: req.body.firstname,
-                        lastname: req.body.lastname,
+                        firstname: req.body.firstname.charAt(0).toUpperCase() + req.body.firstname.slice(1),
+                        lastname: req.body.lastname.charAt(0).toUpperCase() + req.body.lastname.slice(1),
                         email: maskData.maskEmail2(req.body.email),
                         password: hash,
                         isAdmin: 0,
@@ -59,8 +59,8 @@ exports.create_an_account = function (req, res) {
                 } else if (req.file) {
                     const user = new User({
                         avatar: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
-                        firstname: req.body.firstname,
-                        lastname: req.body.lastname,
+                        firstname: req.body.firstname.charAt(0).toUpperCase() + req.body.firstname.slice(1),
+                        lastname: req.body.lastname.charAt(0).toUpperCase() + req.body.lastname.slice(1),
                         email: maskData.maskEmail2(req.body.email),
                         password: hash,
                         isAdmin: 0,
