@@ -36,8 +36,8 @@ Dans le dossier backend, créez un fichier .env dans lequel vous inquerez :
     PASSWORD = (votre mot de passe)
     NAME = (votre nom d'user, souvent 'root')
 
-Créez une base de données `groupomaniadb`.
+Créez une base de données nommée `groupomaniadb`.
 
-Y importer le fichier groupomaniadb.sql que vous trouverez dans le dossier backend.
+Y importer le fichier `groupomaniadb.sql` que vous trouverez dans le dossier backend.
 
-Si la connexion à la base de données est bien établie, alors la console affichera "The solution is: 2" (voir backend/models/db:16).
+Si la connexion à la base de données est bien établie, alors la console affichera `"The solution is: 2"` (voir backend/models/db:16).
