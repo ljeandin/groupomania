@@ -1,5 +1,5 @@
 Ceci est le code source du projet 7 du parcours développeur web d'Openclassrooms.
-Les technologies utilisées pour ce projet :
+Les technologies utilisées pour ce projet sont :
 
 -   VueJs
 -   NodeJs + express
@@ -19,7 +19,7 @@ puis cliquer sur "Tâches" puis "serve" puis "Lancer la tâche" et enfin "Ouvrir
 
 ## Backend
 
-Ouvrir le dossier Backend dans le terminal de votre éditeur puis exécuter la commande:
+Ouvrir le dossier backend dans le terminal de votre éditeur puis exécuter la commande:
 
     npm install
 
@@ -30,10 +30,13 @@ puis
 ## Base de données
 
 Se connecter au serveur MySql de votre choix.
-Exécuter la commande: `CREATE DATABASE groupomaniadb;`
-Importer le fichier groupomaniadb.sql que vous trouverez dans le dossier backend :
 
-    mysql -u root -p Luludindin88& groupomaniadb < groupomaniadb.sql
+Dans le dossier backend, créer un fichier .env dans lequel vous mettrez :
+PASSWORD = (votre mot de passe)
+NAME = (votre nom d'user, souvent 'root')
 
-Il faudra remplacer `groupomaniadb.sql` par le chemin d'accès au fichier dans votre machine.
-Si la connexion à la base de données est bien établie, alors la console affichera "The solution is: 2" (voir backend/models/db:16)
+Créer une base de données `groupomaniadb`.
+
+Y importer le fichier groupomaniadb.sql que vous trouverez dans le dossier backend.
+
+Si la connexion à la base de données est bien établie, alors la console affichera "The solution is: 2" (voir backend/models/db:16).
