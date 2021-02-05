@@ -1,9 +1,9 @@
 Ceci est le code source du projet 7 du parcours développeur web d'Openclassrooms.
 Les technologies utilisées pour ce projet sont :
 
--   VueJs
--   NodeJs + express
--   Mysql
+-   Frontend : VueJs
+-   Backend : NodeJs + express
+-   Base de données : Mysql
 
 ## Frontend
 
