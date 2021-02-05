@@ -6,6 +6,7 @@ import Signup from "../views/Signup.vue";
 
 const routes = [
     {
+        //this redirects the user to login page
         path: "/",
         redirect: "/login",
     },

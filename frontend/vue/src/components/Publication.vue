@@ -5,7 +5,6 @@
                 <img class="avatar" :src="post.avatar" alt=""/>
                 <span class="firstName">{{ post.firstname }}</span>
                 <span class="lastName">{{ post.lastname }}</span>
-                {{ post.id }}
                 
                 <div class="adminLine">
                     <button class="report"
@@ -85,7 +84,6 @@
 
 <script>
 import { reactive } from 'vue';
-import Comments from '@/components/Comments';
 import DefaultAvatar from '@/assets/images/avatar_default.png';
 import { onMounted } from 'vue';
 
@@ -201,7 +199,7 @@ export default {
 
         function deleteComment(commentId) {
             if (confirm("La suppression d'un commentaire est irréversible, voulez vous continuer ?")) {
-                fetch("http://localhost:3000/api/feed/deletecomment", {
+                fetch("http://localhost:3000/api/feed/comments/deletecomment", {
                     body : JSON.stringify({comment_id : commentId}),
                     method: "delete",
                     headers:  {
@@ -244,7 +242,6 @@ export default {
 
         return{
             state,
-            Comments,
             onClickComment,
             sendComment,
             likePost,

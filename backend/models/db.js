@@ -1,6 +1,6 @@
-const mysql = require("mysql2"); //we'll use mysql
+const mysql = require("mysql2");
 
-//Requiring dotenv (to hide mongoose connexion password and name -see right below)
+//Requiring dotenv (to hide mySQL connexion password and name -see right below)
 require("dotenv").config();
 
 //mySql connexion
@@ -13,6 +13,7 @@ var connection = mysql.createConnection({
 
 connection.connect();
 
+//if the connection is established, the console will print "The solution is : 2"
 connection.query("SELECT 1 + 1 AS solution", function (err, rows, fields) {
     if (err) throw err;
 

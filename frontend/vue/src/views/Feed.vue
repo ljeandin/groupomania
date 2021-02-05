@@ -11,7 +11,6 @@
 </template>
 
 <script>
-import { reactive, onMounted } from 'vue';
 import Header from '@/components/Header';
 import PostingPanel from '@/components/PostingPanel';
 import Publication from '@/components/Publication';
@@ -20,29 +19,12 @@ import Publication from '@/components/Publication';
 export default {
     name: 'feed',
     setup(){
-        const state = reactive ({
-            connectedUser : {}
-        })
-
+        //redirection if there's no token in the local storage (ie : when token expires)
         if(localStorage.getItem("token") === null){
             window.location.href = "http://localhost:8080/login";
         }
 
-        //connecting to the API and retrieving the connected user data
-        onMounted(() => {
-            fetch("http://localhost:3000/api/user/getone", {
-                method: "get",
-                headers:  {
-                    'Content-Type': 'application/json;charset=UTF-8',
-                    'Authorization': 'Bearer ' + localStorage.token , //token is extracted from local storage (see Login.vue)
-                },
-            })
-            .then(response => response.json())
-            .then(data => state.connectedUser = data)
-            .catch(err => console.log('Fetch Error :-S', err));
-        })
-        
-        /***Expandable textarea***/
+        //styling for the expandable text area (applies to the whole website)
         function getScrollHeight(elm) {
             var savedValue = elm.value;
             elm.value = "";
@@ -62,11 +44,10 @@ export default {
             elm.rows = minRows + rows;
         }
 
-        // global delegated event listener
+        // global event listener to make the expandable text area work when user inputs something
         document.addEventListener("input", onExpandableTextareaInput);
 
         return{
-            state,
             Header,
             PostingPanel,
             Publication,

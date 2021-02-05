@@ -40,7 +40,7 @@
                             <i id="icon" class="material-icons" @click="seePassword()" @keypress="seePassword()" tabindex="0">visibility_off</i>
                         </section>
                     </div>
-                   <!-- <PasswordCues />-->
+
                     <ul id="message" class="message">
                         <p id="validationTitle">Le mot de passe doit contenir :</p>
                         <li id="letter" class="invalid">Une minuscule</li>
@@ -84,7 +84,6 @@
 <script>
 import { reactive } from 'vue';
 import Header from '../components/Header';
-import PasswordCues from '../components/PasswordCues';
 import DefaultAvatar from '@/assets/images/avatar_default.png';
 import axios from 'axios';
 
@@ -103,32 +102,37 @@ export default {
             avatarPreview : DefaultAvatar,
             
             components : {
-                Header,
-                PasswordCues,
+                Header
             },
         })
         
+        //function for user selects an avatar
         function avatarChange(e){
+            //take file
             let file = e.target.files[0];
+            //temporary URL for the avatar preview
             state.avatarPreview = URL.createObjectURL(file);
+            //defining the state.avatar as the file
             state.user.avatar = file;
         }
         
         //function to create a new Post
         function createNewAccount(){
             if(formValidation()==true){
+                //putting state.user infos in a formData
                 const formData = new FormData();
                 formData.append('lastname', state.user.lastname);
                 formData.append('firstname', state.user.firstname);
                 formData.append('email', state.user.email);
                 formData.append('password', state.user.password);
                 formData.append('avatar', state.user.avatar);
-                console.log(formData);
 
+                //axios config
                 const config = {headers: {'Authorization': 'Bearer ' + localStorage.token, 'Content-Type': 'multipart/form-data'}} ; //token is extracted from local storage (see Login.vue)}
                 
+                //sending data
                 axios.post('http://localhost:3000/api/user/signup', formData, config)
-                .then(response => console.log(response))
+                //redirecting to login page 
                 .then(() => window.location.href = "http://localhost:8080/login")
                 .catch(errors => console.log(errors));
             }
@@ -163,10 +167,10 @@ export default {
             }
         }
         
-
+        //function to see the password
         function seePassword() {
-            let icon = document.getElementById("icon");
-            let password = document.getElementById("mot_de_passe");
+            let icon = document.getElementById("icon");//this is the button
+            let password = document.getElementById("mot_de_passe");//this is the input
             //if password is hidden (with type=password in HTML)
             if (password.type === "password") {
                 password.type = "text"; //show password with type=text
@@ -178,23 +182,17 @@ export default {
             }
         }
 
-        //function for keyboard focus on custom button
-        function focusBtnUploadAvatar() {
-            document.getElementById("labelUploadAvatar").style.backgroundColor = "#d1d9e6"; //color correspond to $focus-color in sass/abstracts/variables
-        }
-
-        function blurBtnUploadAvatar() {
-            document.getElementById("labelUploadAvatar").style.backgroundColor = "#ecf0f3"; //color correspond to $background-color in sass/abstracts/variables
-        }
-
+        //this hides the password cues when the input isn't in focus
         function passwordCueBlur(){
             document.getElementById("message").style.display = "none";
         }
 
+        //this shows the password cues when the input is in focus
         function passwordCueFocus(){
             document.getElementById("message").style.display = "block";
         }
 
+        //this is the function that indicates what the password needs to contain, activates when user starts typing
         function passwordCueKeyup(){
             let password = document.getElementById("mot_de_passe");
             let letter = document.getElementById("letter");
@@ -241,33 +239,44 @@ export default {
                 length.classList.add("invalid");
             }
 
-            //changing password message
+            //if everything is valid
             if (
                 letter.classList.contains("valid") &&
                 capital.classList.contains("valid") &&
                 number.classList.contains("valid") &&
                 length.classList.contains("valid")
             ) {
+                //changing password message
                 document.getElementById("validationTitle").textContent = "Le mot de passe est valide";
             } else {
                 document.getElementById("validationTitle").textContent = "Le mot de passe doit contenir :";
                 return false;
             }
         }
-        
+
+
+        //function for keyboard focus on custom buttons
+        function focusBtnUploadAvatar() {
+            document.getElementById("labelUploadAvatar").style.backgroundColor = "#d1d9e6"; //color correspond to $focus-color in sass/abstracts/variables
+        }
+
+        function blurBtnUploadAvatar() {
+            document.getElementById("labelUploadAvatar").style.backgroundColor = "#ecf0f3"; //color correspond to $background-color in sass/abstracts/variables
+        }
+
+
         return {
             state,
             Header,
             avatarChange,
             createNewAccount,
             formValidation,
-            PasswordCues,
             seePassword,
-            focusBtnUploadAvatar,
-            blurBtnUploadAvatar,
             passwordCueBlur,
             passwordCueFocus,
-            passwordCueKeyup
+            passwordCueKeyup,
+            focusBtnUploadAvatar,
+            blurBtnUploadAvatar,
         }
     }
 }

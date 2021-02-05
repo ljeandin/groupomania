@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken"); // JSONwebtoken for token generating
 
-//authentication middleware
+//authentication middleware to make sure the requests are made by an authenticated user
 module.exports = (req, res, next) => {
     try {
         const token = req.headers.authorization.split(" ")[1]; //extracting token from authorization header

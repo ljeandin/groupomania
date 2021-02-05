@@ -1,4 +1,5 @@
 sql = require("../models/db.js");
+
 // constructor
 const Post = function (post) {
     this.user_id = post.user_id;
@@ -27,6 +28,7 @@ Post.getAll = (result) => {
 
 //this function creates a new post
 Post.createPost = (newPost, result) => {
+    //this insert the new post in the posts table
     sql.query("INSERT INTO posts SET ? ", newPost, (err, res) => {
         if (err) {
             console.log("error :", err);
@@ -37,6 +39,7 @@ Post.createPost = (newPost, result) => {
     });
 };
 
+//this function is used to like/ un-like a post
 Post.like = (postId, userId, result) => {
     //see if the user has already liked this post
     sql.query(`SELECT * FROM likes WHERE likes.post_id = ${postId} AND likes.user_id = ${userId}`, (err, res) => {
@@ -84,7 +87,9 @@ Post.like = (postId, userId, result) => {
     });
 };
 
+//this function deletes a post
 Post.delete = (postId, result) => {
+    //delete the post that's identified by its id
     sql.query(`DELETE FROM posts WHERE posts.id = ${postId}`, (err, res) => {
         if (err) {
             console.log("error :", err);
@@ -97,7 +102,9 @@ Post.delete = (postId, result) => {
     });
 };
 
+//this function is for the admin to approve a post
 Post.approve = (postId, result) => {
+    //the query changes sets the adminApproved column to 1 (true) in the right post
     sql.query(`UPDATE posts SET posts.adminApproved = 1 WHERE posts.id = ${postId}`, (err, res) => {
         if (err) {
             console.log("error :", err);
@@ -108,6 +115,7 @@ Post.approve = (postId, result) => {
             return;
         }
     });
+    //this query removes the reported status when the post is approved
     sql.query(`UPDATE posts SET posts.reported = 0 WHERE posts.id = ${postId}`, (err, res) => {
         if (err) {
             console.log("error :", err);
@@ -120,7 +128,9 @@ Post.approve = (postId, result) => {
     });
 };
 
+//this function is for users to report a post they deem wrong, offensive, etc
 Post.report = (postId, result) => {
+    //sets the status of the post to reported by turning the reported column to 1 (true)
     sql.query(`UPDATE posts SET posts.reported = 1 WHERE posts.id = ${postId}`, (err, res) => {
         if (err) {
             console.log("error :", err);
@@ -131,6 +141,7 @@ Post.report = (postId, result) => {
             return;
         }
     });
+    //removes the admin approval in case the admin previously approved the post
     sql.query(`UPDATE posts SET posts.adminApproved = 0 WHERE posts.id = ${postId}`, (err, res) => {
         if (err) {
             console.log("error :", err);

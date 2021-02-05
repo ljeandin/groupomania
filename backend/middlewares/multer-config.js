@@ -7,7 +7,7 @@ const MIME_TYPES = {
     "image/gif": "gif",
 };
 
-//multer middleware (images management)
+//this is the multer middleware for posts images
 const storage = multer.diskStorage({
     destination: (req, file, callback) => {
         callback(null, "images");

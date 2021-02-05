@@ -47,7 +47,6 @@
 
 <script>
 import { reactive, onMounted } from 'vue';
-//import DefaultAvatar from '@/assets/images/avatar_default.png';
 import axios from 'axios';
 
 export default {
@@ -82,50 +81,61 @@ export default {
             .catch(err => console.log('Fetch Error :-S', err));
         })
 
-        //function relative to the images inputs. It display a preview of the image that is going to be posted
+        //this is for when the user selects an image they want to post
         function imageChange(e){
+            //get the file
             let file = e.target.files[0];
+            //create url for the preview
             state.imagePreview = URL.createObjectURL(file);
+            //put the file in the state.newPost
             state.newPost.image = file;
+            //display the image preview
             document.getElementById('imagePreview').style.display="block";
 
         }
 
         //function to create a new Post
         function createNewPost(){
+            //putting inputs in form data
             const formData = new FormData();
             formData.append('image', state.newPost.image);
             formData.append('content', state.newPost.content);
-            console.log(formData);
 
+            //config for axios
             const config = {headers: {'Authorization': 'Bearer ' + localStorage.token, 'Content-Type': 'multipart/form-data'}} ; //token is extracted from local storage (see Login.vue)}
             
+            //sending data
             axios.post('http://localhost:3000/api/feed', formData, config)
             .then(response => console.log(response))
-            .then(()=> state.newPost = {
-                content : '',
-                image : null,
-            },
-            state.imagePreview = null,
+            .then(()=> 
+            //emptying the inputs
+                state.imagePreview = null,
+                state.newPost = {
+                    content : '',
+                    image : null,
+                },
             )
             .then(() => location.reload())
             .catch(errors => console.log(errors));
         }
 
-        //adding image to post
+        //some styles to make custom buttons accessible (with styling to highlight whit keyboard nav)
+        //on focus on image button
         function focusBtnImg() {
             document.getElementById("labelImage").style.backgroundColor = "#d1d9e6"; //color correspond to $focus-color in sass/abstracts/variables
         }
 
+        //onblur on image button
         function blurBtnImg() {
             document.getElementById("labelImage").style.backgroundColor = "#ecf0f3"; //color correspond to $background-color in sass/abstracts/variables
         }
 
-        //adding gif to post
+        //on focus on gif button
         function focusBtnGif() {
             document.getElementById("labelGif").style.backgroundColor = "#d1d9e6"; //color correspond to $focus-color in sass/abstracts/variables
         }
 
+        //on blur on gif button 
         function blurBtnGif() {
             document.getElementById("labelGif").style.backgroundColor = "#ecf0f3"; //color correspond to $background-color in sass/abstracts/variables
         }

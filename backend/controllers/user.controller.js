@@ -21,6 +21,7 @@ schema //for the password validation
     .has()
     .digits(1); //at least one digit
 
+//function to create an account
 exports.create_an_account = function (req, res) {
     //if there's no content sent, error
     if (!req.body) {
@@ -40,7 +41,7 @@ exports.create_an_account = function (req, res) {
                 //create a new user with the frontend inputs
                 if (!req.file) {
                     const user = new User({
-                        avatar: `${req.protocol}://${req.get("host")}/images/avatar_default.png`,
+                        avatar: `${req.protocol}://${req.get("host")}/images/avatar_default.png`, //if the user hasn't selected an avatar, path to the default avatar
                         firstname: req.body.firstname.charAt(0).toUpperCase() + req.body.firstname.slice(1),
                         lastname: req.body.lastname.charAt(0).toUpperCase() + req.body.lastname.slice(1),
                         email: maskData.maskEmail2(req.body.email),
@@ -79,36 +80,19 @@ exports.create_an_account = function (req, res) {
     }
 };
 
+//function to conenct to account
 exports.connect_to_account = function (req, res) {
     const email = maskData.maskEmail2(req.body.email);
     const password = req.body.password;
 
     //if email and password are filled-in
     if (email && password) {
-        //get all infos about the user that has the email
-        sql.query("SELECT * FROM users WHERE email = ?", email, (error, results, _fields) => {
-            //if the email does exist in the db
-            if (results.length > 0) {
-                //compare the given password to one in the db
-                bcrypt.compare(password, results[0].password).then((valid) => {
-                    // if it doesn't match, throw error
-                    if (!valid) {
-                        res.status(401).json({ message: "Wrong password" });
-                    } else {
-                        //if it matches, send the infos and create auth token
-                        res.status(200).json({
-                            userId: results[0].id,
-                            email: results[0].email,
-                            token: jwt.sign({ userId: results[0].id }, "RANDOM_TOKEN_SECRET", {
-                                expiresIn: "24h",
-                            }),
-                        });
-                    }
+        User.login(email, password, (err, data) => {
+            if (err)
+                res.status(500).send({
+                    message: err.message || "Something went wrong when logging into account !",
                 });
-            } else {
-                // if the email doesn't match, throw error
-                res.status(401).json({ message: "Wrong email adress" });
-            }
+            else res.send(data);
         });
     } else {
         //if the form isn't filled-in, throw error
@@ -116,6 +100,7 @@ exports.connect_to_account = function (req, res) {
     }
 };
 
+//this is to get a single user infos
 exports.get_user_infos = function (req, res) {
     const token = req.headers.authorization.split(" ")[1]; //extracting token from authorization header
     const decodedToken = jwt.verify(token, "RANDOM_TOKEN_SECRET"); //decoding token with the key indicated at controllers/user.controller.js:53
@@ -130,6 +115,7 @@ exports.get_user_infos = function (req, res) {
     });
 };
 
+//this is for changing the avatar
 exports.change_avatar = function (req, res) {
     const token = req.headers.authorization.split(" ")[1]; //extracting token from authorization header
     const decodedToken = jwt.verify(token, "RANDOM_TOKEN_SECRET"); //decoding token with the key indicated at controllers/user.controller.js:53
@@ -146,6 +132,7 @@ exports.change_avatar = function (req, res) {
     });
 };
 
+//this is to delete the account
 exports.delete_the_account = function (req, res) {
     const token = req.headers.authorization.split(" ")[1]; //extracting token from authorization header
     const decodedToken = jwt.verify(token, "RANDOM_TOKEN_SECRET"); //decoding token with the key indicated at controllers/user.controller.js:53

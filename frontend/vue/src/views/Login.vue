@@ -73,7 +73,7 @@ export default {
             }
         })
 
-         /**Logo animations**/
+         //Logo animations
         onMounted(() => {
             document.onreadystatechange = () => {
                 //animationg the logo with the globe icon
@@ -109,8 +109,9 @@ export default {
             animateSgv("logoTypography", 0, 0.1);
         })
 
+        //function to log into account
         function logIntoAccount(){
-            //connecting and posting data to the api
+            //posting data to the api
             fetch("http://localhost:3000/api/user/login", {
                 body:JSON.stringify(state.user),
                 method: "post",
@@ -120,8 +121,10 @@ export default {
             })
             .then (response => response.json())
             .then((data) => {
+                //defining token from the datat that's sent by the backend as token
                 let token = data.token;
 
+                //if no backend didn't send token, alert the user that their password or email is wrong
                 if(token == null ){
                     alert("E-mail ou mot de passe éronné")
                 } else {
@@ -135,7 +138,6 @@ export default {
             .catch(err => console.log('Fetch Error :-S', err));
         }
         
-       
         return {
             state,
             logIntoAccount,
@@ -144,13 +146,4 @@ export default {
 }
 </script>
 
-<style lang="scss">
-
-    /*
-    //emptying the textarea once post is sent to server
-    state.user = {
-        email:'',
-        password:'',
-    };window.location.href = "http://localhost:8080/api/feed";
-    */
-</style>
+<style lang="scss"></style>
