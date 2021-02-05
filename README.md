@@ -7,7 +7,7 @@ Les technologies utilisées pour ce projet sont :
 
 ## Frontend
 
-Ouvrir le dossier Frontend dans le terminal de votre éditeur puis exécuter la commande:
+Ouvrez le dossier Frontend dans le terminal de votre éditeur puis exécutez la commande:
 
     vue ui
 
@@ -15,11 +15,11 @@ si le navigateur ne s'ouvre pas automatiquement aller à :
 
 -   http://localhost:8080/
 
-puis cliquer sur "Tâches" puis "serve" puis "Lancer la tâche" et enfin "Ouvrir l'app"
+puis cliquez sur "Tâches" puis "serve" puis "Lancer la tâche" et enfin "Ouvrir l'app"
 
 ## Backend
 
-Ouvrir le dossier backend dans le terminal de votre éditeur puis exécuter la commande:
+Ouvrez le dossier backend dans le terminal de votre éditeur puis exécutez la commande:
 
     npm install
 
@@ -29,13 +29,14 @@ puis
 
 ## Base de données
 
-Se connecter au serveur MySql de votre choix.
+Connectez-vous au serveur MySql de votre choix.
 
-Dans le dossier backend, créer un fichier .env dans lequel vous mettrez :
-PASSWORD = (votre mot de passe)
-NAME = (votre nom d'user, souvent 'root')
+Dans le dossier backend, créez un fichier .env dans lequel vous inquerez :
 
-Créer une base de données `groupomaniadb`.
+    PASSWORD = (votre mot de passe)
+    NAME = (votre nom d'user, souvent 'root')
+
+Créez une base de données `groupomaniadb`.
 
 Y importer le fichier groupomaniadb.sql que vous trouverez dans le dossier backend.
 
