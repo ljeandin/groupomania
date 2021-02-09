@@ -14,7 +14,7 @@ const Post = function (post) {
 Post.getAll = (result) => {
     sql.query(
         //this query selects relevant infos in the posts and users tables, and joins them with the userID
-        "SELECT posts.id, posts.user_id, posts.content, posts.image, posts.likes, posts.adminApproved, posts.reported, users.avatar, users.firstname, users.lastname FROM posts INNER JOIN users ON posts.user_id = users.id ORDER BY posts.id ASC",
+        "SELECT posts.id, posts.user_id, posts.content, posts.image, posts.likes, posts.adminApproved, posts.reported, users.avatar, users.firstname, users.lastname, users.isAdmin FROM posts INNER JOIN users ON posts.user_id = users.id ORDER BY posts.id DESC",
         (err, res) => {
             if (err) {
                 console.log("error : ", err);

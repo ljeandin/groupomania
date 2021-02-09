@@ -12,7 +12,7 @@ const Comment = function (comment) {
 Comment.get = (postId, result) => {
     sql.query(
         //this query selects relevant infos in the comments and users tables, and joins them with the user_idS
-        `SELECT comments.id, comments.user_id, comments.post_id, comments.content, users.firstname, users.lastname, users.avatar FROM comments INNER JOIN users ON comments.user_id = users.id WHERE comments.post_id = ${postId} ORDER BY comments.id DESC`,
+        `SELECT comments.id, comments.user_id, comments.post_id, comments.content, users.firstname, users.lastname, users.avatar, users.isAdmin FROM comments INNER JOIN users ON comments.user_id = users.id WHERE comments.post_id = ${postId} ORDER BY comments.id DESC`,
         (err, res) => {
             if (err) {
                 console.log("error : ", err);

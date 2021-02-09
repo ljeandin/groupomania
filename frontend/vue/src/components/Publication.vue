@@ -5,6 +5,7 @@
                 <img class="avatar" :src="post.avatar" alt=""/>
                 <span class="firstName">{{ post.firstname }}</span>
                 <span class="lastName">{{ post.lastname }}</span>
+                <span v-if="post.isAdmin">&nbsp;(admin)</span>
                 
                 <div class="adminLine">
                     <button class="report"
@@ -69,6 +70,7 @@
                     <img class="avatar" :src="comment.avatar" alt=""/>
                     <span class="firstName">{{ comment.firstname }}</span>
                     <span class="lastName">{{ comment.lastname }}</span>
+                    <span v-if="comment.isAdmin">&nbsp;(admin)</span>
                     <button class="adminDelete adminDelete__comments" 
                     type="button" 
                     v-if="comment.user_id == state.user.id || state.user.isAdmin == 1"
@@ -100,7 +102,7 @@ export default {
             }
         })
 
-        //connecting to the API and retrieving data
+        //retrieving all posts
         onMounted(() => {
             fetch("http://localhost:3000/api/feed", {
                 method: "get",
@@ -111,6 +113,7 @@ export default {
             })
             .then(response => response.json())
             .then(data => data.forEach(post => {
+                //retrieving comments for each post
                 fetch("http://localhost:3000/api/feed/comments", {
                     body : JSON.stringify({ post_id : post.id}),
                     method: "post",
@@ -121,6 +124,7 @@ export default {
                 })
                 .then(response => response.json())
                 .then(data => {
+                    //inserting comments into the post object
                     post = {...post, commentsContent : data};
                     state.posts.push(post);
                 })
@@ -153,6 +157,7 @@ export default {
             commentsBlock.classList.toggle("show-comments");
         }
 
+        //this is for sending comments
         function sendComment(postId){
             state.newComment.post_id = postId;
             fetch("http://localhost:3000/api/feed/comments/newcomment", {
@@ -169,6 +174,7 @@ export default {
 
         }
 
+        //this is for liking/un-liking a post
         function likePost(postId) {
             fetch("http://localhost:3000/api/feed/like", {
                 body : JSON.stringify({post_id : postId}),
@@ -182,6 +188,7 @@ export default {
             .catch(err => console.log('Fetch Error :-S', err));
         }
 
+        //this is for deleting a post
         function deletePost(postId) {
             if (confirm("La suppression d'une publication est irréversible, voulez vous continuer ?")) {
                 fetch("http://localhost:3000/api/feed/deletepost", {
@@ -197,6 +204,7 @@ export default {
             }
         }
 
+        //this is for deleting a comment
         function deleteComment(commentId) {
             if (confirm("La suppression d'un commentaire est irréversible, voulez vous continuer ?")) {
                 fetch("http://localhost:3000/api/feed/comments/deletecomment", {
@@ -212,6 +220,7 @@ export default {
             }
         }
 
+        //this is for the admin to approve a post
         function approvePost(postId) {
             fetch("http://localhost:3000/api/feed/approvepost", {
                 body : JSON.stringify({post_id : postId}),
@@ -225,6 +234,7 @@ export default {
             .catch(err => console.log('Fetch Error :-S', err));
         }
 
+        //this is for reporting a post
         function reportPost(postId) {
             if (confirm("Vous vous apprêtez à signaler une publication, voulez-vous continuer ?")) {
                 fetch("http://localhost:3000/api/feed/reportpost", {
